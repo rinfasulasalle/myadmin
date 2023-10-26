@@ -23,11 +23,8 @@
         />
       </div>
       <div class="info">
-        <a
-          href="{{ url_for('authentication_blueprint.logout') }}"
-          class="d-block"
-        >
-          {{ current_user.username }} - Logout
+        <a class="d-block">
+          {{ current_user.usuario_nombres }} {{current_user.usuario_apellidos}}
         </a>
       </div>
     </div>
@@ -586,6 +583,31 @@
             </li>
           </ul>
         </li>
+        <!-- User settings -->
+        <li class="nav-header">SESIÓN</li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-cogs"></i>
+            <p>Configuración de Perfil</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            href="{{ url_for('authentication_blueprint.logout') }}"
+            class="nav-link btn-logout"
+            style="
+              background-color: #b02b2b;
+              color: #fff;
+              border: none;
+              text-align: left;
+              padding: 10px 20px;
+            "
+          >
+            <i class="nav-icon fas fa-sign-out-alt"></i>
+            <p>Cerrar Sesión</p>
+          </a>
+        </li>
+        <!-- ./User settings -->
       </ul>
     </nav>
     <!-- /.sidebar-menu -->
