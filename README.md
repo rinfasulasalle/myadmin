@@ -28,29 +28,20 @@ Open-source **[Flask Dashboard](https://appseed.us/admin-dashboards/flask/)** ge
 > Download the code
 
 ```bash
-$ git clone https://github.com/app-generator/flask-adminlte.git
+$ git clone https://github.com/rinfasulasalle/myadmin.git
 $ cd flask-adminlte
 ```
 
 <br />
 
-### 👉 Set Up for `Unix`, `MacOS`
+### 👉 Set Up for `Windows`, `Linux`
 
 > Install modules via `VENV`
 
 ```bash
 $ virtualenv env
 $ source env/bin/activate
-$ pip3 install -r requirements.txt
-```
-
-<br />
-
-> Set Up Flask Environment
-
-```bash
-$ export FLASK_APP=run.py
-$ export FLASK_ENV=development
+$ pip install -r requirements.txt
 ```
 
 <br />
@@ -58,48 +49,10 @@ $ export FLASK_ENV=development
 > Start the app
 
 ```bash
-$ flask run
+$ python app.py
 ```
 
-At this point, the app runs at `http://127.0.0.1:5000/`.
-
-<br />
-
-### 👉 Set Up for `Windows`
-
-> Install modules via `VENV` (windows)
-
-```
-$ virtualenv env
-$ .\env\Scripts\activate
-$ pip3 install -r requirements.txt
-```
-
-<br />
-
-> Set Up Flask Environment
-
-```bash
-$ # CMD
-$ set FLASK_APP=run.py
-$ set FLASK_ENV=development
-$
-$ # Powershell
-$ $env:FLASK_APP = ".\run.py"
-$ $env:FLASK_ENV = "development"
-```
-
-<br />
-
-> Start the app
-
-```bash
-$ flask run
-```
-
-At this point, the app runs at `http://127.0.0.1:5000/`.
-
-<br />
+At this point, the app runs at `http://127.0.0.1:6060/`.
 
 ### 👉 Create Users
 
@@ -118,48 +71,48 @@ By default, the app redirects guest users to authenticate. In order to access th
 The project is coded using blueprints, app factory pattern, dual configuration profile (development and production) and an intuitive structure presented bellow:
 
 ```bash
-< PROJECT ROOT >
+< RUTA DEL PROYECTO >
    |
    |-- apps/
    |    |
-   |    |-- home/                           # A simple app that serve HTML files
-   |    |    |-- routes.py                  # Define app routes
+   |    |-- home/                           # Una aplicación simple que sirve archivos HTML
+   |    |    |-- routes.py                  # Define las rutas de la aplicación
    |    |
-   |    |-- authentication/                 # Handles auth routes (login and register)
-   |    |    |-- routes.py                  # Define authentication routes
-   |    |    |-- models.py                  # Defines models
-   |    |    |-- forms.py                   # Define auth forms (login and register)
+   |    |-- authentication/                 # Maneja rutas de autenticación (inicio de sesión y registro)
+   |    |    |-- routes.py                  # Define las rutas de autenticación
+   |    |    |-- models.py                  # Define los modelos
+   |    |    |-- forms.py                   # Define los formularios de autenticación (inicio de sesión y registro)
    |    |
    |    |-- static/
-   |    |    |-- <css, JS, images>          # CSS files, Javascripts files
+   |    |    |-- <css, JS, imágenes>        # Archivos CSS, archivos JavaScript
    |    |
-   |    |-- templates/                      # Templates used to render pages
-   |    |    |-- includes/                  # HTML chunks and components
-   |    |    |    |-- navigation.html       # Top menu component
-   |    |    |    |-- sidebar.html          # Sidebar component
-   |    |    |    |-- footer.html           # App Footer
-   |    |    |    |-- scripts.html          # Scripts common to all pages
+   |    |-- templates/                      # Plantillas utilizadas para renderizar páginas
+   |    |    |-- includes/                  # Fragmentos HTML y componentes
+   |    |    |    |-- navigation.html       # Componente del menú superior
+   |    |    |    |-- sidebar.html          # Componente de la barra lateral
+   |    |    |    |-- footer.html           # Pie de aplicación
+   |    |    |    |-- scripts.html          # Scripts comunes a todas las páginas
    |    |    |
-   |    |    |-- layouts/                   # Master pages
-   |    |    |    |-- base-fullscreen.html  # Used by Authentication pages
-   |    |    |    |-- base.html             # Used by common pages
+   |    |    |-- layouts/                   # Páginas maestras
+   |    |    |    |-- base-fullscreen.html  # Utilizado por páginas de autenticación
+   |    |    |    |-- base.html             # Utilizado por páginas comunes
    |    |    |
-   |    |    |-- accounts/                  # Authentication pages
-   |    |    |    |-- login.html            # Login page
-   |    |    |    |-- register.html         # Register page
+   |    |    |-- accounts/                  # Páginas de autenticación
+   |    |    |    |-- login.html            # Página de inicio de sesión
+   |    |    |    |-- register.html         # Página de registro
    |    |    |
-   |    |    |-- home/                      # UI Kit Pages
-   |    |         |-- index.html            # Index page
-   |    |         |-- 404-page.html         # 404 page
-   |    |         |-- *.html                # All other pages
+   |    |    |-- home/                      # Páginas de UI Kit
+   |    |         |-- index.html            # Página de inicio
+   |    |         |-- 404-page.html         # Página 404
+   |    |         |-- *.html                # Todas las demás páginas
    |    |
-   |  config.py                             # Set up the app
-   |    __init__.py                         # Initialize the app
+   |   config.py                            # Configura la aplicación
+   |    __init__.py                         # Inicializa la aplicación
    |
-   |-- requirements.txt                     # App Dependencies
+   |-- requirements.txt                     # Dependencias de la aplicación
    |
-   |-- .env                                 # Inject Configuration via Environment
-   |-- run.py                               # Start the app - WSGI gateway
+   |-- env                                  # Entorno Virtual
+   |-- run.py                               # Inicia la aplicación
    |
    |-- ************************************************************************
 ```
