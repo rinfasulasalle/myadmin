@@ -1,9 +1,7 @@
-{% extends "layouts/base.html" %} {% block title %} Dashboard Empleados {%
-endblock %}
+{% extends "layouts/base.html" %} {% block title %} Tables Data {% endblock %}
 
 <!-- Element injected in the BODY element -->
-{% block body_class %} sidebar-mini layout-fixed layout-navbar-fixed
-layout-footer-fixed {% endblock body_class %}
+{% block body_class %} {% endblock body_class %}
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}
@@ -13,95 +11,135 @@ layout-footer-fixed {% endblock body_class %}
   rel="stylesheet"
   href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"
 />
-<!-- Font Awesome Icons -->
+<!-- Font Awesome -->
 <link
   rel="stylesheet"
   href="/static/assets/plugins/fontawesome-free/css/all.min.css"
 />
-<!-- overlayScrollbars -->
+<!-- DataTables -->
 <link
   rel="stylesheet"
-  href="/static/assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css"
+  href="/static/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css"
+/>
+<link
+  rel="stylesheet"
+  href="/static/assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css"
 />
 <!-- Theme style -->
 <link rel="stylesheet" href="/static/assets/css/adminlte.min.css" />
-<!-- AXIOS -->
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-{% endblock stylesheets %}{% block content %}
+{% endblock stylesheets %} {% block content %}
+
+<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-  <div class="content-header">
-    <!-- ... (código anterior) ... -->
-    <h1 class="m-0 text-dark">Dashboard Empleados</h1>
-  </div>
-
-  <section class="content">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-12">
-          <h4>Tabla de Empleados</h4>
-
-          <!-- Barra de búsqueda -->
-          <div class="form-group">
-            <input
-              type="text"
-              class="form-control"
-              id="searchInput"
-              placeholder="Buscar empleado"
-            />
-          </div>
-
-          <!-- Tabla con scroll y paginación -->
-          <div class="table-responsive">
-            <table class="table table-bordered" id="employeesTable">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Nombre</th>
-                  <th>Apellido</th>
-                  <th>Rol</th>
-                  <th>Email</th>
-                  <th>Teléfono</th>
-                </tr>
-              </thead>
-              <tbody></tbody>
-            </table>
-          </div>
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Dashboard de Empleados</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">DataTables</li>
+          </ol>
         </div>
       </div>
     </div>
+    <!-- /.container-fluid -->
   </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">DataTable employees</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <!-- Encabezados de la tabla (thead) -->
+                <thead>
+                  <tr>
+                    <th>DNI</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Rol</th>
+                    <th>Correo Electrónico</th>
+                    <th>Sexo</th>
+                    <th>Teléfono</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Las filas se llenarán automáticamente usando JavaScript -->
+                </tbody>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
 </div>
+
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
-<!-- Mis archivos JavaScript -->
-<script src="/static/assets/js/index/employees.js"></script>
-
-<!-- REQUIRED SCRIPTS -->
+<!-- Axios CDN -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <!-- jQuery -->
 <script src="/static/assets/plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap -->
+<!-- Bootstrap 4 -->
 <script src="/static/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- overlayScrollbars -->
-<script src="/static/assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- DataTables -->
+<script src="/static/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/static/assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="/static/assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/static/assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 <!-- AdminLTE App -->
-<script src="/static/assets/js/adminlte.js"></script>
-
-<!-- OPTIONAL SCRIPTS -->
+<script src="/static/assets/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
 <script src="/static/assets/js/demo.js"></script>
+<!-- page script -->
+<script>
+  // Realizar una solicitud GET al endpoint usando Axios
+  axios
+    .get("http://62.72.11.15:8090/usuarios")
+    .then(function (response) {
+      var data = response.data;
+      var table = $("#example1").DataTable();
 
-<!-- PAGE PLUGINS -->
-<!-- jQuery Mapael -->
-<script src="/static/assets/plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
-<script src="/static/assets/plugins/raphael/raphael.min.js"></script>
-<script src="/static/assets/plugins/jquery-mapael/jquery.mapael.min.js"></script>
-<script src="/static/assets/plugins/jquery-mapael/maps/usa_states.min.js"></script>
-<!-- ChartJS -->
-<script src="/static/assets/plugins/chart.js/Chart.min.js"></script>
+      // Limpiar la tabla antes de agregar nuevos datos
+      table.clear();
 
-<!-- PAGE SCRIPTS -->
-<script src="/static/assets/js/pages/dashboard2.js"></script>
+      // Iterar sobre los datos y agregar cada fila a la tabla
+      data.forEach(function (usuario) {
+        table.row
+          .add([
+            usuario.id,
+            usuario.usuario_nombres,
+            usuario.usuario_apellidos,
+            usuario.usuario_rol,
+            usuario.usuario_correo,
+            usuario.usuario_sexo,
+            usuario.usuario_telefono,
+          ])
+          .draw(false);
+      });
+    })
+    .catch(function (error) {
+      console.error("Error al obtener los datos:", error);
+    });
+</script>
 
 {% endblock javascripts %}

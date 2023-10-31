@@ -11,8 +11,8 @@ def hash_pass(password):
 
 def verify_pass(provided_password, stored_password):
     """Verify a stored password against one provided by user"""
-    print("provided_password1:",provided_password)
-    print("stored_password1:",stored_password)
+    #print("provided_password1:",provided_password)
+    #print("stored_password1:",stored_password)
     '''
     salt = stored_password[:64]
     stored_password = stored_password[64:]
