@@ -143,9 +143,9 @@
                   <div class="form-group">
                     <label for="sexo">Sexo</label>
                     <select class="form-control" id="sexo">
+                      <option value="No Especificado">No Especificado</option>
                       <option value="Masculino">Masculino</option>
                       <option value="Femenino">Femenino</option>
-                      <option value="No Especificado">No Especificado</option>
                     </select>
                   </div>
 
@@ -267,9 +267,9 @@
       dniInput.value = "";
       nombreInput.value = "";
       apellidoInput.value = "";
-      rolInput.value = "";
+      rolInput.value = "Sin Acceso";
       correoInput.value = "";
-      sexoInput.value = "M"; // Establecer el valor por defecto a Masculino
+      sexoInput.value = "No Especificado";
       telefonoInput.value = "";
     });
 
@@ -284,7 +284,7 @@
       var sexo = sexoInput.value;
       var telefono = telefonoInput.value;
 
-      // Enviar los datos al servidor usando Axios (aquí debes ajustar la URL y el método según tu API)
+      // Enviar los datos al servidor usando Axios
       axios
         .post("http://62.72.11.15:8090/usuario", {
           id: dni,
@@ -310,19 +310,41 @@
           telefonoInput.value = "";
           userForm.style.display = "none";
 
-          // Recargar la tabla para mostrar el nuevo usuario (debes tener una función para cargar los usuarios en la tabla)
+          // Recargar la tabla para mostrar el nuevo usuario
           cargarUsuariosEnTabla();
         })
         .catch(function (error) {
-          // Manejar errores aquí
           console.error("Error al crear el usuario:", error);
         });
     });
 
-    // Función para cargar los usuarios en la tabla (debes implementarla según tu lógica)
     function cargarUsuariosEnTabla() {
-      // Aquí puedes realizar una nueva solicitud GET para obtener los usuarios y mostrarlos en la tabla
-      // ...
+      // Realizar una solicitud GET al endpoint usando Axios
+      axios
+        .get("http://62.72.11.15:8090/usuarios")
+        .then(function (response) {
+          var data = response.data;
+          var table = $("#example1").DataTable();
+
+          // Limpiar la tabla antes de agregar nuevos datos
+          table.clear();
+          data.forEach(function (usuario) {
+            table.row
+              .add([
+                usuario.id,
+                usuario.usuario_nombres,
+                usuario.usuario_apellidos,
+                usuario.usuario_rol,
+                usuario.usuario_correo,
+                usuario.usuario_sexo,
+                usuario.usuario_telefono,
+              ])
+              .draw(false);
+          });
+        })
+        .catch(function (error) {
+          console.error("Error al obtener los datos:", error);
+        });
     }
   });
 </script>
