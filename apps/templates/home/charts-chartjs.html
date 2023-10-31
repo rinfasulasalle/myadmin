@@ -1,6 +1,4 @@
-{% extends "layouts/base.html" %}
-
-{% block title %} ChartsJS {% endblock %} 
+{% extends "layouts/base.html" %} {% block title %} ChartsJS {% endblock %}
 
 <!-- Element injected in the BODY element -->
 {% block body_class %} sidebar-mini {% endblock body_class %}
@@ -8,387 +6,343 @@
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}
 
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="/static/assets/plugins/fontawesome-free/css/all.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="/static/assets/css/adminlte.min.css">
+<!-- Google Font: Source Sans Pro -->
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"
+/>
+<!-- Font Awesome -->
+<link
+  rel="stylesheet"
+  href="/static/assets/plugins/fontawesome-free/css/all.min.css"
+/>
+<!-- Theme style -->
+<link rel="stylesheet" href="/static/assets/css/adminlte.min.css" />
+<!-- AXIOS -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-{% endblock stylesheets %}
-
-{% block content %}
-
-  <div class="content-wrapper">
-
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>ChartJS</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">ChartJS</li>
-            </ol>
-          </div>
+{% endblock stylesheets %} {% block content %}
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Gráficos Estadísticos</h1>
         </div>
-      </div><!-- /.container-fluid -->
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-6">
-            <!-- AREA CHART -->
-            <div class="card card-primary">
-              <div class="card-header">
-                <h3 class="card-title">Area Chart</h3>
-
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove">
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="chart">
-                  <canvas id="areaChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                </div>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-
-            <!-- DONUT CHART -->
-            <div class="card card-danger">
-              <div class="card-header">
-                <h3 class="card-title">Donut Chart</h3>
-
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove">
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="card-body">
-                <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-
-            <!-- PIE CHART -->
-            <div class="card card-danger">
-              <div class="card-header">
-                <h3 class="card-title">Pie Chart</h3>
-
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove">
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="card-body">
-                <canvas id="pieChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-
-          </div>
-          <!-- /.col (LEFT) -->
-          <div class="col-md-6">
-            <!-- LINE CHART -->
-            <div class="card card-info">
-              <div class="card-header">
-                <h3 class="card-title">Line Chart</h3>
-
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove">
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="chart">
-                  <canvas id="lineChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                </div>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-
-            <!-- BAR CHART -->
-            <div class="card card-success">
-              <div class="card-header">
-                <h3 class="card-title">Bar Chart</h3>
-
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove">
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="chart">
-                  <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                </div>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-
-            <!-- STACKED BAR CHART -->
-            <div class="card card-success">
-              <div class="card-header">
-                <h3 class="card-title">Stacked Bar Chart</h3>
-
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove">
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="chart">
-                  <canvas id="stackedBarChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                </div>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-
-          </div>
-          <!-- /.col (RIGHT) -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Usuarios por Género</li>
+          </ol>
         </div>
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
 
-  </div>
-
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- BAR CHART PARA USUARIOS FEMENINOS Y MASCULINOS -->
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Usuarios por Género</h3>
+            <div class="card-tools">
+              <button
+                type="button"
+                class="btn btn-tool"
+                data-card-widget="collapse"
+              >
+                <i class="fas fa-minus"></i>
+              </button>
+              <button
+                type="button"
+                class="btn btn-tool"
+                data-card-widget="remove"
+              >
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+          <div class="card-body">
+            <canvas
+              id="genderChart"
+              style="
+                min-height: 250px;
+                height: 250px;
+                max-height: 250px;
+                max-width: 100%;
+              "
+            ></canvas>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+        <!-- /.col -->
+        <div class="card card-success">
+          <div class="card-header">
+            <h3 class="card-title">Distribución de Usuarios por Rol</h3>
+            <div class="card-tools">
+              <button
+                type="button"
+                class="btn btn-tool"
+                data-card-widget="collapse"
+              >
+                <i class="fas fa-minus"></i>
+              </button>
+              <button
+                type="button"
+                class="btn btn-tool"
+                data-card-widget="remove"
+              >
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+          <div class="card-body">
+            <canvas
+              id="roleChart"
+              style="
+                min-height: 250px;
+                height: 250px;
+                max-height: 250px;
+                max-width: 100%;
+              "
+            ></canvas>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+        <div class="card card-success">
+          <div class="card-header">
+            <h3 class="card-title">Conteo Nacionalidades</h3>
+            <div class="card-tools">
+              <button
+                type="button"
+                class="btn btn-tool"
+                data-card-widget="collapse"
+              >
+                <i class="fas fa-minus"></i>
+              </button>
+              <button
+                type="button"
+                class="btn btn-tool"
+                data-card-widget="remove"
+              >
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+          <div class="card-body">
+            <canvas id="nacionalidadChart" style="min-height: 400px"></canvas>
+          </div>
+          <!-- /.card-body -->
+        </div>
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
 
-  <!-- jQuery -->
-  <script src="/static/assets/plugins/jquery/jquery.min.js"></script>
-  <!-- Bootstrap 4 -->
-  <script src="/static/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- ChartJS -->
-  <script src="/static/assets/plugins/chart.js/Chart.min.js"></script>
-  <!-- AdminLTE App -->
-  <script src="/static/assets/js/adminlte.min.js"></script>
-  <!-- AdminLTE for demo purposes -->
-  <script src="/static/assets/js/demo.js"></script>
-  <!-- page script -->
-  <script>
-    $(function () {
-      /* ChartJS
-      * -------
-      * Here we will create a few charts using ChartJS
-      */
+<!-- jQuery -->
+<script src="/static/assets/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="/static/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- ChartJS -->
+<script src="/static/assets/plugins/chart.js/Chart.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/static/assets/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="/static/assets/js/demo.js"></script>
+<!-- page script -->
+<script>
+  $(document).ready(function () {
+    // Llamada al endpoint para obtener datos de usuarios
+    axios
+      .get("http://62.72.11.15:8090/usuarios")
+      .then(function (response) {
+        var usuarios = response.data;
 
-      //--------------
-      //- AREA CHART -
-      //--------------
+        // Contar usuarios masculinos y femeninos
+        var masculinos = 0;
+        var femeninos = 0;
+        var roles = {}; // Objeto para almacenar la cuenta de cada rol
 
-      // Get context with jQuery - using jQuery's .get() method.
-      var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
-
-      var areaChartData = {
-        labels  : ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-        datasets: [
-          {
-            label               : 'Digital Goods',
-            backgroundColor     : 'rgba(60,141,188,0.9)',
-            borderColor         : 'rgba(60,141,188,0.8)',
-            pointRadius          : false,
-            pointColor          : '#3b8bba',
-            pointStrokeColor    : 'rgba(60,141,188,1)',
-            pointHighlightFill  : '#fff',
-            pointHighlightStroke: 'rgba(60,141,188,1)',
-            data                : [28, 48, 40, 19, 86, 27, 90]
-          },
-          {
-            label               : 'Electronics',
-            backgroundColor     : 'rgba(210, 214, 222, 1)',
-            borderColor         : 'rgba(210, 214, 222, 1)',
-            pointRadius         : false,
-            pointColor          : 'rgba(210, 214, 222, 1)',
-            pointStrokeColor    : '#c1c7d1',
-            pointHighlightFill  : '#fff',
-            pointHighlightStroke: 'rgba(220,220,220,1)',
-            data                : [65, 59, 80, 81, 56, 55, 40]
-          },
-        ]
-      }
-
-      var areaChartOptions = {
-        maintainAspectRatio : false,
-        responsive : true,
-        legend: {
-          display: false
-        },
-        scales: {
-          xAxes: [{
-            gridLines : {
-              display : false,
-            }
-          }],
-          yAxes: [{
-            gridLines : {
-              display : false,
-            }
-          }]
-        }
-      }
-
-      // This will get the first returned node in the jQuery collection.
-      var areaChart       = new Chart(areaChartCanvas, {
-        type: 'line',
-        data: areaChartData,
-        options: areaChartOptions
-      })
-
-      //-------------
-      //- LINE CHART -
-      //--------------
-      var lineChartCanvas = $('#lineChart').get(0).getContext('2d')
-      var lineChartOptions = $.extend(true, {}, areaChartOptions)
-      var lineChartData = $.extend(true, {}, areaChartData)
-      lineChartData.datasets[0].fill = false;
-      lineChartData.datasets[1].fill = false;
-      lineChartOptions.datasetFill = false
-
-      var lineChart = new Chart(lineChartCanvas, {
-        type: 'line',
-        data: lineChartData,
-        options: lineChartOptions
-      })
-
-      //-------------
-      //- DONUT CHART -
-      //-------------
-      // Get context with jQuery - using jQuery's .get() method.
-      var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
-      var donutData        = {
-        labels: [
-            'Chrome',
-            'IE',
-            'FireFox',
-            'Safari',
-            'Opera',
-            'Navigator',
-        ],
-        datasets: [
-          {
-            data: [700,500,400,600,300,100],
-            backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
+        // Iterar sobre los usuarios y contar por género y roles
+        usuarios.forEach(function (usuario) {
+          if (usuario.usuario_sexo === "Masculino") {
+            masculinos++;
+          } else if (usuario.usuario_sexo === "Femenino") {
+            femeninos++;
           }
-        ]
-      }
-      var donutOptions     = {
-        maintainAspectRatio : false,
-        responsive : true,
-      }
-      //Create pie or douhnut chart
-      // You can switch between pie and douhnut using the method below.
-      var donutChart = new Chart(donutChartCanvas, {
-        type: 'doughnut',
-        data: donutData,
-        options: donutOptions
+
+          var rol = usuario.usuario_rol;
+          roles[rol] = (roles[rol] || 0) + 1;
+        });
+
+        // Gráfico de género
+        var genderChartCanvas = $("#genderChart").get(0).getContext("2d");
+        var genderChartData = {
+          labels: ["Masculino", "Femenino"],
+          datasets: [
+            {
+              data: [masculinos, femeninos],
+              backgroundColor: [
+                "rgba(75, 192, 192, 0.2)", // Color para usuarios masculinos
+                "rgba(255, 99, 132, 0.2)", // Color para usuarios femeninos
+              ],
+              borderColor: ["rgba(75, 192, 192, 1)", "rgba(255, 99, 132, 1)"],
+              borderWidth: 1,
+            },
+          ],
+        };
+        var genderChartOptions = {
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                  beginAtZero: true,
+                  fontSize: 14, // Tamaño del texto en el eje y
+                },
+              },
+            ],
+          },
+        };
+        var genderChart = new Chart(genderChartCanvas, {
+          type: "bar",
+          data: genderChartData,
+          options: genderChartOptions,
+        });
+
+        // Gráfico de roles
+        var rolesLabels = Object.keys(roles);
+        var rolesData = Object.values(roles);
+        var pieColors = [
+          "rgba(255, 99, 132, 0.7)",
+          "rgba(255, 205, 86, 0.7)",
+          "rgba(54, 162, 235, 0.7)",
+          "rgba(75, 192, 192, 0.7)",
+        ];
+        var roleChartCanvas = $("#roleChart").get(0).getContext("2d");
+        var roleChartData = {
+          labels: rolesLabels,
+          datasets: [
+            {
+              data: rolesData,
+              backgroundColor: pieColors,
+              borderWidth: 1,
+            },
+          ],
+        };
+        var roleChartOptions = {
+          responsive: true,
+          maintainAspectRatio: false,
+          legend: {
+            position: "right",
+          },
+        };
+        var roleChart = new Chart(roleChartCanvas, {
+          type: "pie",
+          data: roleChartData,
+          options: roleChartOptions,
+        });
       })
+      .catch(function (error) {
+        console.error(error);
+      });
+  });
+</script>
+<script>
+  $(document).ready(function () {
+    // Realizar la solicitud GET para obtener las nacionalidades de los trabajadores
+    axios
+      .get("http://62.72.11.15:8090/trabajadores")
+      .then(function (response) {
+        var trabajadores = response.data;
 
-      //-------------
-      //- PIE CHART -
-      //-------------
-      // Get context with jQuery - using jQuery's .get() method.
-      var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
-      var pieData        = donutData;
-      var pieOptions     = {
-        maintainAspectRatio : false,
-        responsive : true,
-      }
-      //Create pie or douhnut chart
-      // You can switch between pie and douhnut using the method below.
-      var pieChart = new Chart(pieChartCanvas, {
-        type: 'pie',
-        data: pieData,
-        options: pieOptions
+        // Obtener todas las nacionalidades únicas de los trabajadores
+        var nacionalidades = [
+          ...new Set(
+            trabajadores.map((trabajador) => trabajador.trabajador_nacionalidad)
+          ),
+        ];
+
+        // Contar trabajadores por nacionalidad
+        var trabajadoresPorNacionalidad = nacionalidades.map((nacionalidad) => {
+          return {
+            nacionalidad: nacionalidad,
+            cantidad: trabajadores.filter(
+              (trabajador) =>
+                trabajador.trabajador_nacionalidad === nacionalidad
+            ).length,
+          };
+        });
+
+        // Ordenar el array por cantidad de trabajadores de forma ascendente
+        trabajadoresPorNacionalidad.sort((a, b) => a.cantidad - b.cantidad);
+
+        // Obtener etiquetas (nombres de nacionalidades) y datos (cantidades de trabajadores) para el gráfico
+        var labels = trabajadoresPorNacionalidad.map(
+          (item) => item.nacionalidad
+        );
+        var data = trabajadoresPorNacionalidad.map((item) => item.cantidad);
+
+        // Crear el gráfico lineal de trabajadores por nacionalidad
+        var nacionalidadChartCanvas = $("#nacionalidadChart")
+          .get(0)
+          .getContext("2d");
+        var nacionalidadChartData = {
+          labels: labels,
+          datasets: [
+            {
+              label: "Trabajadores por Nacionalidad",
+              data: data,
+              borderColor: "rgba(75, 192, 192, 1)",
+              borderWidth: 2,
+              pointBackgroundColor: "rgba(75, 192, 192, 1)",
+              fill: false,
+            },
+          ],
+        };
+        var nacionalidadChartOptions = {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                  beginAtZero: true,
+                  fontSize: 14,
+                },
+              },
+            ],
+            xAxes: [
+              {
+                ticks: {
+                  fontSize: 14,
+                },
+              },
+            ],
+          },
+        };
+        var nacionalidadChart = new Chart(nacionalidadChartCanvas, {
+          type: "line",
+          data: nacionalidadChartData,
+          options: nacionalidadChartOptions,
+        });
       })
-
-      //-------------
-      //- BAR CHART -
-      //-------------
-      var barChartCanvas = $('#barChart').get(0).getContext('2d')
-      var barChartData = $.extend(true, {}, areaChartData)
-      var temp0 = areaChartData.datasets[0]
-      var temp1 = areaChartData.datasets[1]
-      barChartData.datasets[0] = temp1
-      barChartData.datasets[1] = temp0
-
-      var barChartOptions = {
-        responsive              : true,
-        maintainAspectRatio     : false,
-        datasetFill             : false
-      }
-
-      var barChart = new Chart(barChartCanvas, {
-        type: 'bar',
-        data: barChartData,
-        options: barChartOptions
-      })
-
-      //---------------------
-      //- STACKED BAR CHART -
-      //---------------------
-      var stackedBarChartCanvas = $('#stackedBarChart').get(0).getContext('2d')
-      var stackedBarChartData = $.extend(true, {}, barChartData)
-
-      var stackedBarChartOptions = {
-        responsive              : true,
-        maintainAspectRatio     : false,
-        scales: {
-          xAxes: [{
-            stacked: true,
-          }],
-          yAxes: [{
-            stacked: true
-          }]
-        }
-      }
-
-      var stackedBarChart = new Chart(stackedBarChartCanvas, {
-        type: 'bar',
-        data: stackedBarChartData,
-        options: stackedBarChartOptions
-      })
-    })
-  </script>
+      .catch(function (error) {
+        console.error(error);
+      });
+  });
+</script>
 
 {% endblock javascripts %}

@@ -23,6 +23,8 @@
 />
 <!-- adminlte-->
 <link rel="stylesheet" href="/static/assets/css/adminlte.min.css" />
+<!-- Axios -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 {% endblock stylesheets %} {% block content %}
 
@@ -49,7 +51,7 @@
     <!-- Default box -->
     <div class="card">
       <div class="card-header">
-        <h3 class="card-title">Title</h3>
+        <h3 class="card-title">Portal para realizar búsqueda por DNI</h3>
 
         <div class="card-tools">
           <button
@@ -70,7 +72,25 @@
           </button>
         </div>
       </div>
-      <div class="card-body">Start creating your amazing application!</div>
+      <div class="card-body">
+        <h1>Portal para realizar búsqueda por DNI</h1>
+        <form id="dni_search_form">
+          <div class="mb-3">
+            <label for="dni" class="form-label">Número de DNI:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="dni"
+              placeholder="Ingrese su DNI"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">Buscar</button>
+        </form>
+        <div id="resultado">
+          <!-- Aquí puedes mostrar los resultados de la búsqueda si es necesario -->
+        </div>
+      </div>
       <!-- /.card-body -->
       <div class="card-footer">Footer</div>
       <!-- /.card-footer-->
@@ -84,6 +104,9 @@
 
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
+<!-- JAVASCRIPT-->
+<!-- Primer archivo JavaScript -->
+<script src="/static/assets/js/index/index2.js"></script>
 
 <!-- jQuery -->
 <script src="/static/assets/plugins/jquery/jquery.min.js"></script>

@@ -12,7 +12,7 @@ from flask_login import (
 
 from apps import db, login_manager
 from apps.authentication import blueprint
-from apps.authentication.forms import LoginForm, CreateAccountForm
+from apps.authentication.forms import LoginForm #, CreateAccountForm
 from apps.authentication.models import Usuario
 
 from apps.authentication.util import verify_pass
@@ -39,6 +39,10 @@ def login():
 
         # Check the password
         if user and verify_pass(password, user.usuario_contrasenia):  
+            if user.usuario_rol != 'Administrador':
+                return render_template('accounts/login.html',
+                               msg='Este usuario no tiene permisos',
+                               form=login_form)
             # Asumiendo que 'usuario_contrasenia' es campo de contraseña en  bd
             login_user(user)
             return redirect(url_for('authentication_blueprint.route_default'))
