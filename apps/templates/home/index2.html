@@ -1,7 +1,7 @@
-{% extends "layouts/base.html" %} {% block title %} Blank Page {% endblock %}
+{% extends "layouts/base.html" %} {% block title %} Tables Data {% endblock %}
 
 <!-- Element injected in the BODY element -->
-{% block body_class %} sidebar-mini pace-primary {% endblock body_class %}
+{% block body_class %} {% endblock body_class %}
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}
@@ -16,86 +16,136 @@
   rel="stylesheet"
   href="/static/assets/plugins/fontawesome-free/css/all.min.css"
 />
-<!-- pace-progress -->
+<!-- DataTables -->
 <link
   rel="stylesheet"
-  href="/static/assets/plugins/pace-progress/themes/black/pace-theme-flat-top.css"
+  href="/static/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css"
 />
-<!-- adminlte-->
+<link
+  rel="stylesheet"
+  href="/static/assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css"
+/>
+<!-- Theme style -->
 <link rel="stylesheet" href="/static/assets/css/adminlte.min.css" />
-<!-- Axios -->
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 {% endblock stylesheets %} {% block content %}
-
+<style>
+  /* Estilo para el contenedor de la tabla */
+  .table-responsive {
+    overflow-x: auto; /* Habilita el scroll horizontal */
+    max-width: 100%; /* Asegura que el contenedor no sea más ancho que el viewport */
+  }
+</style>
+<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Bienvenido, {{current_user.usuario_nombres}} !</h1>
+          <h1>Dashboard DB</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Dashboard DB</li>
           </ol>
         </div>
       </div>
     </div>
     <!-- /.container-fluid -->
   </section>
-
   <!-- Main content -->
   <section class="content">
-    <!-- Default box -->
-    <div class="card">
-      <div class="card-header">
-        <h3 class="card-title">Portal para realizar búsqueda por DNI</h3>
-
-        <div class="card-tools">
-          <button
-            type="button"
-            class="btn btn-tool"
-            data-card-widget="collapse"
-            title="Collapse"
-          >
-            <i class="fas fa-minus"></i>
-          </button>
-          <button
-            type="button"
-            class="btn btn-tool"
-            data-card-widget="remove"
-            title="Remove"
-          >
-            <i class="fas fa-times"></i>
-          </button>
-        </div>
-      </div>
-      <div class="card-body">
-        <h1>Portal para realizar búsqueda por DNI</h1>
-        <form id="dni_search_form">
-          <div class="mb-3">
-            <label for="dni" class="form-label">Número de DNI:</label>
-            <input
-              type="text"
-              class="form-control"
-              id="dni"
-              placeholder="Ingrese su DNI"
-              required
-            />
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Dashboard DB Empleados</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <div class="table-responsive">
+                <table id="example1" class="table table-bordered table-striped">
+                  <!-- Encabezados de la tabla (thead) -->
+                  <thead>
+                    <tr>
+                      <!-- TABLA USUARIO -->
+                      <th>DNI</th>
+                      <th>Nombre</th>
+                      <th>Apellido</th>
+                      <th>Sexo</th>
+                      <th>Teléfono</th>
+                      <th>Fecha Nacimiento</th>
+                      <!-- TABLA TRABAJADOR -->
+                      <th>Tipo Documento</th>
+                      <th>Nacionalidad</th>
+                      <th>Estado Civil</th>
+                      <th>Ubigeo</th>
+                      <th>Fecha Ingreso Sys</th>
+                      <th>Fecha Ingreso Emp</th>
+                      <th>Experiencia Previa</th>
+                      <th>Edad(años)</th>
+                      <th>Récord</th>
+                      <th>Total EXP</th>
+                      <!-- TABLA DIRECCION -->
+                      <th>País</th>
+                      <th>Departamento</th>
+                      <th>Provincia</th>
+                      <th>Distrito</th>
+                      <th>Detalle</th>
+                      <!-- TABLA SUELDO -->
+                      <th>Sueldo Básico</th>
+                      <th>ASIGFAM %</th>
+                      <th>BONO %</th>
+                      <th>ASIGFAM S/</th>
+                      <th>BONO S/</th>
+                      <th>Sueldo Mensual</th>
+                      <th>Sueldo Anual</th>
+                      <!-- TABLA CUENTA BANCARIA -->
+                      <th>Entidad Bancaria</th>
+                      <th>Numero Cuenta</th>
+                      <th>CCI</th>
+                      <th>Tipo Cuenta</th>
+                      <!-- TABLA Contrato -->
+                      <th>Tipo Contrato</th>
+                      <th>Contrato Opcion</th>
+                      <th>Tipo Empleo</th>
+                      <th>Situacion</th>
+                      <th>Area</th>
+                      <th>Proyecto</th>
+                      <th>Departamento</th>
+                      <th>Cargo</th>
+                      <!-- TABLA ESTUDIO -->
+                      <th>Nivel Educ.</th>
+                      <th>Situacion Esp.</th>
+                      <th>Regimen Laboral</th>
+                      <th>Regimen Laboral ASEG</th>
+                      <th>Institución</th>
+                      <th>Carrera</th>
+                      <th>Capacitación</th>
+                      <th>Especialización</th>
+                      <th>ID Colegiatura</th>
+                      <th>Sede Colegiatura</th>
+                      <th>Condición</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Las filas se llenarán automáticamente usando JavaScript -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- /.card-body -->
           </div>
-          <button type="submit" class="btn btn-primary">Buscar</button>
-        </form>
-        <div id="resultado">
-          <!-- Aquí puedes mostrar los resultados de la búsqueda si es necesario -->
+          <!-- /.card -->
         </div>
+        <!-- /.col -->
       </div>
-      <!-- /.card-body -->
-      <div class="card-footer">Footer</div>
-      <!-- /.card-footer-->
+      <!-- /.row -->
     </div>
-    <!-- /.card -->
+    <!-- /.container-fluid -->
   </section>
   <!-- /.content -->
 </div>
@@ -104,19 +154,120 @@
 
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
-<!-- JAVASCRIPT-->
-<!-- Primer archivo JavaScript -->
-<script src="/static/assets/js/index/index2.js"></script>
-
+<!-- Axios CDN -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <!-- jQuery -->
 <script src="/static/assets/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="/static/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- pace-progress -->
-<script src="/static/assets/plugins/pace-progress/pace.min.js"></script>
+<!-- DataTables -->
+<script src="/static/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/static/assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="/static/assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/static/assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<!-- DataTables FixedColumns CSS -->
+<link
+  rel="stylesheet"
+  href="/static/assets/plugins/datatables-fixedcolumns/css/fixedColumns.bootstrap4.min.css"
+/>
+<!-- DataTables FixedColumns JS -->
+<script src="/static/assets/plugins/datatables-fixedcolumns/js/dataTables.fixedColumns.min.js"></script>
+<!-- DataTables Responsive JS -->
+<script src="/static/assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/static/assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+
 <!-- AdminLTE App -->
 <script src="/static/assets/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="/static/assets/js/demo.js"></script>
+<!-- page script -->
+<script>
+  // Realizar una solicitud GET al endpoint usando Axios
+  axios
+    .get("http://62.72.11.15:8090/all_trabajadores")
+    .then(function (response) {
+      var data = response.data;
+      var table = $("#example1").DataTable({
+        // Configuraciones adicionales de DataTables
+        scrollX: true, // Permite desplazamiento horizontal
+        fixedColumns: {
+          leftColumns: 2, // Fija las primeras 2 columnas (ID y Nombre)
+        },
+      });
+      // Limpiar la tabla antes de agregar nuevos datos
+      table.clear();
+
+      // Iterar sobre los datos y agregar cada fila a la tabla
+      data.forEach(function (all_trabajadores) {
+        table.row
+          .add([
+            // Tabla usuario
+            all_trabajadores.usuario_id,
+            all_trabajadores.usuario_nombres,
+            all_trabajadores.usuario_apellidos,
+            all_trabajadores.usuario_sexo,
+            all_trabajadores.usuario_telefono,
+            all_trabajadores.trabajador_fecha_nacimiento,
+            // Tabla trabajador
+            all_trabajadores.trabajador_tipo_documento,
+            all_trabajadores.trabajador_nacionalidad,
+            all_trabajadores.trabajador_estado_civil,
+            all_trabajadores.trabajador_ubigeo,
+            all_trabajadores.trabajador_fecha_ingreso_sistema,
+            all_trabajadores.trabajador_fecha_ingreso,
+            all_trabajadores.trabajador_exp_previa,
+            //calculados
+            all_trabajadores.trabajador_edad,
+            all_trabajadores.trabajador_record,
+            all_trabajadores.trabajador_total_anios_exp,
+            // Tabla direccion
+            all_trabajadores.direccion_pais,
+            all_trabajadores.direccion_departamento,
+            all_trabajadores.direccion_provincia,
+            all_trabajadores.direccion_distrito,
+            all_trabajadores.direccion_detalle,
+            // Tabla sueldo
+            all_trabajadores.sueldo_valor_básico,
+            all_trabajadores.sueldo_asigfam_porcentaje,
+            all_trabajadores.sueldo_bono_porcentaje,
+            all_trabajadores.sueldo_asignacion_familiar,
+            all_trabajadores.sueldo_monto_bono,
+            all_trabajadores.sueldo_mensual,
+            all_trabajadores.sueldo_anual,
+            // Tabla Cuenta Bancaria
+            all_trabajadores.cuenta_bancaria_banco,
+            all_trabajadores.cuenta_bancaria_codigo,
+            all_trabajadores.cuenta_bancaria_codigo_cci,
+            all_trabajadores.cuenta_bancaria_tipo,
+            // Tabla Contrato
+            all_trabajadores.contrato_tipo,
+            all_trabajadores.contrato_opcion,
+            all_trabajadores.empleo_tipo,
+            all_trabajadores.empleo_situacion,
+            all_trabajadores.empleo_area,
+            all_trabajadores.empleo_proyecto,
+            all_trabajadores.empleo_departamento,
+            all_trabajadores.empleo_cargo,
+            // Tabla estudio
+            all_trabajadores.estudio_nivel_educativo,
+            all_trabajadores.estudio_situacion_especial,
+            all_trabajadores.estudio_regimen_laboral,
+            all_trabajadores.estudio_regimen_laboral_aseguramiento,
+            all_trabajadores.estudio_institucion,
+            all_trabajadores.estudio_carrera_educativa,
+            all_trabajadores.estudio_capacitacion,
+            all_trabajadores.estudio_especializacion,
+            all_trabajadores.estudio_id_colegiatura,
+            all_trabajadores.estudio_fecha_colegiatura,
+            all_trabajadores.estudio_sede_colegiatura,
+            all_trabajadores.estudio_condicion,
+          ])
+          .draw(false);
+      });
+    })
+    .catch(function (error) {
+      console.error("Error al obtener los datos:", error);
+    });
+</script>
 
 {% endblock javascripts %}
