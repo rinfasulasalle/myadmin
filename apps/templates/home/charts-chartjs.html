@@ -45,100 +45,96 @@
   <section class="content">
     <div class="container-fluid">
       <div class="row">
-        <!-- BAR CHART PARA USUARIOS FEMENINOS Y MASCULINOS -->
-        <div class="card card-primary">
-          <div class="card-header">
-            <h3 class="card-title">Usuarios por Género</h3>
-            <div class="card-tools">
-              <button
-                type="button"
-                class="btn btn-tool"
-                data-card-widget="collapse"
-              >
-                <i class="fas fa-minus"></i>
-              </button>
-              <button
-                type="button"
-                class="btn btn-tool"
-                data-card-widget="remove"
-              >
-                <i class="fas fa-times"></i>
-              </button>
+        <div class="col-md-6">
+          <!-- BAR CHART PARA USUARIOS FEMENINOS Y MASCULINOS -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Usuarios por Género</h3>
+              <div class="card-tools">
+                <button
+                  type="button"
+                  class="btn btn-tool"
+                  data-card-widget="collapse"
+                >
+                  <i class="fas fa-minus"></i>
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-tool"
+                  data-card-widget="remove"
+                >
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
             </div>
-          </div>
-          <div class="card-body">
-            <canvas
-              id="genderChart"
-              style="
-                min-height: 250px;
-                height: 250px;
-                max-height: 250px;
-                max-width: 100%;
-              "
-            ></canvas>
-          </div>
-          <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
-        <!-- /.col -->
-        <div class="card card-success">
-          <div class="card-header">
-            <h3 class="card-title">Distribución de Usuarios por Rol</h3>
-            <div class="card-tools">
-              <button
-                type="button"
-                class="btn btn-tool"
-                data-card-widget="collapse"
-              >
-                <i class="fas fa-minus"></i>
-              </button>
-              <button
-                type="button"
-                class="btn btn-tool"
-                data-card-widget="remove"
-              >
-                <i class="fas fa-times"></i>
-              </button>
+            <div class="card-body">
+              <div class="chart">
+                <canvas id="genderChart"></canvas>
+              </div>
             </div>
+            <!-- /.card-body -->
           </div>
-          <div class="card-body">
-            <canvas
-              id="roleChart"
-              style="
-                min-height: 250px;
-                height: 250px;
-                max-height: 250px;
-                max-width: 100%;
-              "
-            ></canvas>
-          </div>
-          <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
-        <div class="card card-success">
-          <div class="card-header">
-            <h3 class="card-title">Conteo Nacionalidades</h3>
-            <div class="card-tools">
-              <button
-                type="button"
-                class="btn btn-tool"
-                data-card-widget="collapse"
-              >
-                <i class="fas fa-minus"></i>
-              </button>
-              <button
-                type="button"
-                class="btn btn-tool"
-                data-card-widget="remove"
-              >
-                <i class="fas fa-times"></i>
-              </button>
+          <!-- /.card -->
+          <!-- /.col -->
+          <div class="card card-success">
+            <div class="card-header">
+              <h3 class="card-title">Distribución de Usuarios por Rol</h3>
+              <div class="card-tools">
+                <button
+                  type="button"
+                  class="btn btn-tool"
+                  data-card-widget="collapse"
+                >
+                  <i class="fas fa-minus"></i>
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-tool"
+                  data-card-widget="remove"
+                >
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
             </div>
+            <div class="card-body">
+              <canvas
+                id="roleChart"
+                style="
+                  min-height: 250px;
+                  height: 250px;
+                  max-height: 250px;
+                  max-width: 100%;
+                "
+              ></canvas>
+            </div>
+            <!-- /.card-body -->
           </div>
-          <div class="card-body">
-            <canvas id="nacionalidadChart" style="min-height: 400px"></canvas>
+          <!-- /.card -->
+          <div class="card card-success">
+            <div class="card-header">
+              <h3 class="card-title">Conteo Nacionalidades</h3>
+              <div class="card-tools">
+                <button
+                  type="button"
+                  class="btn btn-tool"
+                  data-card-widget="collapse"
+                >
+                  <i class="fas fa-minus"></i>
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-tool"
+                  data-card-widget="remove"
+                >
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <canvas id="nacionalidadChart" style="min-height: 400px"></canvas>
+            </div>
+            <!-- /.card-body -->
           </div>
-          <!-- /.card-body -->
         </div>
       </div>
       <!-- /.row -->
@@ -190,10 +186,13 @@
 
         // Gráfico de género
         var genderChartCanvas = $("#genderChart").get(0).getContext("2d");
+        total = masculinos + femeninos;
+        char_total = "Total Users:" + total;
         var genderChartData = {
           labels: ["Masculino", "Femenino"],
           datasets: [
             {
+              label: char_total,
               data: [masculinos, femeninos],
               backgroundColor: [
                 "rgba(75, 192, 192, 0.2)", // Color para usuarios masculinos
@@ -334,7 +333,7 @@
           },
         };
         var nacionalidadChart = new Chart(nacionalidadChartCanvas, {
-          type: "line",
+          type: "bar",
           data: nacionalidadChartData,
           options: nacionalidadChartOptions,
         });
