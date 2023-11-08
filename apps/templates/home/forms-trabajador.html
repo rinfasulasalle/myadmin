@@ -641,7 +641,6 @@ endblock %}
                     placeholder="Carrera no especificada"
                   />
                 </div>
-                <!-- Agrega el resto de los campos aquí -->
               </div>
               <div class="card-footer">
                 <button type="submit" class="btn btn-secondary">
@@ -649,6 +648,46 @@ endblock %}
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+
+        <!-- Para cargar desde CSV -->
+        <div class="col-md-12">
+          <div class="card card-secondary">
+            <div class="card-header">
+              <h3 class="card-title">Importar desde CSV</h3>
+            </div>
+            <div class="card-body">
+              <p>
+                También puede importar los datos desde un archivo CSV en el
+                siguiente formato:
+              </p>
+              <p><strong>Ejemplo del formato CSV:</strong></p>
+              <pre>
+        "campo1","campo2","campo3"
+        "valor1","valor2","valor3"
+        "valor4","valor5","valor6"
+              </pre>
+              <div class="custom-file mt-3">
+                <input
+                  type="file"
+                  class="custom-file-input"
+                  id="csvFile"
+                  accept=".csv"
+                />
+                <label class="custom-file-label" for="csvFile"
+                  >Seleccionar archivo CSV</label
+                >
+              </div>
+              <button
+                type="button"
+                class="btn btn-primary mt-3"
+                onclick="importarCSV()"
+              >
+                Importar CSV
+              </button>
+              <div id="csvContent" class="mt-3"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -687,5 +726,22 @@ endblock %}
     this.classList.toggle("fa-eye-slash");
   });
 </script>
+<script>
+  function importarCSV() {
+    const fileInput = document.getElementById("csvFile");
+    const csvContentDiv = document.getElementById("csvContent");
+    const file = fileInput.files[0];
 
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const csvContent = e.target.result;
+        csvContentDiv.innerText = csvContent;
+      };
+      reader.readAsText(file);
+    } else {
+      csvContentDiv.innerText = "Por favor, seleccione un archivo CSV.";
+    }
+  }
+</script>
 {% endblock javascripts %}
