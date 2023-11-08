@@ -8,8 +8,8 @@ import configparser
 config = configparser.ConfigParser()
 # pip install mysql-connector-python
 try:
-    config.read('D://mysql_config.ini')
-    #config.read()
+    #config.read('D://mysql_config.ini')
+    config.read('/root/mysql_config.ini')
     DB_HOST = config.get('mysql', 'host')
     DB_PORT = config.get('mysql', 'port')
     DB_USERNAME = config.get('mysql', 'user')
