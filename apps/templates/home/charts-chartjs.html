@@ -69,7 +69,15 @@
             </div>
             <div class="card-body">
               <div class="chart">
-                <canvas id="genderChart"></canvas>
+                <canvas
+                  id="genderChart"
+                  style="
+                    min-height: 250px;
+                    height: 250px;
+                    max-height: 250px;
+                    max-width: 100%;
+                  "
+                ></canvas>
               </div>
             </div>
             <!-- /.card-body -->
@@ -186,17 +194,17 @@
 
         // Gráfico de género
         var genderChartCanvas = $("#genderChart").get(0).getContext("2d");
-        total = masculinos + femeninos;
-        char_total = "Total Users:" + total;
+        var total = masculinos + femeninos;
+        var char_total = "Total Users:" + total;
         var genderChartData = {
-          labels: ["Masculino", "Femenino"],
+          labels: ["Masculino", "Femenino", "Total Users"],
           datasets: [
             {
-              label: char_total,
-              data: [masculinos, femeninos],
+              data: [masculinos, femeninos, total],
               backgroundColor: [
                 "rgba(75, 192, 192, 0.2)", // Color para usuarios masculinos
                 "rgba(255, 99, 132, 0.2)", // Color para usuarios femeninos
+                "rgba(40, 12, 12, 0.2)",
               ],
               borderColor: ["rgba(75, 192, 192, 1)", "rgba(255, 99, 132, 1)"],
               borderWidth: 1,
@@ -204,7 +212,16 @@
           ],
         };
         var genderChartOptions = {
+          maintainAspectRatio: false,
+          responsive: true,
           scales: {
+            xAxes: [
+              {
+                gridLines: {
+                  display: false,
+                },
+              },
+            ],
             yAxes: [
               {
                 ticks: {
@@ -257,10 +274,7 @@
       .catch(function (error) {
         console.error(error);
       });
-  });
-</script>
-<script>
-  $(document).ready(function () {
+
     // Realizar la solicitud GET para obtener las nacionalidades de los trabajadores
     axios
       .get("http://62.72.11.15:8090/trabajadores")

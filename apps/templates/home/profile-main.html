@@ -1,0 +1,109 @@
+{% extends "layouts/base.html" %} {% block title %} Blank Page {% endblock %}
+
+<!-- Element injected in the BODY element -->
+{% block body_class %} sidebar-mini pace-primary {% endblock body_class %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+
+<!-- Google Font: Source Sans Pro -->
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"
+/>
+<!-- Font Awesome -->
+<link
+  rel="stylesheet"
+  href="/static/assets/plugins/fontawesome-free/css/all.min.css"
+/>
+<!-- pace-progress -->
+<link
+  rel="stylesheet"
+  href="/static/assets/plugins/pace-progress/themes/black/pace-theme-flat-top.css"
+/>
+<!-- adminlte-->
+<link rel="stylesheet" href="/static/assets/css/adminlte.min.css" />
+
+{% endblock stylesheets %}{% block content %}
+
+<div class="content-wrapper">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Configuración de Perfil</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="card">
+      <div class="card-body">
+        <form action="/guardar_perfil" method="post">
+          <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="nombre"
+              name="nombre"
+              placeholder="{{ current_user.usuario_apellidos }}, {{ current_user.usuario_nombres }}"
+              disabled
+            />
+          </div>
+          <div class="form-group">
+            <label for="email">Correo Electrónico:</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              name="email"
+              placeholder="{{ current_user.usuario_correo }}"
+              disabled
+            />
+          </div>
+          <div class="form-group">
+            <label for="password_actual">Contraseña Actual:</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password_actual"
+              name="password_actual"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="nueva_password">Nueva Contraseña:</label>
+            <input
+              type="password"
+              class="form-control"
+              id="nueva_password"
+              name="nueva_password"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+<!-- jQuery -->
+<script src="/static/assets/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="/static/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- pace-progress -->
+<script src="/static/assets/plugins/pace-progress/pace.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/static/assets/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="/static/assets/js/demo.js"></script>
+
+{% endblock javascripts %}

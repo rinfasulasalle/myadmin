@@ -31,5 +31,6 @@ if DEBUG:
     app.logger.info('ASSETS_ROOT      = ' + app_config.ASSETS_ROOT)
 '''
 if __name__ == "__main__":
+    print("Running on http://localhost:6060")
     # Ejecutar la aplicación con la configuración especificada
     app.run(debug=DEBUG, port=PORT, host=HOST)
