@@ -20,473 +20,640 @@ endblock %}
 <!-- Theme style -->
 <link rel="stylesheet" href="/static/assets/css/adminlte.min.css" />
 
-{% endblock stylesheets %} {% block content %}
+{% endblock stylesheets %}{% block content %}
 
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
-    <div class="container-fluid">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1>Formularios de Ingreso de Trabajadores</h1>
-        </div>
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Formularios de Trabajadores</li>
-          </ol>
-        </div>
-      </div>
-    </div>
-    <!-- /.container-fluid -->
+    <!-- ... (encabezado del contenido) ... -->
   </section>
 
   <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
       <div class="row">
-        <!-- left column -->
+        <!-- Formulario de Usuarios (izquierda) -->
         <div class="col-md-6">
-          <!-- general form elements -->
           <div class="card card-primary">
             <div class="card-header">
-              <h3 class="card-title">Quick Example</h3>
+              <h3 class="card-title">Formulario de Usuarios</h3>
             </div>
-            <!-- /.card-header -->
-            <!-- form start -->
             <form>
               <div class="card-body">
+                <!-- Campos para el formulario de usuarios -->
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Email address</label>
+                  <label for="rol">Rol</label>
+                  <select class="form-control" id="rol">
+                    <option value="sin_acceso" selected>Sin Acceso</option>
+                    <option value="admin">Administrador</option>
+                    <option value="usuario">Recursos Humanos</option>
+                    <option value="trabajador">Trabajador</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="nombres">Nombres</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="nombres"
+                    placeholder="Ingrese nombres"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="apellidos">Apellidos</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="apellidos"
+                    placeholder="Ingrese apellidos"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="correo">Correo</label>
                   <input
                     type="email"
                     class="form-control"
-                    id="exampleInputEmail1"
-                    placeholder="Enter email"
+                    id="correo"
+                    placeholder="Ingrese correo"
                   />
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Password</label>
-                  <input
-                    type="password"
-                    class="form-control"
-                    id="exampleInputPassword1"
-                    placeholder="Password"
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputFile">File input</label>
+                  <label for="contrasena">Contraseña</label>
                   <div class="input-group">
-                    <div class="custom-file">
-                      <input
-                        type="file"
-                        class="custom-file-input"
-                        id="exampleInputFile"
-                      />
-                      <label class="custom-file-label" for="exampleInputFile"
-                        >Choose file</label
-                      >
-                    </div>
-                    <div class="input-group-append">
-                      <span class="input-group-text">Upload</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-check">
-                  <input
-                    type="checkbox"
-                    class="form-check-input"
-                    id="exampleCheck1"
-                  />
-                  <label class="form-check-label" for="exampleCheck1"
-                    >Check me out</label
-                  >
-                </div>
-              </div>
-              <!-- /.card-body -->
-
-              <div class="card-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </div>
-            </form>
-          </div>
-          <!-- /.card -->
-
-          <!-- Input addon -->
-          <div class="card card-info">
-            <div class="card-header">
-              <h3 class="card-title">Input Addon</h3>
-            </div>
-            <div class="card-body">
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">@</span>
-                </div>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Username"
-                />
-              </div>
-
-              <div class="input-group mb-3">
-                <input type="text" class="form-control" />
-                <div class="input-group-append">
-                  <span class="input-group-text">.00</span>
-                </div>
-              </div>
-
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">$</span>
-                </div>
-                <input type="text" class="form-control" />
-                <div class="input-group-append">
-                  <span class="input-group-text">.00</span>
-                </div>
-              </div>
-
-              <h4>With icons</h4>
-
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"
-                    ><i class="fas fa-envelope"></i
-                  ></span>
-                </div>
-                <input type="email" class="form-control" placeholder="Email" />
-              </div>
-
-              <div class="input-group mb-3">
-                <input type="text" class="form-control" />
-                <div class="input-group-append">
-                  <span class="input-group-text"
-                    ><i class="fas fa-check"></i
-                  ></span>
-                </div>
-              </div>
-
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">
-                    <i class="fas fa-dollar-sign"></i>
-                  </span>
-                </div>
-                <input type="text" class="form-control" />
-                <div class="input-group-append">
-                  <div class="input-group-text">
-                    <i class="fas fa-ambulance"></i>
-                  </div>
-                </div>
-              </div>
-
-              <h5 class="mt-4 mb-2">With checkbox and radio inputs</h5>
-
-              <div class="row">
-                <div class="col-lg-6">
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <input type="checkbox" />
-                      </span>
-                    </div>
-                    <input type="text" class="form-control" />
-                  </div>
-                  <!-- /input-group -->
-                </div>
-                <!-- /.col-lg-6 -->
-                <div class="col-lg-6">
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"
-                        ><input type="radio"
-                      /></span>
-                    </div>
-                    <input type="text" class="form-control" />
-                  </div>
-                  <!-- /input-group -->
-                </div>
-                <!-- /.col-lg-6 -->
-              </div>
-              <!-- /.row -->
-
-              <h5 class="mt-4 mb-2">With buttons</h5>
-
-              <p>Large: <code>.input-group.input-group-lg</code></p>
-
-              <div class="input-group input-group-lg mb-3">
-                <div class="input-group-prepend">
-                  <button
-                    type="button"
-                    class="btn btn-warning dropdown-toggle"
-                    data-toggle="dropdown"
-                  >
-                    Action
-                  </button>
-                  <ul class="dropdown-menu">
-                    <li class="dropdown-item"><a href="#">Action</a></li>
-                    <li class="dropdown-item">
-                      <a href="#">Another action</a>
-                    </li>
-                    <li class="dropdown-item">
-                      <a href="#">Something else here</a>
-                    </li>
-                    <li class="dropdown-divider"></li>
-                    <li class="dropdown-item">
-                      <a href="#">Separated link</a>
-                    </li>
-                  </ul>
-                </div>
-                <!-- /btn-group -->
-                <input type="text" class="form-control" />
-              </div>
-              <!-- /input-group -->
-
-              <p>Normal</p>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <button type="button" class="btn btn-danger">Action</button>
-                </div>
-                <!-- /btn-group -->
-                <input type="text" class="form-control" />
-              </div>
-              <!-- /input-group -->
-
-              <p>Small <code>.input-group.input-group-sm</code></p>
-              <div class="input-group input-group-sm">
-                <input type="text" class="form-control" />
-                <span class="input-group-append">
-                  <button type="button" class="btn btn-info btn-flat">
-                    Go!
-                  </button>
-                </span>
-              </div>
-              <!-- /input-group -->
-            </div>
-            <!-- /.card-body -->
-          </div>
-          <!-- /.card -->
-          <!-- Horizontal Form -->
-          <div class="card card-info">
-            <div class="card-header">
-              <h3 class="card-title">Horizontal Form</h3>
-            </div>
-            <!-- /.card-header -->
-            <!-- form start -->
-            <form class="form-horizontal">
-              <div class="card-body">
-                <div class="form-group row">
-                  <label for="inputEmail3" class="col-sm-2 col-form-label"
-                    >Email</label
-                  >
-                  <div class="col-sm-10">
-                    <input
-                      type="email"
-                      class="form-control"
-                      id="inputEmail3"
-                      placeholder="Email"
-                    />
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="inputPassword3" class="col-sm-2 col-form-label"
-                    >Password</label
-                  >
-                  <div class="col-sm-10">
                     <input
                       type="password"
                       class="form-control"
-                      id="inputPassword3"
-                      placeholder="Password"
+                      id="contrasena"
+                      placeholder="Ingrese contraseña"
                     />
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <div class="offset-sm-2 col-sm-10">
-                    <div class="form-check">
-                      <input
-                        type="checkbox"
-                        class="form-check-input"
-                        id="exampleCheck2"
-                      />
-                      <label class="form-check-label" for="exampleCheck2"
-                        >Remember me</label
-                      >
+                    <div class="input-group-append">
+                      <span class="input-group-text">
+                        <i class="fas fa-eye" id="togglePassword"></i>
+                      </span>
                     </div>
                   </div>
                 </div>
+
+                <div class="form-group">
+                  <label for="sexo">Sexo</label>
+                  <select class="form-control" id="sexo">
+                    <option value="no_especificado" selected>
+                      No Especificado
+                    </option>
+                    <option value="femenino">Femenino</option>
+                    <option value="masculino">Masculino</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="telefono">Teléfono</label>
+                  <input
+                    type="tel"
+                    class="form-control"
+                    id="telefono"
+                    placeholder="Ingrese teléfono"
+                  />
+                </div>
               </div>
-              <!-- /.card-body -->
               <div class="card-footer">
-                <button type="submit" class="btn btn-info">Sign in</button>
-                <button type="submit" class="btn btn-default float-right">
-                  Cancel
+                <button type="submit" class="btn btn-primary">
+                  Guardar Usuario
                 </button>
               </div>
-              <!-- /.card-footer -->
             </form>
           </div>
-          <!-- /.card -->
         </div>
-        <!--/.col (left) -->
-        <!-- right column -->
+
+        <!-- Formulario de Trabajadores (derecha) -->
         <div class="col-md-6">
-          <!-- general form elements disabled -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Formulario de Trabajadores</h3>
+            </div>
+            <form>
+              <div class="card-body">
+                <!-- Campos para el formulario de trabajadores -->
+                <div class="form-group">
+                  <label for="fechaNacimiento">Fecha de Nacimiento</label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="fechaNacimiento"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="tipoDocumento">Tipo de Documento</label>
+                  <select class="form-control" id="tipoDocumento">
+                    <option value="dni" selected>DNI</option>
+                    <option value="carnet_extranjeria">
+                      Carnet de Extranjería
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="documentoDNI">Documento de DNI (PDF)</label>
+                  <input
+                    type="file"
+                    class="form-control-file"
+                    id="documentoDNI"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="nacionalidad">Nacionalidad</label>
+                  <select class="form-control" id="nacionalidad">
+                    <!-- Lista de países de América Latina -->
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="ubigeo">Ubigeo</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="ubigeo"
+                    placeholder="Ingrese Ubigeo"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="estadoCivil">Estado Civil</label>
+                  <select class="form-control" id="estadoCivil">
+                    <option value="no_especificado" selected>
+                      No Especificado
+                    </option>
+                    <option value="soltero">Soltero/a</option>
+                    <option value="casado">Casado/a</option>
+                    <option value="viudo">Viudo/a</option>
+                    <option value="conviviente">Conviviente</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="documentoEstadoCivil"
+                    >Documento de Estado Civil (PDF)</label
+                  >
+                  <input
+                    type="file"
+                    class="form-control-file"
+                    id="documentoEstadoCivil"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="fechaIngreso">Fecha de Ingreso</label>
+                  <input type="date" class="form-control" id="fechaIngreso" />
+                </div>
+                <div class="form-group">
+                  <label for="experienciaPrevia">Experiencia Previa</label>
+                  <textarea
+                    class="form-control"
+                    id="experienciaPrevia"
+                    rows="3"
+                    placeholder="Ingrese experiencia previa"
+                  ></textarea>
+                </div>
+              </div>
+              <div class="card-footer">
+                <button type="submit" class="btn btn-primary">
+                  Guardar Trabajador
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- Formulario de Cuenta Bancaria (derecha) -->
+        <div class="col-md-6">
+          <div class="card card-info">
+            <div class="card-header">
+              <h3 class="card-title">Formulario de Cuenta Bancaria</h3>
+            </div>
+            <form>
+              <div class="card-body">
+                <!-- Campos para el formulario de cuenta bancaria -->
+                <div class="form-group">
+                  <label for="cuentaBancariaCCI">Cuenta Bancaria CCI</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="cuentaBancariaCCI"
+                    placeholder="Ingrese número de cuenta CCI"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="cuentaBancariaCodigo"
+                    >Cuenta Bancaria Código</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="cuentaBancariaCodigo"
+                    placeholder="Ingrese número de cuenta código"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="cuentaBancariaBanco">Cuenta Bancaria Banco</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="cuentaBancariaBanco"
+                    placeholder="Ingrese nombre del banco"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="cuentaBancariaTipo">Cuenta Bancaria Tipo</label>
+                  <select class="form-control" id="cuentaBancariaTipo">
+                    <option value="sueldo">Sueldo</option>
+                    <option value="CTS">CTS</option>
+                  </select>
+                </div>
+              </div>
+              <div class="card-footer">
+                <button type="submit" class="btn btn-info">
+                  Guardar Cuenta Bancaria
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Formulario de Sueldo (izquierda) -->
+        <div class="col-md-6">
+          <div class="card card-info">
+            <div class="card-header">
+              <h3 class="card-title">Formulario de Sueldo</h3>
+            </div>
+            <form>
+              <div class="card-body">
+                <!-- Campos para el formulario de sueldo -->
+                <div class="form-group">
+                  <label for="sueldoValorBasico">Sueldo Valor Básico</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="sueldoValorBasico"
+                    placeholder="Ingrese sueldo valor básico"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="sueldoAsigFamPorcentaje"
+                    >Sueldo Asignación Familiar (%)</label
+                  >
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="sueldoAsigFamPorcentaje"
+                    placeholder="Ingrese porcentaje de asignación familiar"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="sueldoBonoPorcentaje">Sueldo Bono (%)</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="sueldoBonoPorcentaje"
+                    placeholder="Ingrese porcentaje de bono"
+                  />
+                </div>
+              </div>
+              <div class="card-footer">
+                <button type="submit" class="btn btn-info">
+                  Guardar Sueldo
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Formulario de Dirección (izquierda) -->
+        <div class="col-md-6">
+          <div class="card card-success">
+            <div class="card-header">
+              <h3 class="card-title">Formulario de Dirección</h3>
+            </div>
+            <form>
+              <div class="card-body">
+                <!-- Campos para el formulario de dirección -->
+                <div class="form-group">
+                  <label for="direccionPais">País</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="direccionPais"
+                    placeholder="Ingrese país"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="direccionDepartamento">Departamento</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="direccionDepartamento"
+                    placeholder="Ingrese departamento"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="direccionProvincia">Provincia</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="direccionProvincia"
+                    placeholder="Ingrese provincia"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="direccionDistrito">Distrito</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="direccionDistrito"
+                    placeholder="Ingrese distrito"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="direccionDetalle">Detalle de Dirección</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="direccionDetalle"
+                    placeholder="Ingrese detalle de dirección"
+                  />
+                </div>
+              </div>
+              <div class="card-footer">
+                <button type="submit" class="btn btn-success">
+                  Guardar Dirección
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Formulario de Contrato (derecha) -->
+        <div class="col-md-6">
+          <div class="card card-success">
+            <div class="card-header">
+              <h3 class="card-title">Formulario de Contrato</h3>
+            </div>
+            <form>
+              <div class="card-body">
+                <!-- Campos para el formulario de contrato -->
+                <div class="form-group">
+                  <label for="contratoTipo">Tipo de Contrato</label>
+                  <select class="form-control" id="contratoTipo">
+                    <option value="plazo_fijo">A plazo fijo</option>
+                    <option value="extranjero">De extranjero</option>
+                    <option value="necesidad_mercado">
+                      Por necesidad de mercado
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="contratoOpcion">Opción de Contrato</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="contratoOpcion"
+                    placeholder="Ingrese opción de contrato"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="empleoTipo">Tipo de Empleo</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="empleoTipo"
+                    placeholder="Ingrese tipo de empleo"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="empleoSituacion">Situación Laboral</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="empleoSituacion"
+                    placeholder="Ingrese situación laboral"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="empleoArea">Área de Empleo</label>
+                  <select class="form-control" id="empleoArea">
+                    <option value="abastecimiento">Abastecimiento</option>
+                    <option value="administracion">Administración</option>
+                    <option value="contratos">Contratos</option>
+                    <option value="control_proyectos">
+                      Control de Proyectos
+                    </option>
+                    <option value="ingenieria">Ingeniería</option>
+                    <option value="ti">TI</option>
+                    <option value="no_especificado" selected>
+                      No Especificado
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="empleoProyecto">Proyecto</label>
+                  <select class="form-control" id="empleoProyecto">
+                    <option value="arequipa">Arequipa</option>
+                    <option value="centenario_lithium">
+                      Centenario Lithium
+                    </option>
+                    <option value="no_especificado" selected>
+                      No Especificado
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="empleoDepartamento">Departamento</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="empleoDepartamento"
+                    placeholder="Ingrese departamento"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="empleoCargo">Cargo</label>
+                  <select class="form-control" id="empleoCargo">
+                    <option value="no_especificado" selected>
+                      No Especificado
+                    </option>
+                    <option value="PE-Jr_Personnel_I">PE-Jr Personnel I</option>
+                    <option value="PE-Jr_Personnel_II">
+                      PE-Jr Personnel II
+                    </option>
+                    <option value="PE-Jr_Personnel_III">
+                      PE-Jr Personnel III
+                    </option>
+                    <option value="PE-Jr_Personnel_IV">
+                      PE-Jr Personnel IV
+                    </option>
+                    <option value="PE-Jr_Personnel_V">PE-Jr Personnel V</option>
+                    <option value="PE-Int_Personnel_I">
+                      PE-Int Personnel I
+                    </option>
+                    <option value="PE-Int_Personnel_II">
+                      PE-Int Personnel II
+                    </option>
+                    <option value="PE-Int_Personnel_III">
+                      PE-Int Personnel III
+                    </option>
+                    <option value="PE-Int_Personnel_IV">
+                      PE-Int Personnel IV
+                    </option>
+                    <option value="PE-Int_Personnel_V">
+                      PE-Int Personnel V
+                    </option>
+                    <option value="PE-Sr_Personnel_I">PE-Sr Personnel I</option>
+                    <option value="PE-Sr_Personnel_II">
+                      PE-Sr Personnel II
+                    </option>
+                    <option value="PE-Sr_Personnel_III">
+                      PE-Sr Personnel III
+                    </option>
+                    <option value="PE-Sr_Personnel_IV">
+                      PE-Sr Personnel IV
+                    </option>
+                    <option value="PE-Sr_Personnel_V">PE-Sr Personnel V</option>
+                  </select>
+                </div>
+              </div>
+              <div class="card-footer">
+                <button type="submit" class="btn btn-success">
+                  Guardar Contrato
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Formulario de Estudio (tipo info) -->
+        <div class="col-md-12">
           <div class="card card-secondary">
             <div class="card-header">
-              <h3 class="card-title">Custom Elements</h3>
+              <h3 class="card-title">Formulario de Estudio</h3>
             </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-              <form>
-                <div class="row">
-                  <div class="col-sm-6">
-                    <!-- select -->
-                    <div class="form-group">
-                      <label>Custom Select</label>
-                      <select class="custom-select">
-                        <option>option 1</option>
-                        <option>option 2</option>
-                        <option>option 3</option>
-                        <option>option 4</option>
-                        <option>option 5</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="form-group">
-                      <label>Custom Select Disabled</label>
-                      <select class="custom-select" disabled>
-                        <option>option 1</option>
-                        <option>option 2</option>
-                        <option>option 3</option>
-                        <option>option 4</option>
-                        <option>option 5</option>
-                      </select>
-                    </div>
-                  </div>
+            <form>
+              <div class="card-body">
+                <!-- Campos para el formulario de estudio -->
+                <div class="form-group">
+                  <label for="nivelEducativo">Nivel Educativo</label>
+                  <select class="form-control" id="nivelEducativo">
+                    <option value="sin_educacion_formal">
+                      Sin Educación Formal
+                    </option>
+                    <option value="educacion_especial_incompleta">
+                      Educación Especial Incompleta
+                    </option>
+                    <option value="educacion_especial_completa">
+                      Educación Especial Completa
+                    </option>
+                    <option value="educacion_primaria_incompleta">
+                      Educación Primaria Incompleta
+                    </option>
+                    <option value="educacion_primaria_completa">
+                      Educación Primaria Completa
+                    </option>
+                    <option value="educacion_secundaria_incompleta">
+                      Educación Secundaria Incompleta
+                    </option>
+                    <option value="educacion_secundaria_completa">
+                      Educación Secundaria Completa
+                    </option>
+                    <option value="educacion_tecnica_incompleta">
+                      Educación Técnica Incompleta
+                    </option>
+                    <option value="educacion_tecnica_completa">
+                      Educación Técnica Completa
+                    </option>
+                    <option value="educacion_superior_incompleta">
+                      Educación Superior (Instituto Superior, etc) Incompleta
+                    </option>
+                    <option value="educacion_superior_completa">
+                      Superior Completa (Instituto Superior)
+                    </option>
+                    <option value="educacion_universitaria_incompleta">
+                      Educación Universitaria Incompleta
+                    </option>
+                    <option value="educacion_universitaria_completa">
+                      Universitaria Completa
+                    </option>
+                    <option value="grado_de_bachiller">
+                      Grado de Bachiller
+                    </option>
+                    <option value="titulado">Titulado</option>
+                    <option value="estud_maestria_incompleta">
+                      Estud. Maestría Incompleta
+                    </option>
+                    <option value="estud_maestria_completa">
+                      Estud. Maestría Completa
+                    </option>
+                    <option value="grado_de_maestria">Grado de Maestría</option>
+                    <option value="estudios_de_doctorado_incompleto">
+                      Estudios de Doctorado Incompleto
+                    </option>
+                    <option value="estudios_de_doctorado_completo">
+                      Estudios de Doctorado Completo
+                    </option>
+                    <option value="grado_de_doctor">Grado de Doctor</option>
+                    <option value="no_especificado" selected>
+                      No Especificado
+                    </option>
+                  </select>
                 </div>
 
-                <div class="row">
-                  <div class="col-sm-6">
-                    <!-- Select multiple-->
-                    <div class="form-group">
-                      <label>Custom Select Multiple</label>
-                      <select multiple class="custom-select">
-                        <option>option 1</option>
-                        <option>option 2</option>
-                        <option>option 3</option>
-                        <option>option 4</option>
-                        <option>option 5</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="form-group">
-                      <label>Custom Select Multiple Disabled</label>
-                      <select multiple class="custom-select" disabled>
-                        <option>option 1</option>
-                        <option>option 2</option>
-                        <option>option 3</option>
-                        <option>option 4</option>
-                        <option>option 5</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-
                 <div class="form-group">
-                  <div class="custom-control custom-switch">
-                    <input
-                      type="checkbox"
-                      class="custom-control-input"
-                      id="customSwitch1"
-                    />
-                    <label class="custom-control-label" for="customSwitch1"
-                      >Toggle this custom switch element</label
-                    >
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div
-                    class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success"
-                  >
-                    <input
-                      type="checkbox"
-                      class="custom-control-input"
-                      id="customSwitch3"
-                    />
-                    <label class="custom-control-label" for="customSwitch3"
-                      >Toggle this custom switch element with custom colors
-                      danger/success</label
-                    >
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="custom-control custom-switch">
-                    <input
-                      type="checkbox"
-                      class="custom-control-input"
-                      disabled
-                      id="customSwitch2"
-                    />
-                    <label class="custom-control-label" for="customSwitch2"
-                      >Disabled custom switch element</label
-                    >
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="customRange1">Custom range</label>
-                  <input type="range" class="custom-range" id="customRange1" />
-                </div>
-                <div class="form-group">
-                  <label for="customRange2"
-                    >Custom range (custom-range-danger)</label
-                  >
+                  <label for="situacionEspecial">Situación Especial</label>
                   <input
-                    type="range"
-                    class="custom-range custom-range-danger"
-                    id="customRange2"
+                    type="text"
+                    class="form-control"
+                    id="situacionEspecial"
+                    placeholder="Situación especial no especificada"
                   />
                 </div>
                 <div class="form-group">
-                  <label for="customRange3"
-                    >Custom range (custom-range-teal)</label
-                  >
+                  <label for="regimenLaboral">Régimen Laboral</label>
                   <input
-                    type="range"
-                    class="custom-range custom-range-teal"
-                    id="customRange3"
+                    type="text"
+                    class="form-control"
+                    id="regimenLaboral"
+                    placeholder="Régimen laboral no especificado"
                   />
                 </div>
                 <div class="form-group">
-                  <!-- <label for="customFile">Custom File</label> -->
-
-                  <div class="custom-file">
-                    <input
-                      type="file"
-                      class="custom-file-input"
-                      id="customFile"
-                    />
-                    <label class="custom-file-label" for="customFile"
-                      >Choose file</label
-                    >
-                  </div>
+                  <label for="aseguramiento">Aseguramiento</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="aseguramiento"
+                    placeholder="Aseguramiento no especificado"
+                  />
                 </div>
-                <div class="form-group"></div>
-              </form>
-            </div>
-            <!-- /.card-body -->
+                <div class="form-group">
+                  <label for="institucion">Institución</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="institucion"
+                    placeholder="Institución no especificada"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="carreraEducativa">Carrera Educativa</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="carreraEducativa"
+                    placeholder="Carrera no especificada"
+                  />
+                </div>
+                <!-- Agrega el resto de los campos aquí -->
+              </div>
+              <div class="card-footer">
+                <button type="submit" class="btn btn-secondary">
+                  Guardar Datos de Estudio
+                </button>
+              </div>
+            </form>
           </div>
-          <!-- /.card -->
         </div>
-        <!--/.col (right) -->
       </div>
-      <!-- /.row -->
     </div>
-    <!-- /.container-fluid -->
   </section>
-  <!-- /.content -->
 </div>
 
 {% endblock content %}
@@ -507,6 +674,17 @@ endblock %}
 <script>
   $(function () {
     bsCustomFileInput.init();
+  });
+</script>
+<script>
+  const togglePassword = document.getElementById("togglePassword");
+  const password = document.getElementById("contrasena");
+
+  togglePassword.addEventListener("click", function () {
+    const type =
+      password.getAttribute("type") === "password" ? "text" : "password";
+    password.setAttribute("type", type);
+    this.classList.toggle("fa-eye-slash");
   });
 </script>
 
