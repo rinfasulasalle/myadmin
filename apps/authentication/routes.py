@@ -39,7 +39,7 @@ def login():
 
         # Check the password
         if user and verify_pass(password, user.usuario_contrasenia):  
-            if user.usuario_rol != 'Administrador':
+            if user.id_usuario_rol_id != 1:
                 return render_template('accounts/login.html',
                                msg='Este usuario no tiene permisos',
                                form=login_form)
