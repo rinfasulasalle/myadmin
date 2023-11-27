@@ -83,7 +83,9 @@
               required
             />
           </div>
-          <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+          <button type="button" class="btn btn-primary" id="guardarCambiosBtn">
+            Guardar Cambios
+          </button>
         </form>
       </div>
     </div>
@@ -94,7 +96,8 @@
 
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
-
+<!-- Axios CDN -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <!-- jQuery -->
 <script src="/static/assets/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
@@ -105,5 +108,41 @@
 <script src="/static/assets/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="/static/assets/js/demo.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    document
+      .getElementById("guardarCambiosBtn")
+      .addEventListener("click", function () {
+        var passwordActual = document.getElementById("password_actual").value;
+        var nuevaPassword = document.getElementById("nueva_password").value;
+
+        if (passwordActual !== "{{ current_user.usuario_contrasenia }}") {
+          alert("La contraseña actual no es válida.");
+          return;
+        }
+        var jsonData = {
+          id: "{{ current_user.id}}",
+          usuario_apellidos: "{{ current_user.usuario_apellidos}}",
+          usuario_contrasenia: nuevaPassword,
+          usuario_correo: "{{ current_user.usuario_correo}}",
+          usuario_nombres: "{{ current_user.usuario_nombres}}",
+          usuario_rol: "{{ current_user.usuario_rol}}",
+          usuario_sexo: "{{ current_user.usuario_sexo}}",
+          usuario_telefono: "{{ current_user.usuario_telefono}}",
+        };
+        console.log(jsonData);
+
+        axios
+          .put("http://62.72.11.15:8090/usuario", jsonData)
+          .then(function (response) {
+            console.log("Data guardada correctamente:", response.data);
+          })
+          .catch(function (error) {
+            console.error("Error actualizando data:", error);
+          });
+      });
+  });
+</script>
 
 {% endblock javascripts %}

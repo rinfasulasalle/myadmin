@@ -4,15 +4,15 @@ from apps import db, login_manager
 
 class Usuario(db.Model,UserMixin):
     __tablename__ = 'usuario'
-    id = db.Column(db.String(20), primary_key=True)  # Columna para el ID del usuario (clave primaria y única).
-    usuario_rol = db.Column(db.Enum('Administrador', 'Recursos Humanos', 'Trabajador', 'Sin acceso', name='roles'), default='Sin acceso')  # Columna para el rol del usuario.
-    usuario_nombres = db.Column(db.String(100), nullable=False)  # Columna para los nombres del usuario.
-    usuario_apellidos = db.Column(db.String(100), nullable=False)  # Columna para los apellidos del usuario.
-    usuario_correo = db.Column(db.String(100), unique=True, nullable=False)  # Columna para el correo electrónico del usuario (único).
-    usuario_contrasenia = db.Column(db.String(50), nullable=False)  # Columna para la contraseña del usuario.
-    usuario_sexo = db.Column(db.Enum('Masculino', 'Femenino', 'No Especificado', name='sexos'), default='No Especificado')  # Columna para el sexo del usuario.
-    usuario_telefono = db.Column(db.String(50), nullable=False)  # Columna para el número de teléfono del usuario.
-
+    id = db.Column(db.String(20), primary_key=True, unique=True, nullable=False)
+    id_usuario_rol = db.Column(db.Integer, db.ForeignKey('api_dropdown_roles.id'), nullable=False)
+    usuario_nombres = db.Column(db.String(100), nullable=False)
+    usuario_apellidos = db.Column(db.String(100), nullable=False)
+    usuario_correo = db.Column(db.String(100), unique=True, nullable=False)
+    usuario_contrasenia = db.Column(db.String(100), nullable=False)
+    usuario_rol = db.Column(db.Enum('Administrador', 'Recursos Humanos', 'Trabajador', 'Sin acceso', name='roles'), default='Sin acceso')
+    usuario_sexo = db.Column(db.Enum('Masculino', 'Femenino', 'No Especificado', name='sexos'), default='No Especificado')
+    usuario_telefono = db.Column(db.String(50), nullable=False)
     def __init__(self, **kwargs):
         for property, value in kwargs.items():
             if hasattr(value, '__iter__') and not isinstance(value, str):
