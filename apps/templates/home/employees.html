@@ -28,8 +28,7 @@
 <!-- Theme style -->
 <link rel="stylesheet" href="/static/assets/css/adminlte.min.css" />
 
-{% endblock stylesheets %} {% block content %}
-
+{% endblock stylesheets %}{% block content %}
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -55,7 +54,6 @@
       <div class="row">
         <div class="col-12">
           <div class="card">
-            <!-- /.card-header -->
             <div class="card-body">
               <table id="example1" class="table table-bordered table-striped">
                 <!-- Encabezados de la tabla (thead) -->
@@ -77,118 +75,15 @@
             </div>
             <!-- /.card-body -->
           </div>
-          <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">Gestionar Usuarios</h3>
-            </div>
-            <div class="card-body">
-              <!-- Botón para mostrar el formulario de creación -->
-              <button
-                type="button"
-                class="btn btn-primary mb-3"
-                id="createUserBtn"
-              >
-                Crear Usuario
-              </button>
-
-              <!-- Formulario de creación/actualización de usuario (inicialmente oculto) -->
-              <div id="userForm" style="display: none">
-                <form id="userForm">
-                  <div class="form-group">
-                    <label for="dni">DNI</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="dni"
-                      placeholder="DNI"
-                    />
-                  </div>
-                  <div class="form-group">
-                    <label for="nombre">Nombre</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="nombre"
-                      placeholder="Nombre"
-                    />
-                  </div>
-                  <div class="form-group">
-                    <label for="apellido">Apellido</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="apellido"
-                      placeholder="Apellido"
-                    />
-                  </div>
-                  <div class="form-group">
-                    <label for="rol">Rol</label>
-                    <select class="form-control" id="rol">
-                      <option value="Sin acceso">Sin acceso</option>
-                      <option value="Administrador">Administrador</option>
-                      <option value="Recursos Humanos">Recursos Humanos</option>
-                      <option value="Trabajador">Trabajador</option>
-                    </select>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="correo">Correo Electrónico</label>
-                    <input
-                      type="email"
-                      class="form-control"
-                      id="correo"
-                      placeholder="Correo Electrónico"
-                    />
-                  </div>
-                  <div class="form-group">
-                    <label for="sexo">Sexo</label>
-                    <select class="form-control" id="sexo">
-                      <option value="No Especificado">No Especificado</option>
-                      <option value="Masculino">Masculino</option>
-                      <option value="Femenino">Femenino</option>
-                    </select>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="telefono">Teléfono</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="telefono"
-                      placeholder="Teléfono"
-                    />
-                  </div>
-                  <!-- Botones para guardar o cancelar -->
-                  <button
-                    type="button"
-                    class="btn btn-success"
-                    id="saveUserBtn"
-                  >
-                    Guardar
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-secondary"
-                    id="cancelUserBtn"
-                  >
-                    Cancelar
-                  </button>
-                </form>
-              </div>
-            </div>
-          </div>
-          <!-- /.card -->
         </div>
-        <!-- /.col -->
       </div>
-      <!-- /.row -->
     </div>
     <!-- /.container-fluid -->
   </section>
   <!-- /.content -->
 </div>
+{% endblock %}
 
-{% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
@@ -208,145 +103,7 @@
 <!-- AdminLTE for demo purposes -->
 <script src="/static/assets/js/demo.js"></script>
 <!-- page script -->
-<script>
-  // Realizar una solicitud GET al endpoint usando Axios
-  axios
-    .get("http://62.72.11.15:8090/usuarios")
-    .then(function (response) {
-      var data = response.data;
-      var table = $("#example1").DataTable();
-
-      // Limpiar la tabla antes de agregar nuevos datos
-      table.clear();
-
-      // Iterar sobre los datos y agregar cada fila a la tabla
-      data.forEach(function (usuario) {
-        table.row
-          .add([
-            usuario.id,
-            usuario.usuario_nombres,
-            usuario.usuario_apellidos,
-            usuario.usuario_rol,
-            usuario.usuario_correo,
-            usuario.usuario_sexo,
-            usuario.usuario_telefono,
-          ])
-          .draw(false);
-      });
-    })
-    .catch(function (error) {
-      console.error("Error al obtener los datos:", error);
-    });
-</script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // Referencias a los elementos HTML
-    var createUserBtn = document.getElementById("createUserBtn");
-    var userForm = document.getElementById("userForm");
-    var saveUserBtn = document.getElementById("saveUserBtn");
-    var cancelUserBtn = document.getElementById("cancelUserBtn");
-    var dniInput = document.getElementById("dni");
-    var nombreInput = document.getElementById("nombre");
-    var apellidoInput = document.getElementById("apellido");
-    var rolInput = document.getElementById("rol");
-    var correoInput = document.getElementById("correo");
-    var sexoInput = document.getElementById("sexo");
-    var telefonoInput = document.getElementById("telefono");
-
-    // Mostrar el formulario al hacer clic en "Crear Usuario"
-    createUserBtn.addEventListener("click", function () {
-      userForm.style.display = "block";
-    });
-
-    // Cancelar la creación o actualización del usuario
-    cancelUserBtn.addEventListener("click", function () {
-      userForm.style.display = "none";
-      // Limpiar los campos del formulario
-      dniInput.value = "";
-      nombreInput.value = "";
-      apellidoInput.value = "";
-      rolInput.value = "Sin Acceso";
-      correoInput.value = "";
-      sexoInput.value = "No Especificado";
-      telefonoInput.value = "";
-    });
-
-    // Guardar el usuario al hacer clic en "Guardar"
-    saveUserBtn.addEventListener("click", function () {
-      // Obtener los valores de los campos del formulario
-      var dni = dniInput.value;
-      var nombre = nombreInput.value;
-      var apellido = apellidoInput.value;
-      var rol = rolInput.value;
-      var correo = correoInput.value;
-      var sexo = sexoInput.value;
-      var telefono = telefonoInput.value;
-
-      // Enviar los datos al servidor usando Axios
-      axios
-        .post("http://62.72.11.15:8090/usuario", {
-          id: dni,
-          usuario_nombres: nombre,
-          usuario_apellidos: apellido,
-          usuario_rol: rol,
-          usuario_correo: correo,
-          usuario_sexo: sexo,
-          usuario_telefono: telefono,
-          usuario_contrasenia: dni,
-        })
-        .then(function (response) {
-          // Aquí puedes manejar la respuesta del servidor si es necesario
-          console.log(response.data);
-
-          // Limpiar los campos del formulario y ocultarlo
-          dniInput.value = "";
-          nombreInput.value = "";
-          apellidoInput.value = "";
-          rolInput.value = "";
-          correoInput.value = "";
-          sexoInput.value = "M";
-          telefonoInput.value = "";
-          userForm.style.display = "none";
-
-          // Recargar la tabla para mostrar el nuevo usuario
-          cargarUsuariosEnTabla();
-        })
-        .catch(function (error) {
-          console.error("Error al crear el usuario:", error);
-        });
-    });
-
-    function cargarUsuariosEnTabla() {
-      // Realizar una solicitud GET al endpoint usando Axios
-      axios
-        .get("http://62.72.11.15:8090/usuarios")
-        .then(function (response) {
-          var data = response.data;
-          var table = $("#example1").DataTable();
-
-          // Limpiar la tabla antes de agregar nuevos datos
-          table.clear();
-          data.forEach(function (usuario) {
-            table.row
-              .add([
-                usuario.id,
-                usuario.usuario_nombres,
-                usuario.usuario_apellidos,
-                usuario.usuario_rol,
-                usuario.usuario_correo,
-                usuario.usuario_sexo,
-                usuario.usuario_telefono,
-              ])
-              .draw(false);
-          });
-        })
-        .catch(function (error) {
-          console.error("Error al obtener los datos:", error);
-        });
-    }
-  });
-</script>
 
 {% endblock javascripts %}
