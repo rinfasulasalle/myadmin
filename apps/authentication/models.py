@@ -10,7 +10,6 @@ class Usuario(db.Model, UserMixin):
     usuario_apellidos = db.Column(db.String(100), nullable=False)
     usuario_correo = db.Column(db.String(100), unique=True, nullable=False)
     usuario_contrasenia = db.Column(db.String(100), nullable=False)
-    usuario_sexo = db.Column(db.Enum('Masculino', 'Femenino', 'No Especificado', name='sexos'), default='No Especificado')
     usuario_telefono = db.Column(db.String(50), nullable=False)
 
     def __init__(self, **kwargs):
