@@ -25,3 +25,23 @@ async function fetchData(endpoint) {
         throw error;
     }
 }
+
+async function obtenerTotalUsuarios() {
+    try {
+        const usuarios = await fetchData('usuario/');
+        return usuarios.length;
+    } catch (error) {
+        console.error('Error al obtener los usuarios:', error);
+        throw error;
+    }
+}
+
+async function obtenerTotalTrabajadores() {
+    try {
+        const trabajadores = await fetchData('trabajador/');
+        return trabajadores.length;
+    } catch (error) {
+        console.error('Error al obtener los trabajadores:', error);
+        throw error;
+    }
+}
