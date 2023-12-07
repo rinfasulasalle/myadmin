@@ -1,0 +1,347 @@
+{% extends "layouts/base.html" %} {% block title %} ChartsJS {% endblock %}
+
+<!-- Element injected in the BODY element -->
+{% block body_class %} sidebar-mini {% endblock body_class %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+
+<!-- Google Font: Source Sans Pro -->
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"
+/>
+<!-- Font Awesome -->
+<link
+  rel="stylesheet"
+  href="/static/assets/plugins/fontawesome-free/css/all.min.css"
+/>
+<!-- Theme style -->
+<link rel="stylesheet" href="/static/assets/css/adminlte.min.css" />
+
+{% endblock stylesheets %} {% block content %}
+
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Recursos Humanos</h1>
+        </div>
+        <div class="col-sm-6">
+          <div class="row">
+            <!-- Filtro de Fecha de Inicio -->
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="startDate">Fecha de Inicio:</label>
+                <input type="date" class="form-control" id="startDate">
+              </div>
+            </div>
+            <!-- Filtro de Fecha Fin -->
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="endDate">Fecha Fin:</label>
+                <input type="date" class="form-control" id="endDate">
+              </div>
+            </div>
+            <!-- Botón de Filtrar -->
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="filterButton" class="invisible">Filtrar:</label>
+                <button type="button" class="btn btn-primary form-control" id="filterButton">Filtrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+
+  <!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- HEADCOUNT POR SEXO - Gráfico de barras -->
+        <div class="col-md-4">
+            <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">HEADCOUNT POR SEXO</h3>
+                <div class="card-tools">
+                <button
+                    type="button"
+                    class="btn btn-tool"
+                    data-card-widget="collapse"
+                >
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-tool"
+                    data-card-widget="remove"
+                >
+                    <i class="fas fa-times"></i>
+                </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <!-- Aquí va el código del gráfico de barras para HEADCOUNT POR SEXO -->
+                <canvas
+                id="headcountSexoChart"
+                style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"
+                ></canvas>
+            </div>
+            </div>
+        </div>
+        <!-- HEADCOUNT PRO PROYECTO - Gráfico de barras 3D -->
+        <div class="col-md-4">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">HEADCOUNT PRO PROYECTO</h3>
+              <div class="card-tools">
+                <button
+                  type="button"
+                  class="btn btn-tool"
+                  data-card-widget="collapse"
+                >
+                  <i class="fas fa-minus"></i>
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-tool"
+                  data-card-widget="remove"
+                >
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <!-- Aquí va el código del gráfico de barras 3D para HEADCOUNT PRO PROYECTO -->
+              <canvas
+                id="headcountProyectoChart"
+                style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"
+              ></canvas>
+            </div>
+          </div>
+        </div>
+  
+        <!-- HEADCOINT POR AREA - Gráfico de barras 2D vertical -->
+        <div class="col-md-4">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">HEADCOINT POR AREA</h3>
+              <div class="card-tools">
+                <button
+                  type="button"
+                  class="btn btn-tool"
+                  data-card-widget="collapse"
+                >
+                  <i class="fas fa-minus"></i>
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-tool"
+                  data-card-widget="remove"
+                >
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <!-- Aquí va el código del gráfico de barras 2D vertical para HEADCOINT POR AREA -->
+              <canvas
+                id="headcountAreaChart"
+                style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"
+              ></canvas>
+            </div>
+          </div>
+        </div>
+  
+        <!-- NACIONALIDAD - Gráfico de barras -->
+        <div class="col-md-4">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">NACIONALIDAD</h3>
+              <div class="card-tools">
+                <button
+                  type="button"
+                  class="btn btn-tool"
+                  data-card-widget="collapse"
+                >
+                  <i class="fas fa-minus"></i>
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-tool"
+                  data-card-widget="remove"
+                >
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <!-- Aquí va el código del gráfico de barras para NACIONALIDAD -->
+              <canvas
+                id="nacionalidadChart"
+                style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"
+              ></canvas>
+            </div>
+          </div>
+        </div>
+  
+        <!-- TIPO DE CONTRATO - Gráfico circular -->
+        <div class="col-md-4">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">TIPO DE CONTRATO</h3>
+              <div class="card-tools">
+                <button
+                  type="button"
+                  class="btn btn-tool"
+                  data-card-widget="collapse"
+                >
+                  <i class="fas fa-minus"></i>
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-tool"
+                  data-card-widget="remove"
+                >
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <!-- Aquí va el código del gráfico circular para TIPO DE CONTRATO -->
+              <canvas
+                id="tipoContratoChart"
+                style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"
+              ></canvas>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Nivel Educativo - Gráfico de barras 2D vertical -->
+        <div class="col-md-4">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Nivel Educativo</h3>
+              <div class="card-tools">
+                <button
+                  type="button"
+                  class="btn btn-tool"
+                  data-card-widget="collapse"
+                >
+                  <i class="fas fa-minus"></i>
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-tool"
+                  data-card-widget="remove"
+                >
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <!-- Aquí va el código del gráfico de barras 2D vertical para Nivel Educativo -->
+              <canvas
+                id="nivelEducativoChart"
+                style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"
+              ></canvas>
+            </div>
+          </div>
+        </div>
+  
+        <!-- INGENIEROS COLEGIADOS - Gráfico de barras -->
+        <div class="col-md-4">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">INGENIEROS COLEGIADOS</h3>
+              <div class="card-tools">
+                <button
+                  type="button"
+                  class="btn btn-tool"
+                  data-card-widget="collapse"
+                >
+                  <i class="fas fa-minus"></i>
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-tool"
+                  data-card-widget="remove"
+                >
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <!-- Aquí va el código del gráfico de barras para INGENIEROS COLEGIADOS -->
+              <canvas
+                id="ingenierosColegiadosChart"
+                style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"
+              ></canvas>
+            </div>
+          </div>
+        </div>
+  
+        <!-- ROL DE PROYECTO (Classification) - Gráfico de barras -->
+        <div class="col-md-4">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">ROL DE PROYECTO (Classification)</h3>
+              <div class="card-tools">
+                <button
+                  type="button"
+                  class="btn btn-tool"
+                  data-card-widget="collapse"
+                >
+                  <i class="fas fa-minus"></i>
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-tool"
+                  data-card-widget="remove"
+                >
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <!-- Aquí va el código del gráfico de barras para ROL DE PROYECTO -->
+              <canvas
+                id="rolProyectoChart"
+                style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"
+              ></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  
+  <!-- /.content -->
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+<!-- jQuery -->
+<script src="/static/assets/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="/static/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- ChartJS -->
+<script src="/static/assets/plugins/chart.js/Chart.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/static/assets/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="/static/assets/js/demo.js"></script>
+ <!-- Mi script apiUtils.js -->
+ <script src="/static/assets/js/index/apiUtils.js"></script>
+ <script src="/static/assets/js/graphic/my_graphics.js"></script>
+{% endblock javascripts %}

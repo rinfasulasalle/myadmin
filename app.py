@@ -5,6 +5,7 @@ Copyright (c) 2019 - present AppSeed.us
 
 import os
 from flask_migrate import Migrate
+from flask_cors import CORS  # Agrega esta línea
 from apps.config import config_dict
 from apps import create_app, db
 
@@ -22,14 +23,10 @@ except KeyError:
 
 app = create_app(app_config)
 Migrate(app, db)
-'''
-# Mostrar información en modo de depuración
-if DEBUG:
-    app.logger.info('DEBUG            = ' + str(DEBUG))
-    app.logger.info('Page Compression = ' + 'FALSE' if DEBUG else 'TRUE')
-    app.logger.info('DBMS             = ' + app_config.SQLALCHEMY_DATABASE_URI)
-    app.logger.info('ASSETS_ROOT      = ' + app_config.ASSETS_ROOT)
-'''
+
+# Agrega estas líneas para habilitar CORS
+CORS(app, resources={r"/*": {"origins": "*"}})
+
 if __name__ == "__main__":
     # Ejecutar la aplicación con la configuración especificada
     app.run(debug=DEBUG, port=PORT, host=HOST)
