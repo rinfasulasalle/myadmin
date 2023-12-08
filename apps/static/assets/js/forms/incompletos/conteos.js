@@ -37,7 +37,7 @@ async function encontrarUsuariosNoRegistrados() {
       usuariosNoRegistrados.forEach(id => {
         const li = document.createElement('li');
         li.classList.add('list-group-item');
-        li.textContent = `Usuario ID: ${id}`;
+        li.textContent = `Usuario DNI: ${id}`;
         ul.appendChild(li);
       });
 
