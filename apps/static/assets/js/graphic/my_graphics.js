@@ -59,14 +59,135 @@ function renderHeadcountSexoChart() {
 }
 
 // Función para el gráfico de HEADCOUNT PRO PROYECTO
-function renderHeadcountProProyectoChart() {
-  // Código específico para llenar el gráfico de HEADCOUNT PRO PROYECTO
+function renderheadcountPorProyectoChart() {
+  // Obtener datos de los proyectos
+  fetchData('dropdown_proyecto/')
+      .then(proyectosData => {
+          // Obtener datos de los contratos
+          fetchData('contrato/')
+              .then(contratosData => {
+                  // Mapear los nombres de los proyectos por su id
+                  const proyectosMap = {};
+                  proyectosData.forEach(proyecto => {
+                      proyectosMap[proyecto.id] = proyecto.proyecto;
+                  });
+
+                  // Realizar el conteo por proyecto
+                  const conteoPorProyecto = contratosData.reduce((conteo, contrato) => {
+                      const proyectoId = contrato.id_empleo_proyecto;
+                      const proyectoNombre = proyectosMap[proyectoId];
+                      conteo[proyectoNombre] = (conteo[proyectoNombre] || 0) + 1;
+                      return conteo;
+                  }, {});
+
+                  // Obtener las etiquetas y datos para el gráfico
+                  const labels = Object.keys(conteoPorProyecto);
+                  const datos = Object.values(conteoPorProyecto);
+                  // Crea un array de colores variados
+                  const colores = labels.map((_, index) => getRandomColor());
+
+                  // Configurar el gráfico
+                  const config = {
+                      type: 'bar',
+                      data: {
+                          labels: labels,
+                          datasets: [{
+                              label: 'Headcount por Proyecto',
+                              data: datos,
+                              backgroundColor: colores,
+                          }],
+                      },
+                      options: {
+                          scales: {
+                              yAxes: [{
+                                  display: true,
+                                  ticks: {
+                                      suggestedMin: 0,
+                                      beginAtZero: true,
+                                  }
+                              }]
+                          }
+                      },
+                  };
+                  // Obtener el contexto del canvas y crear el gráfico
+                  const ctx = document.getElementById('headcountPorProyectoChart').getContext('2d');
+                  new Chart(ctx, config);
+              })
+              .catch(error => {
+                  console.error('Error al obtener datos de contratos:', error);
+              });
+      })
+      .catch(error => {
+          console.error('Error al obtener datos de proyectos:', error);
+      });
 }
+
   
 // Función para el gráfico de HEADCOINT POR AREA
 function renderHeadcountPorAreaChart() {
-  // Código específico para llenar el gráfico de HEADCOINT POR AREA
+  // Obtener datos de las áreas
+  fetchData('dropdown_areas/')
+      .then(areasData => {
+          // Obtener datos de los contratos
+          fetchData('contrato/')
+              .then(contratosData => {
+                  // Mapear los nombres de las áreas por su id
+                  const areasMap = {};
+                  areasData.forEach(area => {
+                      areasMap[area.id] = area.area;
+                  });
+
+                  // Realizar el conteo por área
+                  const conteoPorArea = contratosData.reduce((conteo, contrato) => {
+                      const areaId = contrato.id_empleo_area;
+                      const areaNombre = areasMap[areaId];
+                      conteo[areaNombre] = (conteo[areaNombre] || 0) + 1;
+                      return conteo;
+                  }, {});
+
+                  // Obtener las etiquetas y datos para el gráfico
+                  const labels = Object.keys(conteoPorArea);
+                  const datos = Object.values(conteoPorArea);
+                  // Crea un array de colores variados
+                  const colores = labels.map((_, index) => getRandomColor());
+
+                  // Configurar el gráfico
+                  const config = {
+                      type: 'horizontalBar',
+                      data: {
+                          labels: labels,
+                          datasets: [{
+                              label: 'Headcount por Área',
+                              data: datos,
+                              backgroundColor: colores,
+                          }],
+                      },
+                      options: {
+                          scales: {
+                              xAxes: [{
+                                display: true,
+                                ticks: {
+                                    suggestedMin: 0,
+                                    beginAtZero: true,
+                                }
+                            }]
+                          }
+                      },
+                  };
+
+                  // Obtener el contexto del canvas y crear el gráfico
+                  const ctx = document.getElementById('headcountPorAreaChart').getContext('2d');
+                  new Chart(ctx, config);
+              })
+              .catch(error => {
+                  console.error('Error al obtener datos de contratos:', error);
+              });
+      })
+      .catch(error => {
+          console.error('Error al obtener datos de áreas:', error);
+      });
 }
+
   
 // Función para el gráfico de NACIONALIDAD
 function renderNacionalidadChart() {
@@ -187,14 +308,76 @@ function renderIngenierosColegiadosChart() {
   // Código específico para llenar el gráfico de INGENIEROS COLEGIADOS
 }
   
-// Función para el gráfico de ROL DE PROYECTO (Classification)
+// Función para el gráfico de ROL DE PROYECTO (Classification) - Horizontal Bar Chart
 function renderRolProyectoChart() {
-  // Código específico para llenar el gráfico de ROL DE PROYECTO (Classification)
+  // Obtener datos de los roles de proyecto
+  fetchData('dropdown_rol_proyecto/')
+      .then(rolesProyectoData => {
+          // Obtener datos de los contratos
+          fetchData('contrato/')
+              .then(contratosData => {
+                  // Mapear los nombres de los roles de proyecto por su id
+                  const rolesProyectoMap = {};
+                  rolesProyectoData.forEach(rol => {
+                      rolesProyectoMap[rol.id] = rol.rol_titulo;
+                  });
+
+                  // Realizar el conteo por rol de proyecto
+                  const conteoPorRolProyecto = contratosData.reduce((conteo, contrato) => {
+                      const rolProyectoId = contrato.id_empleo_proyecto_rol;
+                      const rolProyectoNombre = rolesProyectoMap[rolProyectoId];
+                      conteo[rolProyectoNombre] = (conteo[rolProyectoNombre] || 0) + 1;
+                      return conteo;
+                  }, {});
+
+                  // Obtener las etiquetas y datos para el gráfico
+                  const labels = Object.keys(conteoPorRolProyecto);
+                  const datos = Object.values(conteoPorRolProyecto);
+                  // Crea un array de colores variados
+                  const colores = labels.map((_, index) => getRandomColor());
+
+                  // Configurar el gráfico como Horizontal Bar Chart
+                  const config = {
+                      type: 'horizontalBar',
+                      data: {
+                          labels: labels,
+                          datasets: [{
+                              label: 'Rol de Proyecto (Classification)',
+                              data: datos,
+                              backgroundColor: colores,
+                          }],
+                      },
+                      options: {
+                          scales: {
+                              xAxes: [{
+                                  display: true,
+                                  ticks: {
+                                      suggestedMin: 0,
+                                      beginAtZero: true,
+                                  }
+                              }]
+                          }
+                      },
+                  };
+
+                  // Obtener el contexto del canvas y crear el gráfico
+                  const ctx = document.getElementById('rolProyectoChart').getContext('2d');
+                  new Chart(ctx, config);
+              })
+              .catch(error => {
+                  console.error('Error al obtener datos de contratos:', error);
+              });
+      })
+      .catch(error => {
+          console.error('Error al obtener datos de roles de proyecto:', error);
+      });
 }
+
+
   
 // Llamadas a las funciones para renderizar los gráficos
 renderHeadcountSexoChart();
-renderHeadcountProProyectoChart();
+renderheadcountPorProyectoChart();
 renderHeadcountPorAreaChart();
 renderNacionalidadChart();
 renderTipoContratoChart();
@@ -220,3 +403,4 @@ async function mostrarTotales() {
 
 // Llamada inicial para mostrar los totales después de renderizar los gráficos
 mostrarTotales();
+//xd();
