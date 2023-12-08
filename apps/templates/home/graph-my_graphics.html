@@ -18,6 +18,8 @@
 />
 <!-- Theme style -->
 <link rel="stylesheet" href="/static/assets/css/adminlte.min.css" />
+<!-- Html 2 pdf-->
+<script src="/static/assets/plugins/html2pdf/html2pdf.bundle.min.js"></script>
 <style>
   /* Estilos personalizados para hacer las gráficas responsivas */
   canvas {
@@ -27,7 +29,7 @@
 </style>
 {% endblock stylesheets %} {% block content %}
 
-<div class="content-wrapper">
+<div class="content-wrapper" id="pdfContent">
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <div class="container-fluid">
@@ -60,6 +62,8 @@
               <div class="form-group">
                 <label for="filterButton" class="invisible">Filtrar:</label>
                 <button type="button" class="btn btn-primary form-control" id="filterButton">Filtrar</button>
+                <!-- Agrega este botón donde desees en tu vista -->
+                <button type="button" class="btn btn-success" id="exportPDF">Exportar a PDF</button>
               </div>
             </div>
           </div>
@@ -357,18 +361,47 @@
 
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
-
-<!-- jQuery -->
-<script src="/static/assets/plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="/static/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- ChartJS -->
-<script src="/static/assets/plugins/chart.js/Chart.min.js"></script>
-<!-- AdminLTE App -->
-<script src="/static/assets/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="/static/assets/js/demo.js"></script>
- <!-- Mi script apiUtils.js -->
- <script src="/static/assets/js/index/apiUtils.js"></script>
- <script src="/static/assets/js/graphic/my_graphics.js"></script>
+  <!-- jQuery -->
+  <script src="/static/assets/plugins/jquery/jquery.min.js"></script>
+  <!-- Bootstrap 4 -->
+  <script src="/static/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- ChartJS -->
+  <script src="/static/assets/plugins/chart.js/Chart.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="/static/assets/js/adminlte.min.js"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="/static/assets/js/demo.js"></script>
+  <!-- Mi script apiUtils.js -->
+  <script src="/static/assets/js/graphic/date.js"></script>
+  <script src="/static/assets/js/index/apiUtils.js"></script>
+  <script src="/static/assets/js/graphic/my_graphics.js"></script>
+  <!-- Script para exportar como PDF -->
+  <script>
+    // Función para obtener la fecha actual en formato DD/MM/YYYY
+    function getCurrentDate() {
+      const now = new Date();
+      const day = now.getDate();
+      const month = now.getMonth() + 1;
+      const year = now.getFullYear();
+      return `${day}/${month}/${year}`;
+    }
+  
+    // Manejar el evento de clic en el botón de exportar PDF
+    document.getElementById('exportPDF').addEventListener('click', function () {
+      const content = document.querySelector('.content');
+  
+      // Configuración para html2pdf
+      const pdfOptions = {
+        margin: 10,
+        filename: `reporte_${getCurrentDate()}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+  
+      // Generar el PDF
+      html2pdf(content, pdfOptions);
+    });
+  </script>
+  
 {% endblock javascripts %}
