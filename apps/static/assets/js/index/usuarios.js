@@ -9,10 +9,35 @@ document.addEventListener("DOMContentLoaded", async function () {
 
         fillTable(userData, rolesData);
         setupEventListeners(rolesData);
+        addAddUserButton(rolesData);
     } catch (error) {
         console.error(error.message);
     }
 });
+
+async function loadAndFillTable(rolesData) {
+    try {
+        const userData = await fetchData("usuario/");
+        console.log("User Data:", userData);
+
+        fillTable(userData, rolesData);
+    } catch (error) {
+        console.error(error.message);
+    }
+}
+
+function fetchData(endpoint) {
+    return fetch(`http://62.72.11.15:3000/api/${endpoint}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error al obtener datos de ${endpoint}`);
+            }
+            return response.json();
+        })
+        .catch(error => {
+            console.error(error.message);
+        });
+}
 
 function fillTable(data, rolesData) {
     const tableBody = document.querySelector("#example1 tbody");
@@ -33,60 +58,178 @@ function createRow(user, rolesData) {
         <td>${user.usuario_correo}</td>
         <td>${user.usuario_telefono}</td>
         <td>
-            <button class="btn btn-sm btn-info" onclick="editUser(${user.id})">Editar</button>
+            <button class="btn btn-sm btn-info edit-btn" data-user-id="${user.id}">Editar</button>
             <button class="btn btn-sm btn-danger" onclick="deleteUser(${user.id})">Eliminar</button>
         </td>
     `;
     return row;
 }
 
+function appendRowToTable(user, rolesData) {
+    const tableBody = document.querySelector("#example1 tbody");
+    const newRow = createRow(user, rolesData);
+    tableBody.appendChild(newRow);
+}
+
+
 function getRoleName(roleId, rolesData) {
     const role = rolesData.find(role => role.id === roleId);
     return role ? role.rol : "Rol no encontrado";
 }
 
-function setupEventListeners(rolesData) {
-    const addUserButton = document.getElementById("addUserButton");
-    if (addUserButton) {
-        addUserButton.addEventListener("click", () => showCreateUserForm(rolesData));
-    }
-
-    // Agrega el botón de "Agregar Usuario" al contenedor
-    const addUserButtonContainer = document.getElementById("addUserButtonContainer");
+function addAddUserButton(rolesData) {
+    const addUserButtonContainer = document.getElementById("example1");
     if (addUserButtonContainer) {
         const button = document.createElement("button");
         button.className = "btn btn-primary";
         button.textContent = "Agregar Usuario";
         button.addEventListener("click", () => showCreateUserForm(rolesData));
+
         addUserButtonContainer.appendChild(button);
     }
+}
 
-    // Configura el evento de envío del formulario de agregar usuario
+
+
+function setupEventListeners(rolesData) {
     const addUserForm = document.getElementById("addUserForm");
     if (addUserForm) {
-        addUserForm.addEventListener("submit", (event) => {
+        addUserForm.addEventListener("submit", async (event) => {
             event.preventDefault();
-            addUserFromForm(rolesData);
+            await saveAddUser(rolesData);
         });
+    }
+
+    const editButtons = document.querySelectorAll(".edit-btn");
+    editButtons.forEach(button => {
+        button.addEventListener("click", (event) => {
+            const userId = event.target.dataset.userId;
+            editUser(userId, rolesData);
+        });
+    });
+}
+
+async function updateTable(rolesData) {
+    try {
+        const updatedUserData = await fetchData("usuario/");
+        const tableBody = document.querySelector("#example1 tbody");
+
+        // Limpiar la tabla antes de agregar los nuevos datos
+        tableBody.innerHTML = "";
+
+        // Agregar filas con los datos actualizados
+        updatedUserData.forEach(user => {
+            const row = createRow(user, rolesData);
+            tableBody.appendChild(row);
+        });
+    } catch (error) {
+        console.error(error.message);
     }
 }
 
-
 function showCreateUserForm(rolesData) {
-    // Aquí puedes implementar la lógica para mostrar un formulario modal para crear un nuevo usuario
-    // Puedes usar librerías como Bootstrap para los modales o implementar uno personalizado
-    // Después de ingresar los detalles, llama a la función addUser con los datos ingresados
-    console.log("Mostrar formulario para crear usuario");
+    const modalContent = `
+    <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addUserModalLabel">Agregar Usuario</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="addUserForm">
+                        <div class="form-group">
+                            <label for="newUserId">ID:</label>
+                            <input type="text" class="form-control" id="newUserId" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="newUserName">Nombres:</label>
+                            <input type="text" class="form-control" id="newUserName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="newUserLastName">Apellidos:</label>
+                            <input type="text" class="form-control" id="newUserLastName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="newUserRole">Rol:</label>
+                            <select class="form-control" id="newUserRole" required>
+                                ${getRoleOptions(rolesData)}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="newUserEmail">Correo:</label>
+                            <input type="email" class="form-control" id="newUserEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="newUserPhone">Teléfono:</label>
+                            <input type="text" class="form-control" id="newUserPhone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="newUserPassword">Contraseña:</label>
+                            <input type="password" class="form-control" id="newUserPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="addUserButton">Guardar Usuario</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    `;
+
+    document.body.insertAdjacentHTML('beforeend', modalContent);
+
+    $("#addUserModal").modal("show");
 }
 
-async function addUserFromForm(rolesData) {
+async function saveAddUser(rolesData) {
     try {
         const newUser = {
-            usuario_nombres: document.getElementById("newUserName").value,
-            usuario_apellidos: document.getElementById("newUserLastName").value,
-            id_usuario_rol: document.getElementById("newUserRole").value,
-            usuario_correo: document.getElementById("newUserEmail").value,
-            usuario_telefono: document.getElementById("newUserPhone").value,
+            usuario_nombres: getValueById("newUserName"),
+            usuario_apellidos: getValueById("newUserLastName"),
+            id_usuario_rol: getValueById("newUserRole"),
+            usuario_correo: getValueById("newUserEmail"),
+            usuario_telefono: getValueById("newUserPhone"),
+            usuario_dni: getValueById("newUserDNI"),  // Agregar el campo DNI
+            usuario_contrasenia: getValueById("newUserPassword"),
+        };
+
+        console.log("Nuevo usuario:", newUser);
+
+        const response = await fetch("http://62.72.11.15:3000/api/usuario/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newUser),
+        });
+
+        console.log("Respuesta del servidor:", response);
+
+        if (response.ok) {
+            // Solo realiza una solicitud GET después de agregar el usuario
+            const updatedUserData = await fetchData("usuario/");
+            updateTable(updatedUserData, rolesData);
+            closeAndClearModal("addUserModal");
+        } else {
+            handleServerError("Error al agregar usuario");
+        }
+    } catch (error) {
+        handleError(error.message);
+    }
+}
+
+async function saveAddUser(rolesData) {
+    try {
+        const newUser = {
+            usuario_nombres: getValueById("newUserName"),
+            usuario_apellidos: getValueById("newUserLastName"),
+            id_usuario_rol: getValueById("newUserRole"),
+            usuario_correo: getValueById("newUserEmail"),
+            usuario_telefono: getValueById("newUserPhone"),
+            usuario_dni: getValueById("newUserDNI"),
+            usuario_contrasenia: getValueById("newUserPassword"),
         };
 
         const response = await fetch("http://62.72.11.15:3000/api/usuario/", {
@@ -98,77 +241,74 @@ async function addUserFromForm(rolesData) {
         });
 
         if (response.ok) {
+            // Obtén el usuario creado del cuerpo de la respuesta
             const createdUser = await response.json();
 
-            // Actualiza la interfaz de usuario
-            const tableBody = document.querySelector("#example1 tbody");
-            const newRow = createRow(createdUser, rolesData);
-            tableBody.appendChild(newRow);
+            // Agrega la nueva fila a la tabla en el frontend
+            appendRowToTable(createdUser, rolesData);
 
             // Cierra el modal
-            $("#addUserModal").modal("hide");
+            closeAndClearModal("addUserModal");
+
+            // Realiza una solicitud GET después de agregar el usuario
+            const updatedUserData = await fetchData("usuario/");
+            updateTable(updatedUserData, rolesData);
         } else {
-            console.error("Error al agregar usuario");
+            handleServerError("Error al agregar usuario");
         }
     } catch (error) {
-        console.error(error.message);
+        handleError(error.message);
     }
 }
+
+
+
+
 
 function showEditUserModal(user, rolesData) {
     const modalContent = `
     <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editUserModalLabel">Editar Usuario</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="editUserForm">
-                    <div class="form-group">
-                        <label for="editUserName">Nombres:</label>
-                        <input type="text" class="form-control" id="editUserName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="editUserLastName">Apellidos:</label>
-                        <input type="text" class="form-control" id="editUserLastName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="editUserRole">Rol:</label>
-                        <select class="form-control" id="editUserRole" required>
-                            <!-- Aquí debes llenar las opciones del rol -->
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="editUserEmail">Correo:</label>
-                        <input type="email" class="form-control" id="editUserEmail" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="editUserPhone">Teléfono:</label>
-                        <input type="text" class="form-control" id="editUserPhone" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-                </form>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editUserModalLabel">Editar Usuario</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editUserForm">
+                        <div class="form-group">
+                            <label for="editUserName">Nombres:</label>
+                            <input type="text" class="form-control" id="editUserName" value="${user.usuario_nombres}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editUserLastName">Apellidos:</label>
+                            <input type="text" class="form-control" id="editUserLastName" value="${user.usuario_apellidos}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editUserRole">Rol:</label>
+                            <select class="form-control" id="editUserRole" required>
+                                ${getRoleOptions(rolesData, user.id_usuario_rol)}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="editUserEmail">Correo:</label>
+                            <input type="email" class="form-control" id="editUserEmail" value="${user.usuario_correo}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editUserPhone">Teléfono:</label>
+                            <input type="text" class="form-control" id="editUserPhone" value="${user.usuario_telefono}" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
     `;
 
     document.body.insertAdjacentHTML('beforeend', modalContent);
-
-    // Obtener las opciones de roles y llenar el select
-    const editUserRoleSelect = document.getElementById("editUserRole");
-    rolesData.forEach(role => {
-        const option = document.createElement("option");
-        option.value = role.id;
-        option.textContent = role.rol;
-        editUserRoleSelect.appendChild(option);
-    });
 
     // Mostrar el modal
     $("#editUserModal").modal("show");
@@ -178,10 +318,24 @@ function showEditUserModal(user, rolesData) {
     if (editUserForm) {
         editUserForm.addEventListener("submit", (event) => {
             event.preventDefault();
-            editUser(user.id);
+            const editedUser = {
+                usuario_nombres: document.getElementById("editUserName").value,
+                usuario_apellidos: document.getElementById("editUserLastName").value,
+                id_usuario_rol: document.getElementById("editUserRole").value,
+                usuario_correo: document.getElementById("editUserEmail").value,
+                usuario_telefono: document.getElementById("editUserPhone").value,
+            };
+            saveEditedUser(user.id, editedUser);
         });
     }
 }
+
+function getRoleOptions(rolesData, selectedRoleId) {
+    return rolesData.map(role => `
+        <option value="${role.id}" ${role.id === selectedRoleId ? 'selected' : ''}>${role.rol}</option>
+    `).join('');
+}
+
 async function saveEditedUser(userId, editedUser) {
     try {
         const response = await fetch(`http://62.72.11.15:3000/api/usuario/${userId}/`, {
@@ -195,6 +349,7 @@ async function saveEditedUser(userId, editedUser) {
         if (response.ok) {
             console.log(`Usuario con ID ${userId} actualizado con éxito`);
             $("#editUserModal").modal("hide");
+            // Puedes agregar aquí una función para actualizar la tabla si es necesario
         } else {
             console.error(`Error al actualizar usuario con ID ${userId}`);
         }
@@ -203,7 +358,8 @@ async function saveEditedUser(userId, editedUser) {
     }
 }
 
-async function editUser(userId) {
+
+async function editUser(userId, rolesData) {
     try {
         const response = await fetch(`http://62.72.11.15:3000/api/usuario/${userId}/`);
         if (response.ok) {
@@ -217,8 +373,6 @@ async function editUser(userId) {
         console.error(error.message);
     }
 }
-
-
 async function deleteUser(userId) {
     try {
         // Realiza una solicitud DELETE al backend para eliminar el usuario

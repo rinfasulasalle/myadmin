@@ -38,52 +38,69 @@ endblock %}
             <div class="card-header">
               <h3 class="card-title">Formulario de Usuarios</h3>
             </div>
-            <form>
+            <form id="formh-usuarios">
               <div class="card-body">
                 <!-- Campos para el formulario de usuarios -->
                 <div class="form-group">
-                  <label for="rol">Rol</label>
-                  <select class="form-control" id="rol">
-                    <option value="sin_acceso" selected>Sin Acceso</option>
-                    <option value="admin">Administrador</option>
-                    <option value="usuario">Recursos Humanos</option>
-                    <option value="trabajador">Trabajador</option>
+                  <label for="id_usuario_rol">Rol</label>
+                  <select class="form-control" id="id_usuario_rol" name="id_usuario_rol">
+                    <!-- fetchData from roles dropdown -->
                   </select>
                 </div>
                 <div class="form-group">
-                  <label for="nombres">Nombres</label>
+                  <label for="usuario_nombres">Nombres</label>
                   <input
                     type="text"
                     class="form-control"
-                    id="nombres"
-                    placeholder="Ingrese nombres"
+                    name="usuario_nombres"
+                    placeholder="Ingrese sus nombres"
                   />
                 </div>
                 <div class="form-group">
-                  <label for="apellidos">Apellidos</label>
+                  <label for="usuario_apellidos">Apellidos</label>
                   <input
                     type="text"
                     class="form-control"
-                    id="apellidos"
-                    placeholder="Ingrese apellidos"
+                    name="usuario_apellidos"
+                    placeholder="Ingrese sus apellidos"
                   />
                 </div>
                 <div class="form-group">
-                  <label for="correo">Correo</label>
+                  <label for="id">DNI</label>
+                  <input
+                    type="number"
+                    step="1"
+                    class="form-control"
+                    name="id"
+                    id="dni"
+                    placeholder="Ingrese su numero de DNI"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="usuario_telefono">Telefono</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    name="usuario_telefono"
+                    placeholder="Ingrese su numero de telefono/celular"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="usuario_correo">Correo</label>
                   <input
                     type="email"
                     class="form-control"
-                    id="correo"
-                    placeholder="Ingrese correo"
+                    name="usuario_correo"
+                    placeholder="Ingrese su correo"
                   />
                 </div>
                 <div class="form-group">
-                  <label for="contrasena">Contraseña</label>
+                  <label for="usuario_contrasenia">Contraseña</label>
                   <div class="input-group">
                     <input
                       type="password"
                       class="form-control"
-                      id="contrasena"
+                      name="usuario_contrasenia"
                       placeholder="Ingrese contraseña"
                     />
                     <div class="input-group-append">
@@ -92,26 +109,6 @@ endblock %}
                       </span>
                     </div>
                   </div>
-                </div>
-
-                <div class="form-group">
-                  <label for="sexo">Sexo</label>
-                  <select class="form-control" id="sexo">
-                    <option value="no_especificado" selected>
-                      No Especificado
-                    </option>
-                    <option value="femenino">Femenino</option>
-                    <option value="masculino">Masculino</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="telefono">Teléfono</label>
-                  <input
-                    type="tel"
-                    class="form-control"
-                    id="telefono"
-                    placeholder="Ingrese teléfono"
-                  />
                 </div>
               </div>
               <div class="card-footer">
@@ -129,82 +126,110 @@ endblock %}
             <div class="card-header">
               <h3 class="card-title">Formulario de Trabajadores</h3>
             </div>
-            <form>
+            <form id="formh-trabajadores">
               <div class="card-body">
                 <!-- Campos para el formulario de trabajadores -->
                 <div class="form-group">
-                  <label for="fechaNacimiento">Fecha de Nacimiento</label>
+                  <label for="id">DNI</label>
                   <input
-                    type="date"
+                    type="number"
+                    step="1"
                     class="form-control"
-                    id="fechaNacimiento"
+                    name="usuario_relacionado"
+                    id="dni-trabajadores"
+                    placeholder="Ingrese su numero de DNI"
                   />
                 </div>
                 <div class="form-group">
-                  <label for="tipoDocumento">Tipo de Documento</label>
-                  <select class="form-control" id="tipoDocumento">
-                    <option value="dni" selected>DNI</option>
+                  <label for="trabajador_fecha_nacimiento">Fecha de Nacimiento</label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    name="trabajador_fecha_nacimiento"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="trabajador_tipo_documento">Tipo de Documento</label>
+                  <select class="form-control" name="trabajador_tipo_documento">
+                    <option value="DNI" selected>DNI</option>
                     <option value="carnet_extranjeria">
                       Carnet de Extranjería
                     </option>
                   </select>
                 </div>
                 <div class="form-group">
-                  <label for="documentoDNI">Documento de DNI (PDF)</label>
+                  <label for="trabajador_path_documento">Documento de DNI (PDF)</label>
                   <input
                     type="file"
                     class="form-control-file"
-                    id="documentoDNI"
+                    name="trabajador_path_documento"
                   />
                 </div>
                 <div class="form-group">
-                  <label for="nacionalidad">Nacionalidad</label>
-                  <select class="form-control" id="nacionalidad">
-                    <!-- Lista de países de América Latina -->
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="ubigeo">Ubigeo</label>
+                  <label for="trabajador_nacionalidad">Nacionalidad</label>
                   <input
                     type="text"
                     class="form-control"
-                    id="ubigeo"
+                    name="trabajador_nacionalidad"
+                    placeholder="Ingrese su nacionalidad"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="trabajador_sexo">Sexo</label>
+                  <select class="form-control" name="trabajador_sexo">
+                    </option>
+                    <option value="No Especificado">No Especificado</option>
+                    <option value="Femenino">Femenino</option>
+                    <option value="Masculino">Masculino</option>
+                  </select>
+                </div>
+                
+                <div class="form-group">
+                  <label for="trabajador_ubigeo">Ubigeo</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="trabajador_ubigeo"
                     placeholder="Ingrese Ubigeo"
                   />
                 </div>
                 <div class="form-group">
-                  <label for="estadoCivil">Estado Civil</label>
-                  <select class="form-control" id="estadoCivil">
+                  <label for="trabajador_estado_civil">Estado Civil</label>
+                  <select class="form-control" name="trabajador_estado_civil">
                     <option value="no_especificado" selected>
                       No Especificado
                     </option>
-                    <option value="soltero">Soltero/a</option>
-                    <option value="casado">Casado/a</option>
-                    <option value="viudo">Viudo/a</option>
-                    <option value="conviviente">Conviviente</option>
+                    <option value="No Especificado">No especificado</option>
+                    <option value="Soltero">Soltero/a</option>
+                    <option value="Casado">Casado/a</option>
+                    <option value="Viudo">Viudo/a</option>
+                    <option value="Divorciado">Divorciado/a</option>
+                    <option value="Conviviente">Conviviente</option>
                   </select>
                 </div>
                 <div class="form-group">
-                  <label for="documentoEstadoCivil"
+                  <label for="trabajador_path_doc_estado_civil"
                     >Documento de Estado Civil (PDF)</label
                   >
                   <input
                     type="file"
                     class="form-control-file"
-                    id="documentoEstadoCivil"
+                    name="trabajador_path_doc_estado_civil"
                   />
                 </div>
                 <div class="form-group">
-                  <label for="fechaIngreso">Fecha de Ingreso</label>
-                  <input type="date" class="form-control" id="fechaIngreso" />
+                  <label for="trabajador_fecha_ingreso">Fecha de Ingreso</label>
+                  <input type="date" class="form-control" name="trabajador_fecha_ingreso" />
                 </div>
                 <div class="form-group">
-                  <label for="experienciaPrevia">Experiencia Previa</label>
-                  <textarea
+                  <label for="trabajador_exp_previa">Experiencia Previa</label>
+                  <input
+                    type="number"
+                    step="0.01"
                     class="form-control"
-                    id="experienciaPrevia"
+                    name="trabajador_exp_previa"
                     rows="3"
-                    placeholder="Ingrese experiencia previa"
+                    placeholder="Ingrese su experiencia previa"
                   ></textarea>
                 </div>
               </div>
@@ -223,9 +248,32 @@ endblock %}
             <div class="card-header">
               <h3 class="card-title">Formulario de Estudio</h3>
             </div>
-            <form>
+            <form id="formh-estudios">
               <div class="card-body">
                 <!-- Campos para el formulario de estudio -->
+                <div class="form-group">
+                  <label for="trabajador">DNI</label>
+                  <input
+                    type="number"
+                    step="1"
+                    class="form-control"
+                    name="trabajador"
+                    id="dni-estudios"
+                    placeholder="Ingrese su numero de DNI"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="trabajador_estado_civil">Estado Civil</label>
+                  <select class="form-control" name="trabajador_estado_civil">
+                    <option value="Habilitado">Habilitado</option>
+                    <option value="No habilitado">No habilitado</option>
+                    <option value="XXXXX">XXXXX</option>
+                  </select>
+                </div>
+                ('Habilitado', 'Habilitado'),
+            ('No habilitado', 'No habilitado'),
+            ('XXXXX', 'XXXXX'),
+
                 <div class="form-group">
                   <label for="nivelEducativo">Nivel Educativo</label>
                   <select class="form-control" id="nivelEducativo">
@@ -406,7 +454,9 @@ endblock %}
 <script src="/static/assets/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="/static/assets/js/demo.js"></script>
+
 <script src="/static/assets/js/index/apiUtils.js"></script>
+<script src="/static/assets/js/forms/trabajador.js"></script>
 <script>
   $(function () {
     bsCustomFileInput.init();

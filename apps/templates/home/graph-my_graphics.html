@@ -18,7 +18,13 @@
 />
 <!-- Theme style -->
 <link rel="stylesheet" href="/static/assets/css/adminlte.min.css" />
-
+<style>
+  /* Estilos personalizados para hacer las gráficas responsivas */
+  canvas {
+      width: 100% !important;
+      height: auto !important;
+  }
+</style>
 {% endblock stylesheets %} {% block content %}
 
 <div class="content-wrapper">
@@ -80,6 +86,7 @@
                 >
                     <i class="fas fa-minus"></i>
                 </button>
+                <!-- 
                 <button
                     type="button"
                     class="btn btn-tool"
@@ -87,6 +94,7 @@
                 >
                     <i class="fas fa-times"></i>
                 </button>
+                -->
                 </div>
             </div>
             <div class="card-body">
@@ -111,6 +119,7 @@
                 >
                   <i class="fas fa-minus"></i>
                 </button>
+                                <!-- 
                 <button
                   type="button"
                   class="btn btn-tool"
@@ -118,6 +127,7 @@
                 >
                   <i class="fas fa-times"></i>
                 </button>
+                -->
               </div>
             </div>
             <div class="card-body">
@@ -129,71 +139,6 @@
             </div>
           </div>
         </div>
-  
-        <!-- HEADCOUNT POR AREA - Gráfico de barras 2D vertical -->
-        <div class="col-md-4">
-          <div class="card card-primary">
-            <div class="card-header">
-              <h3 class="card-title">HEADCOUNT POR AREA</h3>
-              <div class="card-tools">
-                <button
-                  type="button"
-                  class="btn btn-tool"
-                  data-card-widget="collapse"
-                >
-                  <i class="fas fa-minus"></i>
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-tool"
-                  data-card-widget="remove"
-                >
-                  <i class="fas fa-times"></i>
-                </button>
-              </div>
-            </div>
-            <div class="card-body">
-              <!-- Aquí va el código del gráfico de barras 2D vertical para HEADCOINT POR AREA -->
-              <canvas
-                id="headcountPorAreaChart"
-                style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"
-              ></canvas>
-            </div>
-          </div>
-        </div>
-  
-        <!-- NACIONALIDAD - Gráfico de barras -->
-        <div class="col-md-4">
-          <div class="card card-info">
-            <div class="card-header">
-              <h3 class="card-title">NACIONALIDAD</h3>
-              <div class="card-tools">
-                <button
-                  type="button"
-                  class="btn btn-tool"
-                  data-card-widget="collapse"
-                >
-                  <i class="fas fa-minus"></i>
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-tool"
-                  data-card-widget="remove"
-                >
-                  <i class="fas fa-times"></i>
-                </button>
-              </div>
-            </div>
-            <div class="card-body">
-              <!-- Aquí va el código del gráfico de barras para NACIONALIDAD -->
-              <canvas
-                id="nacionalidadChart"
-                style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"
-              ></canvas>
-            </div>
-          </div>
-        </div>
-  
         <!-- TIPO DE CONTRATO - Gráfico circular -->
         <div class="col-md-4">
           <div class="card card-primary">
@@ -207,6 +152,7 @@
                 >
                   <i class="fas fa-minus"></i>
                 </button>
+                                <!-- 
                 <button
                   type="button"
                   class="btn btn-tool"
@@ -214,6 +160,7 @@
                 >
                   <i class="fas fa-times"></i>
                 </button>
+                -->
               </div>
             </div>
             <div class="card-body">
@@ -225,9 +172,78 @@
             </div>
           </div>
         </div>
+        <!-- HEADCOUNT POR AREA - Gráfico de barras 2D vertical -->
+        <div class="col-md-6">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">HEADCOUNT POR AREA</h3>
+              <div class="card-tools">
+                <button
+                  type="button"
+                  class="btn btn-tool"
+                  data-card-widget="collapse"
+                >
+                  <i class="fas fa-minus"></i>
+                </button>
+                                <!-- 
+                <button
+                  type="button"
+                  class="btn btn-tool"
+                  data-card-widget="remove"
+                >
+                  <i class="fas fa-times"></i>
+                </button>
+                -->
+              </div>
+            </div>
+            <div class="card-body">
+              <!-- Aquí va el código del gráfico de barras 2D vertical para HEADCOINT POR AREA -->
+              <canvas
+                id="headcountPorAreaChart"
+                style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"
+              ></canvas>
+            </div>
+          </div>
+        </div>
+  
+        <!-- NACIONALIDAD - Gráfico de barras -->
+        <div class="col-md-6">
+          <div class="card card-info">
+            <div class="card-header">
+              <h3 class="card-title">NACIONALIDAD</h3>
+              <div class="card-tools">
+                <button
+                  type="button"
+                  class="btn btn-tool"
+                  data-card-widget="collapse"
+                >
+                  <i class="fas fa-minus"></i>
+                </button>
+                                <!-- 
+                <button
+                  type="button"
+                  class="btn btn-tool"
+                  data-card-widget="remove"
+                >
+                  <i class="fas fa-times"></i>
+                </button>
+                -->
+              </div>
+            </div>
+            <div class="card-body">
+              <!-- Aquí va el código del gráfico de barras para NACIONALIDAD -->
+              <canvas
+                id="nacionalidadChart"
+                style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"
+              ></canvas>
+            </div>
+          </div>
+        </div>
+  
+        
   
         <!-- Nivel Educativo - Gráfico de barras 2D vertical -->
-        <div class="col-md-4">
+        <div class="col-md-12">
           <div class="card card-success">
             <div class="card-header">
               <h3 class="card-title">Nivel Educativo</h3>
@@ -239,6 +255,7 @@
                 >
                   <i class="fas fa-minus"></i>
                 </button>
+                                <!-- 
                 <button
                   type="button"
                   class="btn btn-tool"
@@ -246,6 +263,7 @@
                 >
                   <i class="fas fa-times"></i>
                 </button>
+                -->
               </div>
             </div>
             <div class="card-body">
@@ -259,7 +277,7 @@
         </div>
   
         <!-- INGENIEROS COLEGIADOS - Gráfico de barras -->
-        <div class="col-md-4">
+        <div class="col-md-6">
           <div class="card card-success">
             <div class="card-header">
               <h3 class="card-title">INGENIEROS COLEGIADOS</h3>
@@ -271,6 +289,8 @@
                 >
                   <i class="fas fa-minus"></i>
                 </button>
+                <!-- 
+                                <!-- 
                 <button
                   type="button"
                   class="btn btn-tool"
@@ -278,6 +298,7 @@
                 >
                   <i class="fas fa-times"></i>
                 </button>
+                -->
               </div>
             </div>
             <div class="card-body">
@@ -291,7 +312,7 @@
         </div>
   
         <!-- ROL DE PROYECTO (Classification) - Gráfico de barras -->
-        <div class="col-md-4">
+        <div class="col-md-6">
           <div class="card card-primary">
             <div class="card-header">
               <h3 class="card-title">ROL DE PROYECTO (Classification)</h3>
@@ -303,6 +324,7 @@
                 >
                   <i class="fas fa-minus"></i>
                 </button>
+                                <!-- 
                 <button
                   type="button"
                   class="btn btn-tool"
@@ -310,6 +332,7 @@
                 >
                   <i class="fas fa-times"></i>
                 </button>
+                -->
               </div>
             </div>
             <div class="card-body">

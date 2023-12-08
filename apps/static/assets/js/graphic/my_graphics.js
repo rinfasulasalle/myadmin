@@ -27,7 +27,7 @@ function renderHeadcountSexoChart() {
 
             // Configura el gráfico
             const config = {
-                type: 'bar',
+                type: 'pie',
                 data: {
                     labels: labels,
                     datasets: [{
@@ -37,16 +37,8 @@ function renderHeadcountSexoChart() {
                     }],
                 },
                 options: {
-                    scales: {
-                        yAxes: [{
-                            display: true,
-                            ticks: {
-                                suggestedMin: 0,
-                                beginAtZero: true
-                            }
-                        }]
-                    }
-                },
+                          responsive: true,
+                      },
             };
 
             // Obtén el contexto del canvas y crea el gráfico
@@ -98,16 +90,16 @@ function renderheadcountPorProyectoChart() {
                           }],
                       },
                       options: {
-                          scales: {
-                              yAxes: [{
-                                  display: true,
-                                  ticks: {
-                                      suggestedMin: 0,
-                                      beginAtZero: true,
-                                  }
-                              }]
-                          }
-                      },
+                        scales: {
+                            yAxes: [{
+                              display: true,
+                              ticks: {
+                                  suggestedMin: 0,
+                                  beginAtZero: true,
+                              }
+                          }]
+                        }
+                    },
                   };
                   // Obtener el contexto del canvas y crear el gráfico
                   const ctx = document.getElementById('headcountPorProyectoChart').getContext('2d');
@@ -218,16 +210,16 @@ function renderNacionalidadChart() {
                   }],
               },
               options: {
-                  scales: {
-                      yAxes: [{
-                          display: true,
-                          ticks: {
-                              suggestedMin: 0,
-                              beginAtZero: true
-                          }
-                      }]
-                  }
-              },
+                scales: {
+                    yAxes: [{
+                        display: true,
+                        ticks: {
+                            suggestedMin: 0,
+                            beginAtZero: true,
+                        }
+                    }]
+                }
+            },
           };
 
           // Obtén el contexto del canvas y crea el gráfico
@@ -300,78 +292,212 @@ function renderTipoContratoChart() {
   
 // Función para el gráfico de Nivel Educativo
 function renderNivelEducativoChart() {
-  // Código específico para llenar el gráfico de Nivel Educativo
-}
-  
-// Función para el gráfico de INGENIEROS COLEGIADOS
-function renderIngenierosColegiadosChart() {
-  // Código específico para llenar el gráfico de INGENIEROS COLEGIADOS
-}
-  
-// Función para el gráfico de ROL DE PROYECTO (Classification) - Horizontal Bar Chart
-function renderRolProyectoChart() {
-  // Obtener datos de los roles de proyecto
-  fetchData('dropdown_rol_proyecto/')
-      .then(rolesProyectoData => {
-          // Obtener datos de los contratos
-          fetchData('contrato/')
-              .then(contratosData => {
-                  // Mapear los nombres de los roles de proyecto por su id
-                  const rolesProyectoMap = {};
-                  rolesProyectoData.forEach(rol => {
-                      rolesProyectoMap[rol.id] = rol.rol_titulo;
+  // Obtener datos de los niveles educativos
+  fetchData('dropdown_nivel_educativo/')
+      .then(nivelesEducativosData => {
+          // Obtener datos de los estudios
+          fetchData('estudio/')
+              .then(estudiosData => {
+                  // Mapear los nombres de los niveles educativos por su id
+                  const nivelesEducativosMap = {};
+                  nivelesEducativosData.forEach(nivel => {
+                      nivelesEducativosMap[nivel.id] = nivel.nivel_educativo;
                   });
 
-                  // Realizar el conteo por rol de proyecto
-                  const conteoPorRolProyecto = contratosData.reduce((conteo, contrato) => {
-                      const rolProyectoId = contrato.id_empleo_proyecto_rol;
-                      const rolProyectoNombre = rolesProyectoMap[rolProyectoId];
-                      conteo[rolProyectoNombre] = (conteo[rolProyectoNombre] || 0) + 1;
+                  // Realizar el conteo por nivel educativo
+                  const conteoPorNivelEducativo = estudiosData.reduce((conteo, estudio) => {
+                      const nivelEducativoId = estudio.id_estudio_nivel_educativo;
+                      const nivelEducativoNombre = nivelesEducativosMap[nivelEducativoId];
+                      conteo[nivelEducativoNombre] = (conteo[nivelEducativoNombre] || 0) + 1;
                       return conteo;
                   }, {});
 
                   // Obtener las etiquetas y datos para el gráfico
-                  const labels = Object.keys(conteoPorRolProyecto);
-                  const datos = Object.values(conteoPorRolProyecto);
+                  const labels = Object.keys(conteoPorNivelEducativo);
+                  const datos = Object.values(conteoPorNivelEducativo);
                   // Crea un array de colores variados
                   const colores = labels.map((_, index) => getRandomColor());
 
-                  // Configurar el gráfico como Horizontal Bar Chart
+                  // Configurar el gráfico
                   const config = {
                       type: 'horizontalBar',
                       data: {
                           labels: labels,
                           datasets: [{
-                              label: 'Rol de Proyecto (Classification)',
+                              label: 'Nivel Educativo',
                               data: datos,
                               backgroundColor: colores,
                           }],
                       },
                       options: {
-                          scales: {
-                              xAxes: [{
-                                  display: true,
-                                  ticks: {
-                                      suggestedMin: 0,
-                                      beginAtZero: true,
-                                  }
-                              }]
-                          }
+                        scales: {
+                          xAxes: [{
+                            display: true,
+                            ticks: {
+                                suggestedMin: 0,
+                                beginAtZero: true,
+                            }
+                        }]
+                      }
                       },
                   };
 
                   // Obtener el contexto del canvas y crear el gráfico
-                  const ctx = document.getElementById('rolProyectoChart').getContext('2d');
+                  const ctx = document.getElementById('nivelEducativoChart').getContext('2d');
                   new Chart(ctx, config);
               })
               .catch(error => {
-                  console.error('Error al obtener datos de contratos:', error);
+                  console.error('Error al obtener datos de estudios:', error);
               });
       })
       .catch(error => {
-          console.error('Error al obtener datos de roles de proyecto:', error);
+          console.error('Error al obtener datos de niveles educativos:', error);
       });
 }
+
+  
+// Función para el gráfico de INGENIEROS COLEGIADOS
+function renderIngenierosColegiadosChart() {
+    // Obtener datos de las especializaciones
+    fetchData('dropdown_especializaciones/')
+        .then(especializacionesData => {
+            // Obtener datos de los estudios
+            fetchData('estudio/')
+                .then(estudiosData => {
+                    // Mapear los nombres de las especializaciones por su id
+                    const especializacionesMap = {};
+                    especializacionesData.forEach(especializacion => {
+                        especializacionesMap[especializacion.id] = especializacion.especializacion;
+                    });
+
+                    // Filtrar los estudios de ingenieros colegiados
+                    const estudiosIngenierosColegiados = estudiosData.filter(estudio => estudio.id_estudio_especializacion);
+
+                    // Realizar el conteo por especialización
+                    const conteoPorEspecializacion = estudiosIngenierosColegiados.reduce((conteo, estudio) => {
+                        const especializacionId = estudio.id_estudio_especializacion;
+                        const especializacionNombre = especializacionesMap[especializacionId];
+                        conteo[especializacionNombre] = (conteo[especializacionNombre] || 0) + 1;
+                        return conteo;
+                    }, {});
+
+                    // Obtener las etiquetas y datos para el gráfico
+                    const labels = Object.keys(conteoPorEspecializacion);
+                    const datos = Object.values(conteoPorEspecializacion);
+                    // Crea un array de colores variados
+                    const colores = labels.map((_, index) => getRandomColor());
+
+                    // Configurar el gráfico
+                    const config = {
+                        type: 'horizontalBar',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Ingenieros Colegiados por Especialización',
+                                data: datos,
+                                backgroundColor: colores,
+                            }],
+                        },
+                        options: {
+                            scales: {
+                                xAxes: [{
+                                    display: true,
+                                    ticks: {
+                                        suggestedMin: 0,
+                                        beginAtZero: true,
+                                    }
+                                }]
+                            }
+                        },
+                    };
+
+                    // Obtener el contexto del canvas y crear el gráfico
+                    const ctx = document.getElementById('ingenierosColegiadosChart').getContext('2d');
+                    new Chart(ctx, config);
+                })
+                .catch(error => {
+                    console.error('Error al obtener datos de estudios:', error);
+                });
+        })
+        .catch(error => {
+            console.error('Error al obtener datos de especializaciones:', error);
+        });
+}
+
+
+
+
+
+  
+// Función para el gráfico de ROL DE PROYECTO (Classification)
+function renderRolProyectoChart() {
+    // Obtener datos de los roles de proyecto
+    fetchData('dropdown_rol_proyecto/')
+        .then(rolesProyectoData => {
+            // Obtener datos de los contratos
+            fetchData('contrato/')
+                .then(contratosData => {
+                    // Ordenar los roles de proyecto por id de forma descendente
+                    rolesProyectoData.sort((a, b) => b.id - a.id);
+
+                    // Mapear los nombres de los roles de proyecto por su id
+                    const rolesProyectoMap = {};
+                    rolesProyectoData.forEach(rol => {
+                        rolesProyectoMap[rol.id] = rol.rol_titulo;
+                    });
+
+                    // Realizar el conteo por rol de proyecto
+                    const conteoPorRolProyecto = contratosData.reduce((conteo, contrato) => {
+                        const rolProyectoId = contrato.id_empleo_proyecto_rol;
+                        const rolProyectoNombre = rolesProyectoMap[rolProyectoId];
+                        conteo[rolProyectoNombre] = (conteo[rolProyectoNombre] || 0) + 1;
+                        return conteo;
+                    }, {});
+
+                    // Obtener las etiquetas y datos para el gráfico
+                    const labels = Object.keys(conteoPorRolProyecto);
+                    const datos = Object.values(conteoPorRolProyecto);
+                    // Crea un array de colores variados
+                    const colores = labels.map((_, index) => getRandomColor());
+
+                    // Configurar el gráfico
+                    const config = {
+                        type: 'horizontalBar',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Rol de Proyecto (Classification)',
+                                data: datos,
+                                backgroundColor: colores,
+                            }],
+                        },
+                        options: {
+                            scales: {
+                                xAxes: [{
+                                    display: true,
+                                    ticks: {
+                                        suggestedMin: 0,
+                                        beginAtZero: true,
+                                    }
+                                }]
+                            }
+                        },
+                    };
+
+                    // Obtener el contexto del canvas y crear el gráfico
+                    const ctx = document.getElementById('rolProyectoChart').getContext('2d');
+                    new Chart(ctx, config);
+                })
+                .catch(error => {
+                    console.error('Error al obtener datos de contratos:', error);
+                });
+        })
+        .catch(error => {
+            console.error('Error al obtener datos de roles de proyecto:', error);
+        });
+}
+
+
 
 
   
