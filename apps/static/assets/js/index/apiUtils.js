@@ -29,18 +29,25 @@ async function fetchData(endpoint) {
     }
 }
 
-async function fetchSendPostData(endpoint, data){
-    try{
-        const res = await fetch(buildUrl(endpoint), {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body:JSON.stringify(data)
-        });
+async function fetchSendPostData(endpoint, data) {
+    try {
+      const response = await fetch(buildUrl(endpoint), {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`Error al enviar datos a ${endpoint}`);
+      }
+  
+      return response;
     } catch (error) {
-        console.error(error.message);
-        throw error;
+      console.error(error.message);
     }
-}
+  }
 
 async function obtenerTotalUsuarios() {
     try {
@@ -63,15 +70,11 @@ async function obtenerTotalTrabajadores() {
 }
 async function xd() {
     try {
-        const a = await fetchData("usuario/");
-        const b = await fetchData("trabajador/");
         const c = await fetchData("contrato/");
         const d = await fetchData("cuenta_bancaria/");
         const e = await fetchData("direccion/");
         const f = await fetchData("estudio/");
         const g = await fetchData("sueldo/");
-        console.log (a.length);
-        console.log (b.length);
         console.log (c.length);
         console.log (d.length);
         console.log (e.length);

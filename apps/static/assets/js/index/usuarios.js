@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 });
 
+
 async function loadAndFillTable(rolesData) {
     try {
         const userData = await fetchData("usuario/");
@@ -41,13 +42,13 @@ function fetchData(endpoint) {
 
 function fillTable(data, rolesData) {
     const tableBody = document.querySelector("#example1 tbody");
+    tableBody.innerHTML = ""; // Limpiar la tabla antes de llenarla nuevamente
 
     data.forEach(user => {
         const row = createRow(user, rolesData);
         tableBody.appendChild(row);
     });
 }
-
 function createRow(user, rolesData) {
     const row = document.createElement("tr");
     row.innerHTML = `
@@ -89,6 +90,63 @@ function addAddUserButton(rolesData) {
     }
 }
 
+async function addUserFromForm(rolesData) {
+    try {
+        const newUser = {
+            usuario_nombres: document.getElementById("newUserName").value,
+            usuario_apellidos: document.getElementById("newUserLastName").value,
+            id_usuario_rol: document.getElementById("newUserRole").value,
+            usuario_correo: document.getElementById("newUserEmail").value,
+            usuario_telefono: document.getElementById("newUserPhone").value,
+            usuario_dni: document.getElementById("newUserDNI").value,
+            usuario_contrasenia: document.getElementById("newUserPassword").value,
+        };
+
+        console.log("Nuevo usuario:", newUser);
+
+        // Utilizamos la función fetchSendPostData para enviar la solicitud POST
+        const response = await fetchSendPostData("usuario/", newUser);
+
+        if (response.ok) {
+            const createdUser = await response.json();
+            console.log(`Usuario con ID ${createdUser.id} agregado con éxito`);
+
+            // Actualiza la tabla con el nuevo usuario
+            appendRowToTable(createdUser, rolesData);
+        }
+    } catch (error) {
+        console.error(error.message);
+    }
+}
+
+  function appendRowToTable(user, rolesData) {
+    const tableBody = document.querySelector("#example1 tbody");
+    const newRow = createRow(user, rolesData);
+    tableBody.appendChild(newRow);
+  }
+  async function fetchSendPostData(endpoint, data) {
+    const url = `http://62.72.11.15:3000/api/${endpoint}`;
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    };
+
+    return fetch(url, options)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error al enviar datos a ${endpoint}`);
+            }
+            return response;
+        })
+        .catch(error => {
+            console.error(error.message);
+        });
+}
+
+
 
 
 function setupEventListeners(rolesData) {
@@ -96,7 +154,7 @@ function setupEventListeners(rolesData) {
     if (addUserForm) {
         addUserForm.addEventListener("submit", async (event) => {
             event.preventDefault();
-            await saveAddUser(rolesData);
+            await addUserFromForm(rolesData);
         });
     }
 
@@ -111,17 +169,8 @@ function setupEventListeners(rolesData) {
 
 async function updateTable(rolesData) {
     try {
-        const updatedUserData = await fetchData("usuario/");
-        const tableBody = document.querySelector("#example1 tbody");
-
-        // Limpiar la tabla antes de agregar los nuevos datos
-        tableBody.innerHTML = "";
-
-        // Agregar filas con los datos actualizados
-        updatedUserData.forEach(user => {
-            const row = createRow(user, rolesData);
-            tableBody.appendChild(row);
-        });
+        const userData = await fetchData("usuario/");
+        fillTable(userData, rolesData);
     } catch (error) {
         console.error(error.message);
     }
@@ -141,8 +190,8 @@ function showCreateUserForm(rolesData) {
                 <div class="modal-body">
                     <form id="addUserForm">
                         <div class="form-group">
-                            <label for="newUserId">ID:</label>
-                            <input type="text" class="form-control" id="newUserId" required>
+                            <label for="newUserDNI">DNI:</label>
+                            <input type="text" class="form-control" id="newUserDNI" required>
                         </div>
                         <div class="form-group">
                             <label for="newUserName">Nombres:</label>
@@ -191,77 +240,51 @@ async function saveAddUser(rolesData) {
             id_usuario_rol: getValueById("newUserRole"),
             usuario_correo: getValueById("newUserEmail"),
             usuario_telefono: getValueById("newUserPhone"),
-            usuario_dni: getValueById("newUserDNI"),  // Agregar el campo DNI
+            usuario_dni: getValueById("newUserDNI"),  // Asegúrate de que hay un campo con el id "newUserDNI"
             usuario_contrasenia: getValueById("newUserPassword"),
         };
 
         console.log("Nuevo usuario:", newUser);
 
-        const response = await fetch("http://62.72.11.15:3000/api/usuario/", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(newUser),
-        });
+        // Utilizamos la función fetchSendPostData para enviar la solicitud POST
+        await fetchSendPostData("usuario/", newUser);
 
-        console.log("Respuesta del servidor:", response);
-
-        if (response.ok) {
-            // Solo realiza una solicitud GET después de agregar el usuario
-            const updatedUserData = await fetchData("usuario/");
-            updateTable(updatedUserData, rolesData);
-            closeAndClearModal("addUserModal");
-        } else {
-            handleServerError("Error al agregar usuario");
-        }
+        // Solo realiza una solicitud GET después de agregar el usuario
+        const updatedUserData = await fetchData("usuario/");
+        updateTable(updatedUserData, rolesData);
+        closeAndClearModal("addUserModal");
     } catch (error) {
-        handleError(error.message);
+        handleServerError("Error al agregar usuario");
     }
 }
 
-async function saveAddUser(rolesData) {
+
+
+async function addNewUser(rolesData) {
     try {
-        const newUser = {
-            usuario_nombres: getValueById("newUserName"),
-            usuario_apellidos: getValueById("newUserLastName"),
-            id_usuario_rol: getValueById("newUserRole"),
-            usuario_correo: getValueById("newUserEmail"),
-            usuario_telefono: getValueById("newUserPhone"),
-            usuario_dni: getValueById("newUserDNI"),
-            usuario_contrasenia: getValueById("newUserPassword"),
-        };
-
-        const response = await fetch("http://62.72.11.15:3000/api/usuario/", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(newUser),
-        });
-
-        if (response.ok) {
-            // Obtén el usuario creado del cuerpo de la respuesta
-            const createdUser = await response.json();
-
-            // Agrega la nueva fila a la tabla en el frontend
-            appendRowToTable(createdUser, rolesData);
-
-            // Cierra el modal
-            closeAndClearModal("addUserModal");
-
-            // Realiza una solicitud GET después de agregar el usuario
-            const updatedUserData = await fetchData("usuario/");
-            updateTable(updatedUserData, rolesData);
-        } else {
-            handleServerError("Error al agregar usuario");
-        }
+      const newUser = {
+        usuario_nombres: getValueById("newUserName"),
+        usuario_apellidos: getValueById("newUserLastName"),
+        id_usuario_rol: getValueById("newUserRole"),
+        usuario_correo: getValueById("newUserEmail"),
+        usuario_telefono: getValueById("newUserPhone"),
+        usuario_dni: getValueById("newUserDNI"), // Added
+        usuario_contrasenia: getValueById("newUserPassword"),
+      };
+  
+      console.log("Nuevo usuario:", newUser);
+  
+      // Use fetchSendPostData to send the POST request
+      await fetchSendPostData("usuario/", newUser);
+  
+      // After adding the user, update the table
+      await updateTable(rolesData);
+      closeAndClearModal("addUserModal");
     } catch (error) {
-        handleError(error.message);
+      handleError(error.message);
     }
-}
-
-
+  }
+  
 
 
 
@@ -281,7 +304,11 @@ function showEditUserModal(user, rolesData) {
                         <div class="form-group">
                             <label for="editUserName">Nombres:</label>
                             <input type="text" class="form-control" id="editUserName" value="${user.usuario_nombres}" required>
-                        </div>
+                    
+                    
+                    
+                    
+                            </div>
                         <div class="form-group">
                             <label for="editUserLastName">Apellidos:</label>
                             <input type="text" class="form-control" id="editUserLastName" value="${user.usuario_apellidos}" required>
@@ -299,7 +326,9 @@ function showEditUserModal(user, rolesData) {
                         <div class="form-group">
                             <label for="editUserPhone">Teléfono:</label>
                             <input type="text" class="form-control" id="editUserPhone" value="${user.usuario_telefono}" required>
+                        
                         </div>
+
                         <button type="submit" class="btn btn-primary">Guardar Cambios</button>
                     </form>
                 </div>
@@ -349,7 +378,7 @@ async function saveEditedUser(userId, editedUser) {
         if (response.ok) {
             console.log(`Usuario con ID ${userId} actualizado con éxito`);
             $("#editUserModal").modal("hide");
-            // Puedes agregar aquí una función para actualizar la tabla si es necesario
+            await updateTable(rolesData); // Actualizar la tabla después de la edición
         } else {
             console.error(`Error al actualizar usuario con ID ${userId}`);
         }
@@ -357,7 +386,6 @@ async function saveEditedUser(userId, editedUser) {
         console.error(error.message);
     }
 }
-
 
 async function editUser(userId, rolesData) {
     try {

@@ -529,4 +529,4 @@ async function mostrarTotales() {
 
 // Llamada inicial para mostrar los totales después de renderizar los gráficos
 mostrarTotales();
-//xd();
+xd();
