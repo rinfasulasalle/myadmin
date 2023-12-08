@@ -11,6 +11,11 @@
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="/static/assets/plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="/static/assets/css/adminlte.min.css">
@@ -41,7 +46,113 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-        <div class="card card-primary card-outline">
+        <div class="container-fluid">
+          <!-- Small boxes (Stat box) -->
+          <div class="row">
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-info">
+                <div class="inner">
+                  <h3 id="usuarios-contador">...</h3>
+                  <p>Conteo Usuarios</p>
+                </div>
+                <div class="icon">
+                  <!-- Icono de Font Awesome para usuarios -->
+                  <i class="fas fa-user"></i>
+                </div>
+              </div>
+            </div>
+          
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-success">
+                <div class="inner">
+                  <h3 id="trabajadores-contador">...</h3>
+                  <p>Conteo Trabajadores</p>
+                </div>
+                <div class="icon">
+                  <!-- Icono de Ionicons para trabajadores (puedes cambiarlo a un icono de Font Awesome si lo prefieres) -->
+                  <i class="ion ion-stats-bars"></i>
+                </div>
+              </div>
+            </div>
+          
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-warning">
+                <div class="inner">
+                  <h3 id="contratos-contador">...</h3>
+                  <p>Conteo Contratos</p>
+                </div>
+                <div class="icon">
+                  <!-- Icono de Font Awesome para contratos -->
+                  <i class="fas fa-file-contract"></i>
+                </div>
+              </div>
+            </div>
+          
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-danger">
+                <div class="inner">
+                  <h3 id="cuentas_bancarias-contador">...</h3>
+                  <p>Conteo Cuentas Bancarias</p>
+                </div>
+                <div class="icon">
+                  <!-- Icono de Ionicons para cuentas bancarias (puedes cambiarlo a un icono de Font Awesome si lo prefieres) -->
+                  <i class="ion ion-pie-graph"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-info">
+                <div class="inner">
+                  <h3 id="direcciones-contador">...</h3>
+                  <p>Conteo Direcciones</p>
+                </div>
+                <div class="icon">
+                  <!-- Icono de Font Awesome para direcciones -->
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+              </div>
+            </div>
+          
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-success">
+                <div class="inner">
+                  <h3 id="estudios-contador">...</h3>
+                  <p>Conteo Estudios</p>
+                </div>
+                <div class="icon">
+                  <!-- Icono de Ionicons para estudios (puedes cambiarlo a un icono de Font Awesome si lo prefieres) -->
+                  <i class="ion ion-clipboard"></i>
+                </div>
+              </div>
+            </div>
+          
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-warning">
+                <div class="inner">
+                  <h3 id="sueldos-contador">...</h3>
+                  <p>Conteo Sueldos</p>
+                </div>
+                <div class="icon">
+                  <!-- Icono de Font Awesome para sueldos -->
+                  <i class="fas fa-money-bill-wave"></i>
+                </div>
+              </div>
+            </div>
+          
+            <!-- Agrega aquí otro bloque de la segunda fila si es necesario -->
+          </div>
+          
+        <div class="card card-warning card-outline">
           <div class="card-header">
             <h1 class="card-title">Lista de Registros Incompletos</h1>
           </div> <!-- /.card-body -->
@@ -73,5 +184,5 @@
   <script src="/static/assets/js/demo.js"></script>
   <!-- Mi script apiUtils.js -->
   <script src="/static/assets/js/index/apiUtils.js"></script>
-  <script src="/static/assets/js/forms/incompletos/pruebas.js"></script>
+  <script src="/static/assets/js/forms/incompletos/conteos.js"></script>
 {% endblock javascripts %}
