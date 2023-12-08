@@ -1,13 +1,12 @@
 // apiUtils.js
 const apiUrl = 'http://62.72.11.15:3000/api/';
-
 function buildUrl(endpoint) {
     if(endpoint.charAt(endpoint.length - 1) !== "/"){
         endpoint += "/"
     }
     return apiUrl + endpoint;
 }
-
+// Funcion para GET con fetch de algun endpoint
 async function fetchData(endpoint) {
     try {
         const response = await fetch(buildUrl(endpoint));
@@ -28,27 +27,30 @@ async function fetchData(endpoint) {
         throw error;
     }
 }
-
+// Funcion para POST con fetch de algun endpoint y un json body
 async function fetchSendPostData(endpoint, data) {
-    try {
-      const response = await fetch(buildUrl(endpoint), {
-        method: "POST",
+    const url = `http://62.72.11.15:3000/api/${endpoint}`;
+    const options = {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+            'Content-Type': 'application/json'
         },
-        body: JSON.stringify(data),
-      });
-  
-      if (!response.ok) {
-        throw new Error(`Error al enviar datos a ${endpoint}`);
-      }
-  
-      return response;
-    } catch (error) {
-      console.error(error.message);
-    }
-  }
+        body: JSON.stringify(data)
+    };
 
+    return fetch(url, options)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error al enviar datos a ${endpoint}`);
+            }
+            return response;
+        })
+        .catch(error => {
+            console.error(error.message);
+        });
+}
+
+// Funcion para calcular cuatos usuarios hay(tamaño)
 async function obtenerTotalUsuarios() {
     try {
         const usuarios = await fetchData('usuario/');
@@ -58,30 +60,13 @@ async function obtenerTotalUsuarios() {
         throw error;
     }
 }
-
+// Funcion para calcular cuatos trabajadores hay(tamaño)
 async function obtenerTotalTrabajadores() {
     try {
         const trabajadores = await fetchData('trabajador/');
         return trabajadores.length;
     } catch (error) {
         console.error('Error al obtener los trabajadores:', error);
-        throw error;
-    }
-}
-async function xd() {
-    try {
-        const c = await fetchData("contrato/");
-        const d = await fetchData("cuenta_bancaria/");
-        const e = await fetchData("direccion/");
-        const f = await fetchData("estudio/");
-        const g = await fetchData("sueldo/");
-        console.log (c.length);
-        console.log (d.length);
-        console.log (e.length);
-        console.log (f.length);
-        console.log (g.length);
-    } catch (error) {
-        console.error(error);
         throw error;
     }
 }
