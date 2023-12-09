@@ -75,8 +75,8 @@
                       <th>DNI</th>
                       <th>Nombre</th>
                       <th>Apellido</th>
-                      <th>Sexo</th>
                       <th>Teléfono</th>
+                      <th>Sexo</th>
                       <th>Fecha Nacimiento</th>
                       <!-- TABLA TRABAJADOR -->
                       <th>Tipo Documento</th>
@@ -181,93 +181,8 @@
 <!-- AdminLTE for demo purposes -->
 <script src="/static/assets/js/demo.js"></script>
 <!-- page script -->
-<script>
-  // Realizar una solicitud GET al endpoint usando Axios
-  axios
-    .get("http://62.72.11.15:8090/all_trabajadores")
-    .then(function (response) {
-      var data = response.data;
-      var table = $("#example1").DataTable({
-        // Configuraciones adicionales de DataTables
-        scrollX: true, // Permite desplazamiento horizontal
-        fixedColumns: {
-          leftColumns: 2, // Fija las primeras 2 columnas (ID y Nombre)
-        },
-      });
-      // Limpiar la tabla antes de agregar nuevos datos
-      table.clear();
-
-      // Iterar sobre los datos y agregar cada fila a la tabla
-      data.forEach(function (all_trabajadores) {
-        table.row
-          .add([
-            // Tabla usuario
-            all_trabajadores.usuario_id,
-            all_trabajadores.usuario_nombres,
-            all_trabajadores.usuario_apellidos,
-            all_trabajadores.usuario_sexo,
-            all_trabajadores.usuario_telefono,
-            all_trabajadores.trabajador_fecha_nacimiento,
-            // Tabla trabajador
-            all_trabajadores.trabajador_tipo_documento,
-            all_trabajadores.trabajador_nacionalidad,
-            all_trabajadores.trabajador_estado_civil,
-            all_trabajadores.trabajador_ubigeo,
-            all_trabajadores.trabajador_fecha_ingreso_sistema,
-            all_trabajadores.trabajador_fecha_ingreso,
-            all_trabajadores.trabajador_exp_previa,
-            //calculados
-            all_trabajadores.trabajador_edad,
-            all_trabajadores.trabajador_record,
-            all_trabajadores.trabajador_total_anios_exp,
-            // Tabla direccion
-            all_trabajadores.direccion_pais,
-            all_trabajadores.direccion_departamento,
-            all_trabajadores.direccion_provincia,
-            all_trabajadores.direccion_distrito,
-            all_trabajadores.direccion_detalle,
-            // Tabla sueldo
-            all_trabajadores.sueldo_valor_básico,
-            all_trabajadores.sueldo_asigfam_porcentaje,
-            all_trabajadores.sueldo_bono_porcentaje,
-            all_trabajadores.sueldo_asignacion_familiar,
-            all_trabajadores.sueldo_monto_bono,
-            all_trabajadores.sueldo_mensual,
-            all_trabajadores.sueldo_anual,
-            // Tabla Cuenta Bancaria
-            all_trabajadores.cuenta_bancaria_banco,
-            all_trabajadores.cuenta_bancaria_codigo,
-            all_trabajadores.cuenta_bancaria_codigo_cci,
-            all_trabajadores.cuenta_bancaria_tipo,
-            // Tabla Contrato
-            all_trabajadores.contrato_tipo,
-            all_trabajadores.contrato_opcion,
-            all_trabajadores.empleo_tipo,
-            all_trabajadores.empleo_situacion,
-            all_trabajadores.empleo_area,
-            all_trabajadores.empleo_proyecto,
-            all_trabajadores.empleo_departamento,
-            all_trabajadores.empleo_cargo,
-            // Tabla estudio
-            all_trabajadores.estudio_nivel_educativo,
-            all_trabajadores.estudio_situacion_especial,
-            all_trabajadores.estudio_regimen_laboral,
-            all_trabajadores.estudio_regimen_laboral_aseguramiento,
-            all_trabajadores.estudio_institucion,
-            all_trabajadores.estudio_carrera_educativa,
-            all_trabajadores.estudio_capacitacion,
-            all_trabajadores.estudio_especializacion,
-            all_trabajadores.estudio_id_colegiatura,
-            all_trabajadores.estudio_fecha_colegiatura,
-            all_trabajadores.estudio_sede_colegiatura,
-            all_trabajadores.estudio_condicion,
-          ])
-          .draw(false);
-      });
-    })
-    .catch(function (error) {
-      console.error("Error al obtener los datos:", error);
-    });
-</script>
+<!-- Mi script apiUtils.js -->
+<script src="/static/assets/js/index/apiUtils.js"></script>
+<script src="/static/assets/js/index/trabajadores.js"></script>
 
 {% endblock javascripts %}

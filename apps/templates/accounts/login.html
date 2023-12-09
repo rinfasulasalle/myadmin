@@ -1,40 +1,33 @@
-{% extends "layouts/base-fullscreen.html" %} {% block title %} Login {% endblock
-%}
+{% extends "layouts/base-fullscreen.html" %} 
+{% block title %} Login {% endblock %}
 
 <!-- Element injected in the BODY element -->
 {% block body_class %} login-page {% endblock body_class %}
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="/static/assets/plugins/fontawesome-free/css/all.min.css" />
+  <!-- icheck bootstrap -->
+  <link rel="stylesheet" href="/static/assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css" />
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/static/assets/css/adminlte.min.css" />
 
-<!-- Google Font: Source Sans Pro -->
-<link
-  rel="stylesheet"
-  href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"
-/>
-<!-- Font Awesome -->
-<link
-  rel="stylesheet"
-  href="/static/assets/plugins/fontawesome-free/css/all.min.css"
-/>
-<!-- icheck bootstrap -->
-<link
-  rel="stylesheet"
-  href="/static/assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css"
-/>
-<!-- Theme style -->
-<link rel="stylesheet" href="/static/assets/css/adminlte.min.css" />
+  <style>
+    /* Add custom styles here */
+    body {
+      background: url('https://p4.wallpaperbetter.com/wallpaper/345/197/187/technology-coffee-books-laptop-wallpaper-preview.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+  </style>
+{% endblock stylesheets %}
 
-{% endblock stylesheets %} {% block content %}
-
+{% block content %}
 <div class="login-box">
-  <div class="login-logo">
-    <a
-      target="_blank"
-      rel="noopener noreferrer"
-      href="https://appseed.us/product/adminlte/flask/"
-      ><b>Admin</b>LTE Flask</a
-    >
+  <div class="login-logo bg-white">
+    <a target="_blank" rel="noopener noreferrer" href="#"><b>Admin</b>LTE LaborarPE</a>
   </div>
 
   <!-- /.login-logo -->
@@ -50,7 +43,7 @@
         {{ form.hidden_tag() }}
 
         <div class="input-group mb-3">
-          {{ form.dni(placeholder="Nombre de usuario", class="form-control") }}
+          {{ form.dni(placeholder="DNI de usuario", class="form-control") }}
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -87,35 +80,16 @@
         </div>
       </form>
 
-      <br /><br />
-
-      <div class="text-center">
-        <br />
-        &copy; ColorLib
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://appseed.us/product/adminlte/flask/"
-          ><b>Admin</b>LTE</a
-        >
-        - codificado por
-        <a target="_blank" rel="noopener noreferrer" href="https://appseed.us"
-          >AppSeed</a
-        >.
-      </div>
     </div>
     <!-- /.login-card-body -->
   </div>
 </div>
-
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
-
-<!-- jQuery -->
-<script src="/static/assets/plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="/static/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+  <!-- jQuery -->
+  <script src="/static/assets/plugins/jquery/jquery.min.js"></script>
+  <!-- Bootstrap 4 -->
+  <script src="/static/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 {% endblock javascripts %}

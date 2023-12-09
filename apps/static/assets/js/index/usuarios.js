@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", async function () {
     try {
         const rolesData = await fetchData("dropdown_roles/");
@@ -10,11 +9,21 @@ document.addEventListener("DOMContentLoaded", async function () {
         fillTable(userData, rolesData);
         setupEventListeners(rolesData);
         addAddUserButton(rolesData);
+        setupSaveUserButton(rolesData);
     } catch (error) {
         console.error(error.message);
     }
 });
 
+function setupSaveUserButton(rolesData) {
+    const saveUserButton = document.getElementById("addUserButton");
+    if (saveUserButton) {
+        saveUserButton.addEventListener("click", async () => {
+            console.log("Save user button clicked");
+            await saveAddUser(rolesData);
+        });
+    }
+}
 
 async function loadAndFillTable(rolesData) {
     try {
@@ -92,6 +101,7 @@ function addAddUserButton(rolesData) {
 
 async function addUserFromForm(rolesData) {
     try {
+        console.log("Attempting to add user");
         const newUser = {
             usuario_nombres: document.getElementById("newUserName").value,
             usuario_apellidos: document.getElementById("newUserLastName").value,
@@ -104,20 +114,12 @@ async function addUserFromForm(rolesData) {
 
         console.log("Nuevo usuario:", newUser);
 
-        // Utilizamos la función fetchSendPostData para enviar la solicitud POST
-        const response = await fetchSendPostData("usuario/", newUser);
-
-        if (response.ok) {
-            const createdUser = await response.json();
-            console.log(`Usuario con ID ${createdUser.id} agregado con éxito`);
-
-            // Actualiza la tabla con el nuevo usuario
-            appendRowToTable(createdUser, rolesData);
-        }
+        // Rest of the code...
     } catch (error) {
         console.error(error.message);
     }
 }
+
 
   function appendRowToTable(user, rolesData) {
     const tableBody = document.querySelector("#example1 tbody");
@@ -134,16 +136,17 @@ async function addUserFromForm(rolesData) {
         body: JSON.stringify(data)
     };
 
-    return fetch(url, options)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Error al enviar datos a ${endpoint}`);
-            }
-            return response;
-        })
-        .catch(error => {
-            console.error(error.message);
-        });
+    try {
+        const response = await fetch(url, options);
+
+        if (!response.ok) {
+            throw new Error(`Error al enviar datos a ${endpoint}`);
+        }
+
+        return response.json();
+    } catch (error) {
+        console.error(error.message);
+    }
 }
 
 
@@ -234,19 +237,11 @@ function showCreateUserForm(rolesData) {
 
 async function saveAddUser(rolesData) {
     try {
-        const newUser = {
-            usuario_nombres: getValueById("newUserName"),
-            usuario_apellidos: getValueById("newUserLastName"),
-            id_usuario_rol: getValueById("newUserRole"),
-            usuario_correo: getValueById("newUserEmail"),
-            usuario_telefono: getValueById("newUserPhone"),
-            usuario_dni: getValueById("newUserDNI"),  // Asegúrate de que hay un campo con el id "newUserDNI"
-            usuario_contrasenia: getValueById("newUserPassword"),
-        };
+        const newUser = getUserDataFromForm();
 
         console.log("Nuevo usuario:", newUser);
 
-        // Utilizamos la función fetchSendPostData para enviar la solicitud POST
+        // Utiliza la función fetchSendPostData para enviar la solicitud POST
         await fetchSendPostData("usuario/", newUser);
 
         // Solo realiza una solicitud GET después de agregar el usuario
@@ -258,34 +253,62 @@ async function saveAddUser(rolesData) {
     }
 }
 
+function getUserDataFromForm() {
+    return {
+        usuario_nombres: document.getElementById("newUserName").value,
+        usuario_apellidos: document.getElementById("newUserLastName").value,
+        id_usuario_rol: document.getElementById("newUserRole").value,
+        usuario_correo: document.getElementById("newUserEmail").value,
+        usuario_telefono: document.getElementById("newUserPhone").value,
+        usuario_dni: document.getElementById("newUserDNI").value,
+        usuario_contrasenia: document.getElementById("newUserPassword").value,
+    };
+}
 
 
 async function addNewUser(rolesData) {
     try {
-      const newUser = {
-        usuario_nombres: getValueById("newUserName"),
-        usuario_apellidos: getValueById("newUserLastName"),
-        id_usuario_rol: getValueById("newUserRole"),
-        usuario_correo: getValueById("newUserEmail"),
-        usuario_telefono: getValueById("newUserPhone"),
-        usuario_dni: getValueById("newUserDNI"), // Added
-        usuario_contrasenia: getValueById("newUserPassword"),
-      };
-  
-      console.log("Nuevo usuario:", newUser);
-  
-      // Use fetchSendPostData to send the POST request
-      await fetchSendPostData("usuario/", newUser);
-  
-      // After adding the user, update the table
-      await updateTable(rolesData);
-      closeAndClearModal("addUserModal");
-    } catch (error) {
-      handleError(error.message);
-    }
-  }
-  
+        const newUser = {
+            usuario_nombres: getValueById("newUserName"),
+            usuario_apellidos: getValueById("newUserLastName"),
+            id_usuario_rol: getValueById("newUserRole"),
+            usuario_correo: getValueById("newUserEmail"),
+            usuario_telefono: getValueById("newUserPhone"),
+            usuario_dni: getValueById("newUserDNI"),
+            usuario_contrasenia: getValueById("newUserPassword"),
+        };
 
+        // Utilize the function fetchSendPostData to send the POST request
+        const response = await fetchSendPostData("usuario/", newUser);
+
+        if (response.ok) {
+            const createdUser = await response.json();
+            console.log(`Usuario con ID ${createdUser.id} agregado con éxito`);
+
+            // Update the table with the new user
+            appendRowToTable(createdUser, rolesData);
+
+            // Close the modal after adding the user
+            closeAndClearModal("addUserModal");
+        } else {
+            console.error(`Error al agregar usuario: ${response.statusText}`);
+        }
+    } catch (error) {
+        console.error(error.message);
+    }
+}
+
+
+function closeAndClearModal(modalId) {
+    // Cierra el modal utilizando Bootstrap
+    $(`#${modalId}`).modal("hide");
+
+    // Limpia el contenido del modal para futuras aperturas
+    const modalElement = document.getElementById(modalId);
+    if (modalElement) {
+        modalElement.innerHTML = "";
+    }
+}
 
 
 function showEditUserModal(user, rolesData) {
