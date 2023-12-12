@@ -151,8 +151,36 @@ document.addEventListener('DOMContentLoaded', function () {
             // Lógica después de enviar los cambios (puedes cerrar el modal, actualizar la página, etc.)
             console.log('Cambios guardados:', respuesta);
             $('#editarModal').modal('hide');
+            alert("Modificación realizada con éxito");
         } catch (error) {
             console.error('Error al guardar cambios:', error);
         }
     });
+    // Function to handle the "Eliminar" button click
+    function eliminarDato(data) {
+        var itemToDelete = data;
+        // Obtiene el valor seleccionado del dropdown
+        var selectedValue = document.getElementById('dropdownOptions').value;
+        var id = itemToDelete.id;
+        
+        // abre modal
+        $('#eliminarConfirmacionModal').modal('show');
+        document.getElementById('confirmarEliminarBtn').addEventListener('click', async function (){
+            try {
+                // Send a DELETE request to the server to delete the item
+                var respuesta = await deleteData(selectedValue, id);
+
+                // Handle the response as needed (e.g., show a success message, update the UI)
+                console.log('Elemento eliminado:', respuesta);
+
+                // Close the confirmation modal
+                $('#eliminarConfirmacionModal').modal('hide');
+
+                // Optionally, update the UI or perform any other actions after deletion
+                alert("Elemento eliminado con éxito");
+            } catch (error) {
+                console.error('Error al eliminar elemento:', error);
+            }
+        });
+    }
 });

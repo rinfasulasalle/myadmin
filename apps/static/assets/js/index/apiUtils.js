@@ -87,6 +87,9 @@ async function deleteData(endpoint, id) {
     const url = buildUrl(endpoint, id);
     const options = {
         method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
     };
 
     return fetch(url, options)
