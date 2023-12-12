@@ -103,15 +103,48 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Función para mostrar los datos en un modal (puedes personalizar según tus necesidades)
     function mostrarDatosModal(data) {
-        // Implementa lógica para mostrar datos en un modal
-        console.log('Datos a editar:', data);
+        // Abre el modal
+        $('#editarModal').modal('show');
+    
+        // Limpia el contenido anterior del modal
+        var modalBody = document.getElementById('modalBody');
+        modalBody.innerHTML = '';
+    
+        // Agrega campos de formulario al modal para cada propiedad en los datos
+        for (var key in data) {
+            var input = document.createElement('input');
+            input.type = 'text';
+            input.id = 'edit' + key;
+            input.value = data[key];
+            input.className = 'form-control';
+            var label = document.createElement('label');
+            label.for = 'edit' + key;
+            label.textContent = key + ': ';
+    
+            modalBody.appendChild(label);
+            modalBody.appendChild(input);
+        }
     }
-
-    // Función para eliminar datos (puedes personalizar según tus necesidades)
-    function eliminarDato(data) {
-        // Implementa lógica para eliminar datos
-        console.log('Datos a eliminar:', data);
-    }
+    
+    document.getElementById('guardarCambiosBtn').addEventListener('click', function () {
+        // Recopila los cambios del formulario modal
+        var cambios = {};
+        document.querySelectorAll('[id^="edit"]').forEach(function (input) {
+            var key = input.id.replace('edit', '');
+            cambios[key] = input.value;
+        });
+    
+        // Aquí puedes enviar los cambios al servidor usando una función como fetchData
+        // reemplaza este bloque con tu lógica de envío de datos al servidor
+        fetchData('tu_endpoint_de_edicion', cambios)
+            .then(function (respuesta) {
+                // Lógica después de enviar los cambios (puedes cerrar el modal, actualizar la página, etc.)
+                console.log('Cambios guardados:', respuesta);
+                $('#editarModal').modal('hide');
+            })
+            .catch(function (error) {
+                console.error('Error al guardar cambios:', error);
+            });
+    });
 });
