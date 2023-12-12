@@ -41,32 +41,28 @@
 
     <!-- Main content -->
     <section class="content">
-
-      <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Title</h3>
-
-          <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-              <i class="fas fa-minus"></i>
-            </button>
-            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-              <i class="fas fa-times"></i>
-            </button>
-          </div>
+          <h3 class="card-title">Datos Globales</h3>
         </div>
         <div class="card-body">
-          Start creating your amazing application!
+          <!-- Tabla para mostrar datos -->
+          <table id="datosGlobalesTable" class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Columna1</th>
+                <th>Columna2</th>
+                <!-- ... Agrega más columnas según tu estructura de datos ... -->
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Datos se cargarán dinámicamente aquí -->
+            </tbody>
+          </table>
         </div>
-        <!-- /.card-body -->
-        <div class="card-footer">
-          Footer
-        </div>
-        <!-- /.card-footer-->
       </div>
-      <!-- /.card -->
-
     </section>
     <!-- /.content -->
   </div>
@@ -88,6 +84,6 @@
   <script src="/static/assets/js/demo.js"></script>
   <!-- My Scripts-->
   <script src="/static/assets/js/index/apiUtils.js"></script>
-  <script src="/static/assets/js/datos_globales/datos_globales.js"></script>
+  <script src="/static/assets/js/datos_globales/dropdowns.js"></script>
 
 {% endblock javascripts %}
