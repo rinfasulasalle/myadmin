@@ -127,3 +127,20 @@ async function obtenerTotalTrabajadores() {
         throw error;
     }
 }
+// Funcion para GET dropdowns
+async function fetchDropdowns(endpoint) {
+    try {
+        const response = await fetch(buildUrl(endpoint));
+
+        if (!response.ok) {
+            throw new Error(`Error al realizar la solicitud. Código de estado: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log(data); // JSON data
+        return data;
+    } catch (error) {
+        console.error('Error en la solicitud:', error.message);
+        throw error;
+    }
+}
