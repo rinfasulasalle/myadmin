@@ -97,20 +97,6 @@ async function deleteData(endpoint, id) {
         });
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Utils para despues
 // Funcion para calcular cuatos usuarios hay(tamaño)
 async function obtenerTotalUsuarios() {
