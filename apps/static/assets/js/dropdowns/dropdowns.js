@@ -25,7 +25,6 @@ document.addEventListener('DOMContentLoaded', function () {
         { value: 'dropdown_capacitaciones', label: 'Dropdown de Capacitaciones' },
         { value: 'dropdown_especializaciones', label: 'Dropdown de Especializaciones' },
         { value: 'dropdown_sedes', label: 'Dropdown de Sedes' },
-        // Agrega más opciones según sea necesario
     ];
 
     // Llena el dropdown con las opciones
@@ -35,24 +34,18 @@ document.addEventListener('DOMContentLoaded', function () {
         option.text = opcion.label;
         dropdown.add(option);
     });
-   // Evento click boton
-   // Evento click boton
+
     confirmarButton.addEventListener('click', async function () {
-        // Obtén el valor seleccionado del dropdown
         var selectedValue = dropdown.value;
 
         try {
-            // Utiliza fetchData para obtener datos del endpoint seleccionado
             var data = await fetchData(selectedValue);
 
-            // Muestra los datos en una tabla
-            resultCardBody.innerHTML = ""; // Limpia el contenido anterior
+            resultCardBody.innerHTML = "";
 
-            // Crea una tabla de Bootstrap
             var table = document.createElement('table');
             table.className = 'table table-bordered table-striped';
 
-            // Crea la cabecera de la tabla
             var thead = document.createElement('thead');
             var tr = document.createElement('tr');
 
@@ -62,10 +55,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 tr.appendChild(th);
             }
 
+            // Añade dos columnas adicionales para los botones de editar y eliminar
+            tr.innerHTML += '<th>Editar</th><th>Eliminar</th>';
+
             thead.appendChild(tr);
             table.appendChild(thead);
 
-            // Crea el cuerpo de la tabla
             var tbody = document.createElement('tbody');
 
             data.forEach(function (item) {
@@ -77,18 +72,46 @@ document.addEventListener('DOMContentLoaded', function () {
                     tr.appendChild(td);
                 }
 
+                // Añade botones de editar y eliminar con eventos onClick
+                tr.innerHTML += '<td><button class="btn btn-warning btn-sm editar-btn">Editar</button></td>' +
+                                '<td><button class="btn btn-danger btn-sm eliminar-btn">Eliminar</button></td>';
+
                 tbody.appendChild(tr);
             });
 
             table.appendChild(tbody);
 
-            // Agrega la tabla al contenedor
             resultCardBody.appendChild(table);
 
-            // Muestra la tarjeta
             resultCard.style.display = 'block';
+
+            // Añade eventos de clic a los botones de editar y eliminar
+            document.querySelectorAll('.editar-btn').forEach(function (button, index) {
+                button.addEventListener('click', function () {
+                    mostrarDatosModal(data[index]);
+                });
+            });
+
+            document.querySelectorAll('.eliminar-btn').forEach(function (button, index) {
+                button.addEventListener('click', function () {
+                    eliminarDato(data[index]);
+                });
+            });
+
         } catch (error) {
             console.error('Error al obtener datos:', error);
         }
     });
+
+    // Función para mostrar los datos en un modal (puedes personalizar según tus necesidades)
+    function mostrarDatosModal(data) {
+        // Implementa lógica para mostrar datos en un modal
+        console.log('Datos a editar:', data);
+    }
+
+    // Función para eliminar datos (puedes personalizar según tus necesidades)
+    function eliminarDato(data) {
+        // Implementa lógica para eliminar datos
+        console.log('Datos a eliminar:', data);
+    }
 });
