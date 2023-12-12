@@ -102,7 +102,8 @@ async function llenarTablaCompleta() {
             table.row.add([
                 datoUsuario.id,
                 datoUsuario.usuario_nombres,
-                datoUsuario.usuario_apellidos,
+                datoUsuario.usuario_apellido_paterno,
+                datoUsuario.usuario_apellido_materno,
                 datoUsuario.usuario_telefono,
                 datoTrabajador.trabajador_fecha_nacimiento,
                 datoTrabajador.trabajador_tipo_documento,

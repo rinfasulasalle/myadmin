@@ -7,7 +7,8 @@ class Usuario(db.Model, UserMixin):
     id = db.Column(db.String(20), primary_key=True, unique=True, nullable=False)
     id_usuario_rol_id = db.Column(db.Integer, db.ForeignKey('dropdownroles.id'), nullable=False)
     usuario_nombres = db.Column(db.String(100), nullable=False)
-    usuario_apellidos = db.Column(db.String(100), nullable=False)
+    usuario_apellido_paterno = db.Column(db.String(100), nullable=False)
+    usuario_apellido_materno = db.Column(db.String(100), nullable=False)
     usuario_correo = db.Column(db.String(100), unique=True, nullable=False)
     usuario_contrasenia = db.Column(db.String(100), nullable=False)
     usuario_telefono = db.Column(db.String(50), nullable=False)
@@ -19,7 +20,7 @@ class Usuario(db.Model, UserMixin):
             setattr(self, property, value)
 
     def __repr__(self):
-        return f"{self.usuario_nombres} {self.usuario_apellidos}"
+        return f"{self.usuario_nombres} {self.usuario_apellido_paterno}"
 
 @login_manager.user_loader
 def user_loader(id):
@@ -29,6 +30,6 @@ def user_loader(id):
 @login_manager.request_loader
 def request_loader(request):
     usuario_nombres = request.form.get('usuario_nombres')  # Obtiene el nombre de usuario de la solicitud.
-    usuario_apellidos = request.form.get('usuario_apellidos')
-    user = Usuario.query.filter_by(usuario_nombres = usuario_nombres, usuario_apellidos = usuario_apellidos).first()                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+    usuario_apellido_paterno = request.form.get('usuario_apellido_paterno')
+    user = Usuario.query.filter_by(usuario_nombres = usuario_nombres, usuario_apellido_paterno = usuario_apellido_paterno).first()                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
     return user if user else None  # Devuelve el usuario si se encuentra, o None si no se encuentra.
