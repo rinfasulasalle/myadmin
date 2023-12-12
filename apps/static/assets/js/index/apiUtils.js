@@ -3,9 +3,13 @@ const apiUrl = 'http://62.72.11.15:3000/api/';
 function buildUrl(endpoint, id = null) {
     let url = apiUrl + endpoint;
     if (id !== null) {
-        url += `/${id}`;
-    }
-    if (url.charAt(url.length - 1) !== "/") {
+        // Verificar si el id es un número antes de agregar el '/'
+        if (typeof id === 'number') {
+            url += `/${id}`;
+        } else {
+            url += `/${id}/`;
+        }
+    } else if (url.charAt(url.length - 1) !== "/") {
         url += "/";
     }
     return url;
