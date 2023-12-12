@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 // Añade botones de editar y eliminar con eventos onClick
                 tr.innerHTML += '<td><button class="btn btn-warning btn-sm editar-btn">Editar</button></td>' +
-                                '<td><button class="btn btn-danger btn-sm eliminar-btn">Eliminar</button></td>';
+                                '<td><button class="btn btn-danger btn-sm eliminar-btn" disabled>Eliminar</button></td>';
 
                 tbody.appendChild(tr);
             });
@@ -177,7 +177,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 $('#eliminarConfirmacionModal').modal('hide');
 
                 // Optionally, update the UI or perform any other actions after deletion
-                alert("Elemento eliminado con éxito");
+                alert("Error Elemento eliminado");
             } catch (error) {
                 console.error('Error al eliminar elemento:', error);
             }

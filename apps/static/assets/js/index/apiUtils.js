@@ -87,6 +87,8 @@ async function deleteData(endpoint, id) {
     const url = buildUrl(endpoint, id);
     const options = {
         method: 'DELETE',
+        mode: 'cors', // Agrega esta línea para especificar el modo CORS
+        redirect: 'follow',
         headers: {
             'Content-Type': 'application/json',
         },
