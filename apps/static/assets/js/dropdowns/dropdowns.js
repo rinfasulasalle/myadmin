@@ -1,10 +1,10 @@
 // dropdowns.js
 document.addEventListener('DOMContentLoaded', function () {
-    // Obtén la referencia al elemento del dropdown
     var dropdown = document.getElementById('dropdownOptions');
     var confirmarButton = document.getElementById('confirmarButton');
     var resultCard = document.getElementById('resultCard');
     var resultCardBody = document.getElementById('resultCardBody');
+    var tableContainer = document.getElementById('tableContainer');
 
     // Objeto con las opciones y etiquetas personalizadas
     var opciones = [
@@ -35,15 +35,60 @@ document.addEventListener('DOMContentLoaded', function () {
         option.text = opcion.label;
         dropdown.add(option);
     });
-    // Evento click boton
-    confirmarButton.addEventListener('click', function () {
-        // Obtén el valor seleccionado del dropdown
-        var selectedValue = dropdown.value;
+   // Evento click boton
+   // Evento click boton
+   confirmarButton.addEventListener('click', async function () {
+    // Obtén el valor seleccionado del dropdown
+    var selectedValue = dropdown.value;
 
-        // Muestra el resultado en la tarjeta
-        resultCardBody.textContent = "Seleccionaste: " + selectedValue;
+    try {
+        // Utiliza fetchData para obtener datos del endpoint seleccionado
+        var data = await fetchData(selectedValue);
+
+        // Muestra los datos en una tabla
+        resultCardBody.innerHTML = ""; // Limpia el contenido anterior
+
+        // Crea una tabla de Bootstrap
+        var table = document.createElement('table');
+        table.className = 'table table-bordered table-striped';
+
+        // Crea la cabecera de la tabla
+        var thead = document.createElement('thead');
+        var tr = document.createElement('tr');
+
+        for (var key in data[0]) {
+            var th = document.createElement('th');
+            th.textContent = key;
+            tr.appendChild(th);
+        }
+
+        thead.appendChild(tr);
+        table.appendChild(thead);
+
+        // Crea el cuerpo de la tabla
+        var tbody = document.createElement('tbody');
+
+        data.forEach(function (item) {
+            tr = document.createElement('tr');
+
+            for (var key in item) {
+                var td = document.createElement('td');
+                td.textContent = item[key];
+                tr.appendChild(td);
+            }
+
+            tbody.appendChild(tr);
+        });
+
+        table.appendChild(tbody);
+
+        // Agrega la tabla al contenedor
+        resultCardBody.appendChild(table);
 
         // Muestra la tarjeta
         resultCard.style.display = 'block';
-    });
+    } catch (error) {
+        console.error('Error al obtener datos:', error);
+    }
+});
 });
