@@ -2,9 +2,9 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Obtén la referencia al elemento del dropdown
     var dropdown = document.getElementById('dropdownOptions');
-    var selectedOptionCard = document.getElementById('selectedOptionCard');
-    var selectedOptionText = document.getElementById('selectedOptionText');
-
+    var confirmarButton = document.getElementById('confirmarButton');
+    var resultCard = document.getElementById('resultCard');
+    var resultCardBody = document.getElementById('resultCardBody');
 
     // Objeto con las opciones y etiquetas personalizadas
     var opciones = [
@@ -35,10 +35,15 @@ document.addEventListener('DOMContentLoaded', function () {
         option.text = opcion.label;
         dropdown.add(option);
     });
-    // Evento de cambio en el dropdown
-    dropdown.addEventListener('change', function () {
-        // Mostrar la card y actualizar el contenido
-        selectedOptionCard.style.display = 'block';
-        selectedOptionText.textContent = 'Opción Seleccionada: ' + dropdown.value;
+    // Evento click boton
+    confirmarButton.addEventListener('click', function () {
+        // Obtén el valor seleccionado del dropdown
+        var selectedValue = dropdown.value;
+
+        // Muestra el resultado en la tarjeta
+        resultCardBody.textContent = "Seleccionaste: " + selectedValue;
+
+        // Muestra la tarjeta
+        resultCard.style.display = 'block';
     });
 });
