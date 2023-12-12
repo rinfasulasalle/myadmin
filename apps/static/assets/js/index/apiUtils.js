@@ -33,7 +33,7 @@ async function fetchData(endpoint) {
 }
 
 // Funcion para POST con fetch de algun endpoint y un json body
-async function PostData(endpoint, data) {
+async function postData(endpoint, data) {
     const url = buildUrl(endpoint);
     const options = {
         method: 'POST',
