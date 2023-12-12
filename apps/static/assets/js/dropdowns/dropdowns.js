@@ -37,58 +37,58 @@ document.addEventListener('DOMContentLoaded', function () {
     });
    // Evento click boton
    // Evento click boton
-   confirmarButton.addEventListener('click', async function () {
-    // Obtén el valor seleccionado del dropdown
-    var selectedValue = dropdown.value;
+    confirmarButton.addEventListener('click', async function () {
+        // Obtén el valor seleccionado del dropdown
+        var selectedValue = dropdown.value;
 
-    try {
-        // Utiliza fetchData para obtener datos del endpoint seleccionado
-        var data = await fetchData(selectedValue);
+        try {
+            // Utiliza fetchData para obtener datos del endpoint seleccionado
+            var data = await fetchData(selectedValue);
 
-        // Muestra los datos en una tabla
-        resultCardBody.innerHTML = ""; // Limpia el contenido anterior
+            // Muestra los datos en una tabla
+            resultCardBody.innerHTML = ""; // Limpia el contenido anterior
 
-        // Crea una tabla de Bootstrap
-        var table = document.createElement('table');
-        table.className = 'table table-bordered table-striped';
+            // Crea una tabla de Bootstrap
+            var table = document.createElement('table');
+            table.className = 'table table-bordered table-striped';
 
-        // Crea la cabecera de la tabla
-        var thead = document.createElement('thead');
-        var tr = document.createElement('tr');
+            // Crea la cabecera de la tabla
+            var thead = document.createElement('thead');
+            var tr = document.createElement('tr');
 
-        for (var key in data[0]) {
-            var th = document.createElement('th');
-            th.textContent = key;
-            tr.appendChild(th);
-        }
-
-        thead.appendChild(tr);
-        table.appendChild(thead);
-
-        // Crea el cuerpo de la tabla
-        var tbody = document.createElement('tbody');
-
-        data.forEach(function (item) {
-            tr = document.createElement('tr');
-
-            for (var key in item) {
-                var td = document.createElement('td');
-                td.textContent = item[key];
-                tr.appendChild(td);
+            for (var key in data[0]) {
+                var th = document.createElement('th');
+                th.textContent = key;
+                tr.appendChild(th);
             }
 
-            tbody.appendChild(tr);
-        });
+            thead.appendChild(tr);
+            table.appendChild(thead);
 
-        table.appendChild(tbody);
+            // Crea el cuerpo de la tabla
+            var tbody = document.createElement('tbody');
 
-        // Agrega la tabla al contenedor
-        resultCardBody.appendChild(table);
+            data.forEach(function (item) {
+                tr = document.createElement('tr');
 
-        // Muestra la tarjeta
-        resultCard.style.display = 'block';
-    } catch (error) {
-        console.error('Error al obtener datos:', error);
-    }
-});
+                for (var key in item) {
+                    var td = document.createElement('td');
+                    td.textContent = item[key];
+                    tr.appendChild(td);
+                }
+
+                tbody.appendChild(tr);
+            });
+
+            table.appendChild(tbody);
+
+            // Agrega la tabla al contenedor
+            resultCardBody.appendChild(table);
+
+            // Muestra la tarjeta
+            resultCard.style.display = 'block';
+        } catch (error) {
+            console.error('Error al obtener datos:', error);
+        }
+    });
 });
