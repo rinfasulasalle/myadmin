@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
     
-    document.getElementById('guardarCambiosBtn').addEventListener('click', function () {
+    document.getElementById('guardarCambiosBtn').addEventListener('click', async function () {
         // Recopila los cambios del formulario modal
         var cambios = {};
         document.querySelectorAll('[id^="edit"]').forEach(function (input) {
@@ -135,16 +135,18 @@ document.addEventListener('DOMContentLoaded', function () {
             cambios[key] = input.value;
         });
     
-        // Aquí puedes enviar los cambios al servidor usando una función como fetchData
-        // reemplaza este bloque con tu lógica de envío de datos al servidor
-        fetchData('tu_endpoint_de_edicion', cambios)
-            .then(function (respuesta) {
-                // Lógica después de enviar los cambios (puedes cerrar el modal, actualizar la página, etc.)
-                console.log('Cambios guardados:', respuesta);
-                $('#editarModal').modal('hide');
-            })
-            .catch(function (error) {
-                console.error('Error al guardar cambios:', error);
-            });
+        // Obtiene el valor seleccionado del dropdown
+        var selectedValue = document.getElementById('dropdownOptions').value;
+        var id = cambios.id
+        try {
+            // Envía los cambios al servidor usando la función fetchData
+            var respuesta = await putData(selectedValue, id, cambios);
+    
+            // Lógica después de enviar los cambios (puedes cerrar el modal, actualizar la página, etc.)
+            console.log('Cambios guardados:', respuesta);
+            $('#editarModal').modal('hide');
+        } catch (error) {
+            console.error('Error al guardar cambios:', error);
+        }
     });
 });
