@@ -118,10 +118,16 @@ document.addEventListener('DOMContentLoaded', function () {
             input.id = 'edit' + key;
             input.value = data[key];
             input.className = 'form-control';
+        
+            // Agregar el atributo disabled solo al campo de entrada con el id correspondiente
+            if (key === 'id') {
+                input.disabled = true;
+            }
+        
             var label = document.createElement('label');
             label.for = 'edit' + key;
             label.textContent = key + ': ';
-    
+        
             modalBody.appendChild(label);
             modalBody.appendChild(input);
         }
