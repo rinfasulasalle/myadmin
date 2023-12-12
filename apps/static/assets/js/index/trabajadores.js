@@ -104,7 +104,6 @@ async function llenarTablaCompleta() {
                 datoUsuario.usuario_nombres,
                 datoUsuario.usuario_apellidos,
                 datoUsuario.usuario_telefono,
-                datoTrabajador.id, 
                 datoTrabajador.trabajador_fecha_nacimiento,
                 datoTrabajador.trabajador_tipo_documento,
                 datoTrabajador.trabajador_nacionalidad,
