@@ -63,10 +63,12 @@ function createRow(user, rolesData) {
     row.innerHTML = `
         <td>${user.id}</td>
         <td>${user.usuario_nombres}</td>
-        <td>${user.usuario_apellidos}</td>
+        <td>${user.usuario_apellido_paterno}</td>
+        <td>${user.usuario_apellido_materno}</td>
         <td>${getRoleName(user.id_usuario_rol, rolesData)}</td>
         <td>${user.usuario_correo}</td>
         <td>${user.usuario_telefono}</td>
+        <td>${user.estado}</td>
         <td>
             <button class="btn btn-sm btn-info edit-btn" data-user-id="${user.id}">Editar</button>
             <button class="btn btn-sm btn-danger" onclick="deleteUser(${user.id})">Eliminar</button>
@@ -79,6 +81,7 @@ function appendRowToTable(user, rolesData) {
     const tableBody = document.querySelector("#example1 tbody");
     const newRow = createRow(user, rolesData);
     tableBody.appendChild(newRow);
+    fetchData(userData);
 }
 
 
