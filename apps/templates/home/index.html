@@ -145,6 +145,42 @@
             <!-- Agrega aquí otro bloque de la segunda fila si es necesario -->
           </div>
           
+          <div class="card card-warning card-outline">
+            <div class="card-header">
+              <h1 class="card-title">Lista de Registros Incompletos</h1>
+            </div>
+            <div class="card-body">
+              <!-- Lista de usuarios no registrados en trabajadores -->
+              <label>Usuarios no registrados en trabajadores:</label>
+              <ul id="usuarios-no-registrados-en-trabajadores">
+                <!-- Los elementos se agregarán dinámicamente con JavaScript -->
+              </ul>
+  
+              <!-- Formulario para seleccionar la tabla a examinar -->
+              <form id="seleccionar-tabla-form" class="mt-3">
+                <div class="form-group">
+                  <label for="tabla-a-examinar">¿Qué tabla desea examinar?</label>
+                  <select id="tabla-a-examinar" name="tabla-a-examinar" class="form-control">
+                    <option value="contrato">Contrato</option>
+                    <option value="cuenta_bancaria">Cuenta Bancaria</option>
+                    <option value="direccion">Dirección</option>
+                    <option value="estudio">Estudio</option>
+                    <option value="sueldo">Sueldo</option>
+                  </select>
+                </div>
+                <button type="button" class="btn btn-success" onclick="examinarTabla()">Examinar</button>
+              </form>
+              <br />
+              <p>Los trabajadores no asociados a la tabla seleccionada son:</p>
+              <!-- Resultados de la tabla seleccionada -->
+              <div id="resultados-tabla-seleccionada">
+                <!-- Los resultados se agregarán dinámicamente con JavaScript -->
+              </div>
+              <br />
+              <p>Si desea crear/actualizar alguna tabla de sus registros incompletos, por favor ingrese a <a href="/forms-trabajador.html">Formularios</a>.</p>
+
+            </div>
+          </div>
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
