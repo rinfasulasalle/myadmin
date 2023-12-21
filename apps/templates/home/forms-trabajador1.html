@@ -230,6 +230,175 @@
           </div>
         </div>
       </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Form Contratos</h3>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <!-- Form for the first column -->
+              <form id="contratoForm">
+                <!-- Trabajador -->
+                <div class="form-group">
+                    <label for="trabajador">Usuario Relacionado(Nmro DNI):</label>
+                    <input type="number" class="form-control" id="group" name="group" required>
+                </div>
+                <!-- Tipo de Contrato y Contrato Opción mima fila-->
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="id_contrato_tipo">Tipo de Contrato:</label>
+                    <select class="form-control" id="id_contrato_tipo" name="id_contrato_tipo" required>
+                        <!-- Debes cargar dinámicamente las opciones desde tu backend (DropdownTipoContrato) -->
+                    </select>
+                  </div>
+            
+                  <!-- Contrato Opción -->
+                  <div class="form-group col-md-6">
+                      <label for="id_contrato_opcion">Contrato Opción:</label>
+                      <select class="form-control" id="id_contrato_opcion" name="id_contrato_opcion" required>
+                          <!-- Debes cargar dinámicamente las opciones desde tu backend (DropdownContratoOpcion) -->
+                      </select>
+                  </div>
+                </div>
+                <!--  Empleo Tipo, Situacion y Area en misma fila-->
+                <div class="form-row">
+                  <div class="form-group col-md-4">
+                    <label for="id_empleo_tipo">Empleo Tipo:</label>
+                    <select class="form-control" id="id_empleo_tipo" name="id_empleo_tipo" required>
+                        <!-- Debes cargar dinámicamente las opciones desde tu backend (DropdownEmpleoTipo) -->
+                    </select>
+                  </div>
+            
+                  <div class="form-group col-md-4">
+                    <label for="id_empleo_situacion">Empleo Situación:</label>
+                    <select class="form-control" id="id_empleo_situacion" name="id_empleo_situacion" required>
+                        <!-- Debes cargar dinámicamente las opciones desde tu backend (DropdownEmpleoTipo) -->
+                    </select>
+                  </div>
+
+                  <div class="form-group col-md-4">
+                    <label for="id_empleo_area">Empleo Área:</label>
+                    <select class="form-control" id="id_empleo_area" name="id_empleo_area" required>
+                        <!-- Debes cargar dinámicamente las opciones desde tu backend (DropdownEmpleoTipo) -->
+                    </select>
+                  </div>
+
+                </div>
+                <!-- Oriyecto y rold epopryecto misma linea-->
+                <div class="form-row">
+                  <!-- Empleo Proyecto -->
+                  <div class="form-group col-md-6">
+                    <label for="id_empleo_proyecto">Empleo Proyecto:</label>
+                    <select class="form-control" id="id_empleo_proyecto" name="id_empleo_proyecto" required>
+                        <!-- Debes cargar dinámicamente las opciones desde tu backend (DropdownEmpleoTipo) -->
+                    </select>
+                  </div>
+                  <!-- Empleo Rol Proyecto -->
+                  <div class="form-group col-md-6">
+                    <label for="id_empleo_proyecto_rol">Empleo Rol de Proyecto:</label>
+                    <select class="form-control" id="id_empleo_proyecto_rol" name="id_empleo_proyecto_rol" required>
+                        <!-- Debes cargar dinámicamente las opciones desde tu backend (DropdownEmpleoTipo) -->
+                    </select>
+                  </div>
+                </div>
+                <!-- Departamento  y cargo en misma linea-->
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="empleo_departamento">Departamento:</label>
+                    <input type="text" class="form-control" id="empleo_departamento" name="empleo_departamento" required>
+                  </div>
+
+                  <div class="form-group col-md-6">
+                    <label for="empleo_cargo">Cargo:</label>
+                    <input type="text" class="form-control" id="empleo_cargo" name="empleo_cargo" required>
+                  </div>
+                </div>
+                
+            
+                <!-- Botón de Envío -->
+                <button type="button" class="btn btn-primary" onclick="submitContratoForm()">Enviar Datos</button>
+              </form>
+            
+              <!-- End of form -->
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Form Cuentas Bancarias</h3>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <form id="cuentaBancariaForm">
+                <!-- Trabajador -->
+                <div class="form-group">
+                  <label for="trabajador">Usuario Relacionado(Nmro DNI):</label>
+                  <input type="number" class="form-control" id="group" name="group" required>
+                </div>
+                <!-- Cuenta Bancaria Sueldo CCI y Cuenta Bancaria Sueldo Código -->
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="cuenta_bancaria_sueldo_codigo_cci">Cuenta Bancaria Sueldo CCI:</label>
+                    <input type="text" class="form-control" id="cuenta_bancaria_sueldo_codigo_cci" name="cuenta_bancaria_sueldo_codigo_cci" required>
+                  </div>
+
+
+                  <div class="form-group col-md-6">
+                    <label for="cuenta_bancaria_sueldo_codigo">Cuenta Bancaria Sueldo Código:</label>
+                    <input type="text" class="form-control" id="cuenta_bancaria_sueldo_codigo" name="cuenta_bancaria_sueldo_codigo" required>
+                  </div>
+                </div>
+                <!-- Cuenta Bancaria Sueldo Banco -->
+                <div class="form-group">
+                    <label for="cuenta_bancaria_sueldo_banco">Cuenta Bancaria Sueldo Banco:</label>
+                    <input type="text" class="form-control" id="cuenta_bancaria_sueldo_banco" name="cuenta_bancaria_sueldo_banco" required>
+                </div>
+                <div class="form-row">
+                  <!-- Cuenta Bancaria CTS CCI -->
+                  <div class="form-group col-md-6">
+                    <label for="cuenta_bancaria_cts_codigo_cci">Cuenta Bancaria CTS CCI:</label>
+                    <input type="text" class="form-control" id="cuenta_bancaria_cts_codigo_cci" name="cuenta_bancaria_cts_codigo_cci" required>
+                  </div>
+              
+                  <!-- Cuenta Bancaria CTS Código -->
+                  <div class="form-group col-md-6">
+                      <label for="cuenta_bancaria_cts_codigo">Cuenta Bancaria CTS Código:</label>
+                      <input type="text" class="form-control" id="cuenta_bancaria_cts_codigo" name="cuenta_bancaria_cts_codigo" required>
+                  </div>
+                </div>           
+
+            
+                <!-- Cuenta Bancaria CTS Banco -->
+                <div class="form-group">
+                    <label for="cuenta_bancaria_cts_banco">Cuenta Bancaria CTS Banco:</label>
+                    <input type="text" class="form-control" id="cuenta_bancaria_cts_banco" name="cuenta_bancaria_cts_banco" required>
+                </div>
+            
+                <!-- Botón de Envío -->
+                <button type="button" class="btn btn-primary" onclick="submitCuentaBancariaForm()">Enviar Datos</button>
+            </form>
+            
+            </div>
+          </div>
+        </div>
+      </div>
 
       
 
