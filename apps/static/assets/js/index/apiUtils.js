@@ -47,17 +47,20 @@ async function postData(endpoint, data) {
         body: JSON.stringify(data)
     };
 
-    return fetch(url, options)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Error al enviar datos a ${endpoint}`);
-            }
-            return response;
-        })
-        .catch(error => {
-            console.error(error.message);
-        });
+    try {
+        const response = await fetch(url, options);
+
+        if (!response.ok) {
+            throw new Error(`Error al enviar datos a ${endpoint}`);
+        }
+
+        return response;
+    } catch (error) {
+        console.error(error.message);
+        throw error; // Permite que el código que llama a postData maneje la excepción si es necesario.
+    }
 }
+
 
 // Función para PUT con fetch de algún endpoint y un json body
 async function putData(endpoint, id, data) {
