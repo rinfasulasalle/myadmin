@@ -29,13 +29,31 @@ async function fetchData(endpoint) {
         }
 
         const data = await response.json();
+
+        // Filtrar los datos solo cuando el endpoint sea 'usuario' y el estado sea 'Activo'
+        if (endpoint === 'usuario') {
+            const filteredData = data.filter(item => item.estado === 'Activo');
+            return filteredData;
+        }
+
+        // Devolver los datos sin filtro para otros endpoints
         return data;
     } catch (error) {
         console.error(error.message);
         throw error;
     }
 }
-
+// Nueva función para cargar y mostrar usuarios cesados
+async function fetchUsuariosCesados() {
+    try {
+        const usuarios = await fetchData('usuario');
+        const usuariosCesados = usuarios.filter(usuario => usuario.estado === 'Cesado');
+        return usuariosCesados;
+    } catch (error) {
+        console.error('Error al cargar usuarios cesados:', error);
+        throw error;
+    }
+}
 // Funcion para POST con fetch de algun endpoint y un json body
 async function postData(endpoint, data) {
     const url = buildUrl(endpoint);

@@ -1,0 +1,180 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Formulario Trabajadores {% endblock %} 
+
+<!-- Element injected in the BODY element -->
+{% block body_class %} sidebar-mini pace-primary {% endblock body_class %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="/static/assets/plugins/fontawesome-free/css/all.min.css">
+  <!-- pace-progress -->
+  <link rel="stylesheet" href="/static/assets/plugins/pace-progress/themes/black/pace-theme-flat-top.css">
+  <!-- adminlte-->
+  <link rel="stylesheet" href="/static/assets/css/adminlte.min.css">
+
+{% endblock stylesheets %}
+
+{% block content %}  
+
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Formularios para Registro de trabajadores</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Start</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+      <!-- Two columns form layout -->
+      <div class="row">
+        <!-- First Column -->
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Form Usuarios</h3>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <!-- Form for the first column -->
+              <form id="userForm" action="/submit_user_form" method="post">
+                <!-- ID input -->
+                <div class="form-group">
+                  <label for="id">ID:</label>
+                  <input type="text" class="form-control" id="id" name="id" required>
+                </div>
+
+                <!-- Usuario Nombres input -->
+                <div class="form-group">
+                  <label for="usuario_nombres">Nombres:</label>
+                  <input type="text" class="form-control" id="usuario_nombres" name="usuario_nombres" required>
+                </div>
+
+                <!-- Usuario Apellido Paterno input -->
+                <div class="form-group">
+                  <label for="usuario_apellido_paterno">Apellido Paterno:</label>
+                  <input type="text" class="form-control" id="usuario_apellido_paterno" name="usuario_apellido_paterno" required>
+                </div>
+
+                <!-- Usuario Apellido Materno input -->
+                <div class="form-group">
+                  <label for="usuario_apellido_materno">Apellido Materno:</label>
+                  <input type="text" class="form-control" id="usuario_apellido_materno" name="usuario_apellido_materno" required>
+                </div>
+
+                <!-- Usuario Correo input -->
+                <div class="form-group">
+                  <label for="usuario_correo">Correo:</label>
+                  <input type="email" class="form-control" id="usuario_correo" name="usuario_correo" required>
+                </div>
+
+                <!-- Usuario Contraseña input -->
+                <div class="form-group">
+                  <label for="usuario_contrasenia">Contraseña:</label>
+                  <input type="password" class="form-control" id="usuario_contrasenia" name="usuario_contrasenia" required>
+                </div>
+
+                <!-- Usuario Teléfono input -->
+                <div class="form-group">
+                  <label for="usuario_telefono">Teléfono:</label>
+                  <input type="tel" class="form-control" id="usuario_telefono" name="usuario_telefono" required>
+                </div>
+
+                <!-- Estado input (assuming it's a select field) -->
+                <div class="form-group">
+                  <label for="estado">Estado:</label>
+                  <select class="form-control" id="estado" name="estado">
+                    <!-- Add options as needed -->
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                  </select>
+                </div>
+
+                <!-- ID Usuario Rol input (assuming it's a select field) -->
+                <div class="form-group">
+                  <label for="id_usuario_rol">ID Usuario Rol:</label>
+                  <select class="form-control" id="id_usuario_rol" name="id_usuario_rol"></select>
+                </div>
+
+                <!-- Submit button -->
+                <button type="button" class="btn btn-primary" onclick="submitForm()">Enviar Datos</button>
+              </form>
+              <!-- End of form -->
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Second Column -->
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Form Column 2</h3>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <!-- Your form for the second column goes here -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+
+    </section>
+    <!-- /.content -->
+  </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+  <!-- jQuery -->
+  <script src="/static/assets/plugins/jquery/jquery.min.js"></script>
+  <!-- Bootstrap 4 -->
+  <script src="/static/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- pace-progress -->
+  <script src="/static/assets/plugins/pace-progress/pace.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="/static/assets/js/adminlte.min.js"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="/static/assets/js/demo.js"></script>
+  <!-- Mi script apiUtils.js -->
+  <script src="/static/assets/js/index/apiUtils.js"></script>
+  <script src="/static/assets/js/forms/trabajadores.js"></script>
+  <script src="/static/assets/js/forms/formHandler.js"></script>
+  
+  <!--<script src="/static/assets/js/forms/incompletos/conteos.js"></script>-->
+
+{% endblock javascripts %}
