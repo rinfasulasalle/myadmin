@@ -13,7 +13,7 @@ function buildUrl(endpoint, id = null) {
         url += "/";
     }
     return url;
-}
+}  
 // Funcion para GET con fetch de algun endpoint
 async function fetchData(endpoint) {
     try {
