@@ -71,19 +71,20 @@
                 <option value="opcion2">Opción 2</option>
                 <option value="opcion3">Opción 3</option>
             </select>
-
+        
             <input type="radio" id="html" name="fav_language" value="HTML">
             <label for="html">HTML</label><br>
           </form>
+          
+          <form id="formulario2">
+              <label for="nombre2">Nombre:</label>
+              <input type="text" id="nombre2" name="nombre2" required>
+          
+              <label for="apellido2">Apellido:</label>
+              <input type="text" id="apellido2" name="apellido2" required>
+          </form>
+          
     
-        <form id="formulario2">
-            <label for="nombre2">Nombre:</label>
-            <input type="text" id="nombre2" name="nombre2" required>
-    
-            <label for="apellido2">Apellido:</label>
-            <input type="text" id="apellido2" name="apellido2" required>
-    
-        </form>
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
@@ -113,29 +114,6 @@
   <script src="/static/assets/js/adminlte.min.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="/static/assets/js/demo.js"></script>
-  <script>
-    function obtenerDatos(formularioId) {
-        var datos = {};
-        var inputs = document.querySelectorAll('#' + formularioId + ' input');
-        
-        inputs.forEach(function(input) {
-            datos[input.name] = input.value;
-        });
-
-        var selects = document.querySelectorAll('#' + formularioId + ' select');
-        
-        selects.forEach(function(select) {
-            datos[select.name] = select.value;
-        });
-
-        return datos;
-    }
-
-    function guardarDatos(formularioId) {
-        var datos = obtenerDatos(formularioId);
-        console.log('Datos del formulario ' + formularioId + ':', datos);
-    }
-</script>
 
 
 {% endblock javascripts %}

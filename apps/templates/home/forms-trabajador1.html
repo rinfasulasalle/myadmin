@@ -60,30 +60,27 @@
             </div>
             <div class="card-body">
               <!-- Form for the first column -->
-              <form id="userForm" action="/submit_user_form" method="post">
-                <!-- ID input -->
+              <form id="usuarioForm">
+                <!-- DNI input -->
                 <div class="form-group">
-                  <label for="id">ID:</label>
+                  <label for="id">DNI:</label>
                   <input type="text" class="form-control" id="id" name="id" required>
                 </div>
-
-                <!-- Usuario Nombres input -->
-                <div class="form-group">
-                  <label for="usuario_nombres">Nombres:</label>
-                  <input type="text" class="form-control" id="usuario_nombres" name="usuario_nombres" required>
-                </div>
-
-                <!-- Usuario Apellido Paterno input -->
-                <div class="form-group">
-                  <label for="usuario_apellido_paterno">Apellido Paterno:</label>
-                  <input type="text" class="form-control" id="usuario_apellido_paterno" name="usuario_apellido_paterno" required>
-                </div>
-
-                <!-- Usuario Apellido Materno input -->
-                <div class="form-group">
-                  <label for="usuario_apellido_materno">Apellido Materno:</label>
-                  <input type="text" class="form-control" id="usuario_apellido_materno" name="usuario_apellido_materno" required>
-                </div>
+                <!-- Usuario Nombres, Apell Paterno, Apello materno misma fila -->
+                <div class="form-row">
+                  <div class="form-group col-md-4">
+                    <label for="usuario_nombres">Nombres:</label>
+                    <input type="text" class="form-control" id="usuario_nombres" name="usuario_nombres" required>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="usuario_apellido_paterno">Apellido Paterno:</label>
+                    <input type="text" class="form-control" id="usuario_apellido_paterno" name="usuario_apellido_paterno" required>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="usuario_apellido_materno">Apellido Materno:</label>
+                    <input type="text" class="form-control" id="usuario_apellido_materno" name="usuario_apellido_materno" required>
+                  </div>
+                </div>          
 
                 <!-- Usuario Correo input -->
                 <div class="form-group">
@@ -94,7 +91,7 @@
                 <!-- Usuario Contraseña input -->
                 <div class="form-group">
                   <label for="usuario_contrasenia">Contraseña:</label>
-                  <input type="password" class="form-control" id="usuario_contrasenia" name="usuario_contrasenia" required>
+                  <input type="password" class="form-control" id="usuario_contrasenia" name="usuario_contrasenia" placeholder="Por defecto es el DNI" disabled>
                 </div>
 
                 <!-- Usuario Teléfono input -->
@@ -106,9 +103,9 @@
                 <!-- Estado input (assuming it's a select field) -->
                 <div class="form-group">
                   <label for="estado">Estado:</label>
-                  <select class="form-control" id="estado" name="estado">
+                  <select class="form-control" id="estado" name="estado" disabled>
                     <!-- Add options as needed -->
-                    <option value="Activo">Activo</option>
+                    <option value="Activo" selected>Activo</option>
                     <option value="Cesado">Cesado</option>
                   </select>
                 </div>
@@ -122,17 +119,17 @@
                 <!-- Submit button -->
                 <button type="button" class="btn btn-primary" onclick="submitForm()">Enviar Datos</button>
               </form>
+
+              
               <!-- End of form -->
             </div>
           </div>
         </div>
-
-
         <!-- Second Column -->
         <div class="col-md-6">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Form Column 2</h3>
+              <h3 class="card-title">Form Trabajadores</h3>
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                   <i class="fas fa-minus"></i>
@@ -144,6 +141,91 @@
             </div>
             <div class="card-body">
               <!-- Your form for the second column goes here -->
+              <form id="trabajadorForm">
+                <!-- Usuario Relacionado -->
+                <div class="form-group">
+                  <label for="usuario_relacionado">Usuario Relacionado(Nmro DNI):</label>
+                  <input type="number" class="form-control" id="usuario_relacionado" name="usuario_relacionado" required>
+                </div>
+                <!-- Tipo de Documento y Archivo de Identidad en la misma fila -->
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                      <label for="trabajador_tipo_documento">Tipo de Documento:</label>
+                      <select class="form-control" id="trabajador_tipo_documento" name="trabajador_tipo_documento" required>
+                          <option value="DNI">DNI</option>
+                          <option value="Carnet de Extranjería">Carnet de Extranjería</option>
+                          <!-- Agrega más opciones según sea necesario -->
+                      </select>
+                  </div>
+
+                  <div class="form-group col-md-6">
+                      <label for="trabajador_path_documento">Archivo de Identidad:</label>
+                      <input type="file" class="form-control" id="trabajador_path_documento" name="trabajador_path_documento">
+                  </div>
+                </div>
+            
+                <!-- Fecha de Nacimiento -->
+                <div class="form-group">
+                    <label for="trabajador_fecha_nacimiento">Fecha de Nacimiento:</label>
+                    <input type="date" class="form-control" id="trabajador_fecha_nacimiento" name="trabajador_fecha_nacimiento" required>
+                </div>
+                <!-- Nacionalidad, Sexo y Ubigeo en la misma fila -->
+                <div class="form-row">
+                  <div class="form-group col-md-4">
+                    <label for="trabajador_ubigeo">Ubigeo:</label>
+                    <input type="text" class="form-control" id="trabajador_ubigeo" name="trabajador_ubigeo" required>
+                  </div>
+                  <div class="form-group col-md-4">
+                      <label for="trabajador_nacionalidad">Nacionalidad:</label>
+                      <input type="text" class="form-control" id="trabajador_nacionalidad" name="trabajador_nacionalidad" required>
+                  </div>
+
+                  <div class="form-group col-md-4">
+                      <label for="trabajador_sexo">Sexo:</label>
+                      <select class="form-control" id="trabajador_sexo" name="trabajador_sexo" required>
+                          <option value="Masculino">Masculino</option>
+                          <option value="Femenino">Femenino</option>
+                          <option value="No Especificado">No Especificado</option>
+                      </select>
+                  </div>
+                </div>
+            
+                <!-- Estado Civil y Archivo de Estado Civil en la misma fila -->
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                      <label for="trabajador_estado_civil">Estado Civil:</label>
+                      <select class="form-control" id="trabajador_estado_civil" name="trabajador_estado_civil" required>
+                          <option value="Soltero">Soltero</option>
+                          <option value="Casado">Casado</option>
+                          <option value="Viudo">Viudo</option>
+                          <option value="Divorciado">Divorciado</option>
+                          <option value="Conviviente">Conviviente</option>
+                          <option value="No Especificado">No Especificado</option>
+                      </select>
+                  </div>
+
+                  <div class="form-group col-md-6">
+                      <label for="trabajador_path_doc_estado_civil">Archivo de Estado Civil:</label>
+                      <input type="file" class="form-control" id="trabajador_path_doc_estado_civil" name="trabajador_path_doc_estado_civil">
+                  </div>
+                </div>  
+                <!-- Fecha de Ingreso al Sistema -->
+                <div class="form-group">
+                    <label for="trabajador_fecha_ingreso_sistema">Fecha de Ingreso al Sistema:</label>
+                    <input type="date" class="form-control" id="trabajador_fecha_ingreso_sistema" name="trabajador_fecha_ingreso_sistema" required>
+                </div>
+            
+                <!-- Fecha de Ingreso -->
+                <div class="form-group">
+                    <label for="trabajador_fecha_ingreso">Fecha de Ingreso:</label>
+                    <input type="date" class="form-control" id="trabajador_fecha_ingreso" name="trabajador_fecha_ingreso" required>
+                </div>
+            
+                <!-- Botón de Envío -->
+                <button type="button" class="btn btn-primary" onclick="submitTrabajadorForm()">Enviar Datos</button>
+              </form>
+            
+            
             </div>
           </div>
         </div>
