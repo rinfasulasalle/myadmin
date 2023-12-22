@@ -158,11 +158,12 @@
                           <!-- Agrega más opciones según sea necesario -->
                       </select>
                   </div>
-
+                  <!--
                   <div class="form-group col-md-6">
                       <label for="trabajador_path_documento">Archivo de Identidad:</label>
                       <input type="file" class="form-control" id="trabajador_path_documento" name="trabajador_path_documento">
                   </div>
+                  -->
                 </div>
             
                 <!-- Fecha de Nacimiento -->
@@ -204,11 +205,12 @@
                           <option value="No Especificado">No Especificado</option>
                       </select>
                   </div>
-
+                  <!--
                   <div class="form-group col-md-6">
                       <label for="trabajador_path_doc_estado_civil">Archivo de Estado Civil:</label>
                       <input type="file" class="form-control" id="trabajador_path_doc_estado_civil" name="trabajador_path_doc_estado_civil">
                   </div>
+                  -->
                 </div>  
                 <!-- Fecha de Ingreso al Sistema -->
                 <div class="form-group">
@@ -220,6 +222,12 @@
                 <div class="form-group">
                     <label for="trabajador_fecha_ingreso">Fecha de Ingreso:</label>
                     <input type="date" class="form-control" id="trabajador_fecha_ingreso" name="trabajador_fecha_ingreso" required>
+                </div>
+
+                <!-- Experiencia Previa -->
+                <div class="form-group">
+                  <label for="trabajador_exp_previa">Experiencia Previa(Decimal):</label>
+                  <input type="number" class="form-control" id="trabajador_exp_previa" name="trabajador_exp_previa" required>
                 </div>
             
                 <!-- Botón de Envío -->
@@ -709,8 +717,8 @@
   <script src="/static/assets/js/index/apiUtils.js"></script>
   <script src="/static/assets/js/forms/trabajadores.js"></script>
   <script src="/static/assets/js/forms/form01.js"></script>
-  <!--
-  <script src="/static/assets/js/forms/form02.js"></script>
+  
+  <script src="/static/assets/js/forms/form02.js"></script><!--
   <script src="/static/assets/js/forms/form03.js"></script>
   <script src="/static/assets/js/forms/form04.js"></script>
   <script src="/static/assets/js/forms/form05.js"></script>
