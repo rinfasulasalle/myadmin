@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="/static/assets/plugins/pace-progress/themes/black/pace-theme-flat-top.css">
   <!-- adminlte-->
   <link rel="stylesheet" href="/static/assets/css/adminlte.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 {% endblock stylesheets %}
 
@@ -399,7 +400,131 @@
           </div>
         </div>
       </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Form Direcciones</h3>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <!-- Your form for the second column goes here -->
+              <form id="direccionForm">
+                <!-- Trabajador -->
+                <div class="form-group">
+                  <label for="trabajador">Usuario Relacionado(Nmro DNI):</label>
+                  <input type="number" class="form-control" id="group" name="group" required>
+                </div>
+            
+                <!-- Dirección País --><!-- Dirección Departamento --><!-- Dirección Provincia --><!-- Dirección Distrito -->
+                <div class="form-row">
+                  <div class="form-group col-md-3">
+                    <label for="direccion_pais">País:</label>
+                    <input type="text" class="form-control" id="direccion_pais" name="direccion_pais" required>
+                  </div>
+                  
+                  <div class="form-group col-md-3">
+                      <label for="direccion_departamento">Departamento:</label>
+                      <input type="text" class="form-control" id="direccion_departamento" name="direccion_departamento" required>
+                  </div>
+                  
+                  <div class="form-group col-md-3">
+                      <label for="direccion_provincia">Provincia:</label>
+                      <input type="text" class="form-control" id="direccion_provincia" name="direccion_provincia" required>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="direccion_distrito">Distrito:</label>
+                    <input type="text" class="form-control" id="direccion_distrito" name="direccion_distrito" required>
+                  </div>
+                </div>
+                
+            
+                <!-- Dirección Detalle -->
+                <div class="form-group">
+                    <label for="direccion_detalle">Detalle de la Dirección:</label>
+                    <input type="text" class="form-control" id="direccion_detalle" name="direccion_detalle" required>
+                </div>
+            
+                <!-- Botón de Envío -->
+                <button type="button" class="btn btn-primary" onclick="submitDireccionForm()">Enviar Datos</button>
+            </form>
+            
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Form Sueldos</h3>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <form id="sueldoForm">
+                <!-- Trabajador -->
+                <div class="form-group">
+                  <label for="trabajador">Usuario Relacionado (Número DNI):</label>
+                  <input type="number" class="form-control" id="trabajador" name="trabajador" required>
+                </div>
+              
+                <!-- Sueldo Valor Básico -->
+                <div class="form-group">
+                  <label for="sueldo_valor_basico">Sueldo Valor Básico:</label>
+                  <input type="text" class="form-control" id="sueldo_valor_basico" name="sueldo_valor_basico" required>
+                </div>
+                <!-- Sueldo Opción Asignación Familiar --><!-- Sueldo Opción Bono -->
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input" id="sueldo_opc_asigfam" name="sueldo_opc_asigfam">
+                      <label class="form-check-label" for="sueldo_opc_asigfam">Opción Asignación Familiar</label>
+                    </div>
+                    
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input" id="sueldo_opc_bono" name="sueldo_opc_bono">
+                      <label class="form-check-label" for="sueldo_opc_bono">Opción Bono</label>
+                    </div>
+                  </div>
+                  <!-- Sueldo Porcentaje Bono -->
+                  <div class="form-group col-md-6">
+                    <label for="sueldo_porcentaje_bono">Sueldo Porcentaje Bono:</label>
+                    <input type="text" class="form-control" id="sueldo_porcentaje_bono" name="sueldo_porcentaje_bono">
+                  </div>
+                </div>
+                
+                <!-- Sueldo Mensual (Mostrar pero no editable) --> <!-- Sueldo Anual (Mostrar pero no editable) 
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="sueldo_mensual">Sueldo Mensual:</label>
+                    <input type="text" class="form-control" id="sueldo_mensual" name="sueldo_mensual" readonly>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="sueldo_anual">Sueldo Anual:</label>
+                    <input type="text" class="form-control" id="sueldo_anual" name="sueldo_anual" readonly>
+                  </div>
+                </div>-->
 
+                <!-- Botón de Envío -->
+                <button type="button" class="btn btn-primary" onclick="submitSueldoForm()">Enviar Datos</button>
+              </form>
+              
+            </div>
+          </div>
+        </div>
+      </div>
       
 
     </section>
