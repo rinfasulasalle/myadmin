@@ -525,6 +525,142 @@
           </div>
         </div>
       </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Form Direcciones</h3>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <form id="estudioForm">
+                <!-- Trabajador -->
+                <div class="form-group">
+                    <label for="trabajador">Usuario Relacionado (Número DNI):</label>
+                    <input type="number" class="form-control" id="trabajador" name="trabajador" required>
+                </div>
+                <div class="form-row">
+                  <!-- Nivel Educativo -->
+                  <div class="col-md-3">
+                      <div class="form-group">
+                          <label for="id_estudio_nivel_educativo">Nivel Educativo:</label>
+                          <select class="form-control" id="id_estudio_nivel_educativo" name="id_estudio_nivel_educativo" required>
+                              <!-- Debes cargar dinámicamente las opciones -->
+                          </select>
+                      </div>
+                  </div>
+          
+                  <!-- Situación Especial -->
+                  <div class="col-md-3">
+                      <div class="form-group">
+                          <label for="id_estudio_situacion_especial">Situación Especial:</label>
+                          <select class="form-control" id="id_estudio_situacion_especial" name="id_estudio_situacion_especial" required>
+                              <!-- Debes cargar dinámicamente las opciones -->
+                          </select>
+                      </div>
+                  </div>
+          
+                  <!-- Régimen Laboral -->
+                  <div class="col-md-3">
+                      <div class="form-group">
+                          <label for="id_regimen_laboral">Régimen Laboral:</label>
+                          <select class="form-control" id="id_regimen_laboral" name="id_regimen_laboral" required>
+                              <!-- Debes cargar dinámicamente las opciones -->
+                          </select>
+                      </div>
+                  </div>
+          
+                  <!-- Régimen Aseguramiento -->
+                  <div class="col-md-3">
+                      <div class="form-group">
+                          <label for="id_regimen_aseguramiento">Régimen Aseguramiento:</label>
+                          <select class="form-control" id="id_regimen_aseguramiento" name="id_regimen_aseguramiento" required>
+                              <!-- Debes cargar dinámicamente las opciones -->
+                          </select>
+                      </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-md-3">
+                    <!-- Institucion -->
+                    <div class="form-group">
+                      <label for="id_institucion">Institución:</label>
+                      <select class="form-control" id="id_institucion" name="id_institucion" required>
+                        <!-- Debes cargar dinámicamente las opciones -->
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <!-- Carrera Educativa -->
+                    <div class="form-group">
+                      <label for="id_carrera_educativa">Carrera Educativa:</label>
+                      <select class="form-control" id="id_carrera_educativa" name="id_carrera_educativa" required>
+                        <!-- Debes cargar dinámicamente las opciones -->
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <!-- Capacitación  -->
+                    <div class="form-group">
+                      <label for="id_estudio_capacitacion">Capacitación:</label>
+                      <select class="form-control" id="id_estudio_capacitacion" name="id_estudio_capacitacion" required>
+                        <!-- Debes cargar dinámicamente las opciones -->
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <!-- Especialización  -->
+                    <div class="form-group">
+                      <label for="id_estudio_especializacion">Especialización:</label>
+                      <select class="form-control" id="id_estudio_especializacion" name="id_estudio_especializacion" required>
+                        <!-- Debes cargar dinámicamente las opciones -->
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <!-- Fecha de Colegiatura -->
+                  <div class="form-group col-md-3">
+                    <label for="estudio_fecha_colegiatura">Fecha de Colegiatura:</label>
+                    <input type="date" class="form-control" id="estudio_fecha_colegiatura" name="estudio_fecha_colegiatura">
+                  </div>
+
+                  <!-- Sede de Colegiatura -->
+                  <div class="form-group col-md-6">
+                    <label for="sede_colegiatura">Sede de Colegiatura:</label>
+                    <select class="form-control" id="sede_colegiatura" name="sede_colegiatura" required>
+                      <!-- Debes cargar dinámicamente las opciones -->
+                    </select>
+                  </div>
+                  <!-- Condición de Estudio -->
+                  <div class="form-group">
+                    <label for="condicion_estudio">Condición de Estudio:</label>
+                    <select class="form-control" id="condicion_estudio" name="condicion_estudio" required>
+                      <option value="XXXXX">XXXXX</option>
+                      <option value="Habilitado">Habilitado</option>
+                      <option value="No habilitado">No habilitado</option>
+                    </select>
+                  </div>
+                </div>
+                
+            
+                
+            
+                <!-- Botón de Envío -->
+                <button type="button" class="btn btn-primary" onclick="submitEstudioForm()">Enviar Datos</button>
+              </form>
+            
+            </div>
+          </div>
+        </div>
+      </div>
       
 
     </section>
