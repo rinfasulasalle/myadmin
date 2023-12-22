@@ -69,7 +69,7 @@ async function postData(endpoint, data) {
         const response = await fetch(url, options);
 
         if (!response.ok) {
-            throw new Error(`Error al enviar datos a ${endpoint}`);
+            throw new Error(`Error al enviar datos a bd de${endpoint}`);
         }
 
         return response;
@@ -164,4 +164,22 @@ async function fetchDropdowns(endpoint) {
         console.error('Error en la solicitud:', error.message);
         throw error;
     }
+}
+
+
+
+// Funcion para mostrar el modal de confirmación
+function mostrarModal(mensaje, esError) {
+    // Lógica para mostrar el modal, por ejemplo, usando Bootstrap
+    var modal = $('#miModal');
+    modal.find('.modal-body').text(mensaje);
+
+    // Cambiar el estilo del modal según si es un error o no
+    if (esError) {
+        modal.find('.modal-body').css('color', 'red');
+    } else {
+        modal.find('.modal-body').css('color', 'green');
+    }
+
+    modal.modal('show');
 }

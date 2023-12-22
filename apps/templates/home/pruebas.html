@@ -72,9 +72,9 @@
                 <option value="opcion3">Opción 3</option>
             </select>
         
-            <input type="radio" id="html" name="fav_language" value="HTML">
+            <input type="checkbox" id="html" name="fav_language" value="HTML">
             <label for="html">HTML</label><br>
-          </form>
+        </form>
           
           <form id="formulario2">
               <label for="nombre2">Nombre:</label>
@@ -115,5 +115,14 @@
   <!-- AdminLTE for demo purposes -->
   <script src="/static/assets/js/demo.js"></script>
 
-
+  <script>
+    function guardarDatos(formularioId) {
+      var formulario = document.getElementById(formularioId);
+      var formData = new FormData(formulario);
+      
+      formData.forEach(function(value, key){
+        console.log(key + ': ' + value);
+      });
+    }
+  </script>
 {% endblock javascripts %}

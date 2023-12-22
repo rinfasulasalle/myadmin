@@ -35,7 +35,7 @@ async function populateDropdown(endpoint, dropdownId) {
         const data = await fetchData(endpoint);
         const dropdown = document.getElementById(dropdownId);
 
-        console.log(`Fetched ${endpoint} data:`, data);
+        //console.log(`Fetched ${endpoint} data:`, data);
 
         if (data && data.length > 0) {
             data.forEach(item => {

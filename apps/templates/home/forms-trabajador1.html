@@ -64,7 +64,7 @@
               <form id="usuarioForm">
                 <!-- DNI input -->
                 <div class="form-group">
-                  <label for="id">DNI:</label>
+                  <label for="id">DNI(No debe Repetirse):</label>
                   <input type="text" class="form-control" id="id" name="id" required>
                 </div>
                 <!-- Usuario Nombres, Apell Paterno, Apello materno misma fila -->
@@ -85,7 +85,7 @@
 
                 <!-- Usuario Correo input -->
                 <div class="form-group">
-                  <label for="usuario_correo">Correo:</label>
+                  <label for="usuario_correo">Correo(No debe Repetirse):</label>
                   <input type="email" class="form-control" id="usuario_correo" name="usuario_correo" required>
                 </div>
 
@@ -118,7 +118,7 @@
                 </div>
 
                 <!-- Submit button -->
-                <button type="button" class="btn btn-primary" onclick="submitForm()">Enviar Datos</button>
+                <button type="button" class="btn btn-primary" onclick="submitUsuarioForm()">Enviar Datos</button>
               </form>
 
               
@@ -667,6 +667,26 @@
     <!-- /.content -->
   </div>
 
+
+  <!-- Agrega este código en tu archivo HTML donde necesitas el modal -->
+<div class="modal" id="miModal" tabindex="-1" role="dialog" aria-labelledby="miModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="miModalLabel">Mensaje</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <!-- Aquí se mostrará el mensaje del modal -->
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          </div>
+      </div>
+  </div>
+</div>
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
@@ -676,6 +696,9 @@
   <script src="/static/assets/plugins/jquery/jquery.min.js"></script>
   <!-- Bootstrap 4 -->
   <script src="/static/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <!-- pace-progress -->
   <script src="/static/assets/plugins/pace-progress/pace.min.js"></script>
   <!-- AdminLTE App -->
@@ -685,7 +708,6 @@
   <!-- Mi script apiUtils.js -->
   <script src="/static/assets/js/index/apiUtils.js"></script>
   <script src="/static/assets/js/forms/trabajadores.js"></script>
-  
   <script src="/static/assets/js/forms/form01.js"></script>
   <!--
   <script src="/static/assets/js/forms/form02.js"></script>
