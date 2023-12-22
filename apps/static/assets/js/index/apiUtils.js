@@ -69,7 +69,7 @@ async function postData(endpoint, data) {
         const response = await fetch(url, options);
 
         if (!response.ok) {
-            throw new Error(`Error al enviar datos a bd de${endpoint}`);
+            throw new Error(`Error al enviar datos a base de datos de ${endpoint}`);
         }
 
         return response;
