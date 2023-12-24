@@ -44,8 +44,6 @@ function renderHeadcountSexoChart() {
             // Obtén el contexto del canvas y crea el gráfico
             const ctx = document.getElementById('headcountSexoChart').getContext('2d');
             new Chart(ctx, config);
-            // Create table beneath the chart
-            createTable('headcountSexoChart', labels, datos);
         })
         .catch(error => {
             console.error('Error al obtener datos de trabajadores:', error);
@@ -106,8 +104,6 @@ function renderheadcountPorProyectoChart() {
                 // Obtener el contexto del canvas y crear el gráfico
                 const ctx = document.getElementById('headcountPorProyectoChart').getContext('2d');
                 new Chart(ctx, config);
-                // Create table beneath the chart
-                createTable('headcountPorProyectoChart', labels, datos);
               })
               .catch(error => {
                   console.error('Error al obtener datos de contratos:', error);
@@ -174,8 +170,6 @@ function renderHeadcountPorAreaChart() {
                   // Obtener el contexto del canvas y crear el gráfico
                   const ctx = document.getElementById('headcountPorAreaChart').getContext('2d');
                   new Chart(ctx, config);
-                  // Create table beneath the chart
-                createTable('headcountPorAreaChart', labels, datos);
               })
               .catch(error => {
                   console.error('Error al obtener datos de contratos:', error);
@@ -231,8 +225,6 @@ function renderNacionalidadChart() {
           // Obtén el contexto del canvas y crea el gráfico
           const ctx = document.getElementById('nacionalidadChart').getContext('2d');
           new Chart(ctx, config);
-          // Create table beneath the chart
-          createTable('nacionalidadChart', labels, datos);
       })
       .catch(error => {
           console.error('Error al obtener datos de trabajadores:', error);
@@ -286,8 +278,6 @@ function renderTipoContratoChart() {
                   // Obtener el contexto del canvas y crear el gráfico
                   const ctx = document.getElementById('tipoContratoChart').getContext('2d');
                   new Chart(ctx, config);
-                  // Create table beneath the chart
-                createTable('tipoContratoChart', labels, datos);
               })
               .catch(error => {
                   console.error('Error al obtener datos de contratos:', error);
@@ -355,8 +345,6 @@ function renderNivelEducativoChart() {
                   // Obtener el contexto del canvas y crear el gráfico
                   const ctx = document.getElementById('nivelEducativoChart').getContext('2d');
                   new Chart(ctx, config);
-                  // Create table beneath the chart
-                createTable('nivelEducativoChart', labels, datos);
               })
               .catch(error => {
                   console.error('Error al obtener datos de estudios:', error);
@@ -426,8 +414,6 @@ function renderIngenierosColegiadosChart() {
                     // Obtener el contexto del canvas y crear el gráfico
                     const ctx = document.getElementById('ingenierosColegiadosChart').getContext('2d');
                     new Chart(ctx, config);
-                    // Create table beneath the chart
-                    createTable('ingenierosColegiadosChart', labels, datos);
                 })
                 .catch(error => {
                     console.error('Error al obtener datos de estudios:', error);
@@ -501,8 +487,6 @@ function renderRolProyectoChart() {
                     // Obtener el contexto del canvas y crear el gráfico
                     const ctx = document.getElementById('rolProyectoChart').getContext('2d');
                     new Chart(ctx, config);
-                    // Create table beneath the chart
-                    createTable('rolProyectoChart', labels, datos);
                 })
                 .catch(error => {
                     console.error('Error al obtener datos de contratos:', error);
@@ -545,45 +529,3 @@ async function mostrarTotales() {
 
 // Llamada inicial para mostrar los totales después de renderizar los gráficos
 mostrarTotales();
-
-
-// Function to create Bootstrap table beneath a chart
-function createTable(chartContainerId, labels, data) {
-    const tableContainer = document.createElement('div');
-    tableContainer.classList.add('table-responsive');
-
-    const table = document.createElement('table');
-    table.classList.add('table', 'table-bordered', 'table-hover');
-
-    // Create table header
-    const thead = document.createElement('thead');
-    const headerRow = document.createElement('tr');
-    const headerLabelCell = document.createElement('th');
-    headerLabelCell.textContent = 'Label';
-    const headerDataCell = document.createElement('th');
-    headerDataCell.textContent = 'Data';
-    headerRow.appendChild(headerLabelCell);
-    headerRow.appendChild(headerDataCell);
-    thead.appendChild(headerRow);
-    table.appendChild(thead);
-
-    // Create table body
-    const tbody = document.createElement('tbody');
-    for (let i = 0; i < labels.length; i++) {
-        const row = document.createElement('tr');
-        const labelCell = document.createElement('td');
-        labelCell.textContent = labels[i];
-        const dataCell = document.createElement('td');
-        dataCell.textContent = data[i];
-        row.appendChild(labelCell);
-        row.appendChild(dataCell);
-        tbody.appendChild(row);
-    }
-    table.appendChild(tbody);
-
-    tableContainer.appendChild(table);
-
-    // Append the table to the container below the chart
-    const chartContainer = document.getElementById(chartContainerId);
-    chartContainer.parentNode.appendChild(tableContainer);
-}
