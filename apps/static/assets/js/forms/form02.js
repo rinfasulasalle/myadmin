@@ -35,11 +35,11 @@ function submitTrabajadorForm(){
                 const errores = Object.values(response).flat().join('\n');
                 mostrarModal('Error al enviar el formulario:\n' + errores, true);
             } else {
-                mostrarModal('Formulario enviado correctamente', false);
+                mostrarModal('Formulario enviado correctamente.', false);
             }
         })
         .catch(error => {
-            console.error('Error al enviar los datos:', error);
+            //console.error('Error al enviar los datos:', error);
             mostrarModal('Error al enviar el formulario. Por favor, inténtalo nuevamente. ' + error.message, true);
         });
 }

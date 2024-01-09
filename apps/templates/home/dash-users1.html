@@ -1,6 +1,6 @@
 {% extends "layouts/base.html" %}
 
-{% block title %} Usuarios {% endblock %} 
+{% block title %} Blank Page {% endblock %} 
 
 <!-- Element injected in the BODY element -->
 {% block body_class %} sidebar-mini pace-primary {% endblock body_class %}
@@ -8,59 +8,82 @@
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}
 
-<!-- Google Font: Source Sans Pro -->
-<link
-  rel="stylesheet"
-  href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"
-/>
-<!-- Font Awesome -->
-<link
-  rel="stylesheet"
-  href="/static/assets/plugins/fontawesome-free/css/all.min.css"
-/>
-<!-- Theme style -->
-<link rel="stylesheet" href="/static/assets/css/adminlte.min.css" />
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="/static/assets/plugins/fontawesome-free/css/all.min.css">
+  <!-- pace-progress -->
+  <link rel="stylesheet" href="/static/assets/plugins/pace-progress/themes/black/pace-theme-flat-top.css">
+  <!-- adminlte-->
+  <link rel="stylesheet" href="/static/assets/css/adminlte.min.css">
 
 {% endblock stylesheets %}
 
-{% block content %}  
+{% block content %}
+
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <!-- ... (unchanged) ... -->
-    </section>
+    <!-- ... (código existente) ... -->
 
-    <!-- Main content -->
+    <!-- Tabla de Usuarios Activos -->
     <section class="content">
-      <!-- Active Users Table -->
       <div class="card">
-          <div class="card-header">
-              <h3 class="card-title">Active Users</h3>
-          </div>
-          <div class="card-body">
-              <!-- Load active users table using fetchData function -->
-              <table id="tablaUsuariosActivos" class="table table-bordered table-striped">
-                  <!-- ... (populate table rows with active users data) ... -->
-              </table>
-          </div>
-      </div>
-
-      <!-- Terminated Users Table -->
-      <div class="card">
-          <div class="card-header">
-              <h3 class="card-title">Terminated Users</h3>
-          </div>
-          <div class="card-body">
-              <!-- Load terminated users table using fetchData function -->
-              <table id="tablaUsuariosCesados" class="table table-bordered table-striped">
-                  <!-- ... (populate table rows with terminated users data) ... -->
-              </table>
-          </div>
+        <div class="card-header">
+          <h3 class="card-title">Usuarios Activos</h3>
+        </div>
+        <div class="card-body">
+          <table id="tablaUsuariosActivos" class="table table-bordered table-striped">
+            <!-- Encabezados de la tabla -->
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombres</th>
+                <th>Apellido Paterno</th>
+                <th>Apellido Materno</th>
+                <th>Correo</th>
+                <th>Teléfono</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <!-- Cuerpo de la tabla se llenará con JavaScript -->
+            <tbody></tbody>
+          </table>
+        </div>
       </div>
     </section>
-    <!-- /.content -->
+
+    <!-- Tabla de Usuarios Cesados -->
+    <section class="content">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Usuarios Cesados</h3>
+        </div>
+        <div class="card-body">
+          <table id="tablaUsuariosCesados" class="table table-bordered table-striped">
+            <!-- Encabezados de la tabla -->
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombres</th>
+                <th>Apellido Paterno</th>
+                <th>Apellido Materno</th>
+                <th>Correo</th>
+                <th>Teléfono</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <!-- Cuerpo de la tabla se llenará con JavaScript -->
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ... (código existente) ... -->
 
   </div>
+
 {% endblock content %}
 
 
@@ -71,44 +94,13 @@
   <script src="/static/assets/plugins/jquery/jquery.min.js"></script>
   <!-- Bootstrap 4 -->
   <script src="/static/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- pace-progress -->
+    <!-- pace-progress -->
   <script src="/static/assets/plugins/pace-progress/pace.min.js"></script>
   <!-- AdminLTE App -->
   <script src="/static/assets/js/adminlte.min.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="/static/assets/js/demo.js"></script>
-  <!-- Agrega las bibliotecas de DataTables -->
-  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-  <script src="/static/assets/plugins/datatables/jquery.dataTables.min.js"></script>
-  <script src="/static/assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-  <script src="/static/assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-  <script src="/static/assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-
-  <!-- Mi script apiUtils.js -->z
+  <!-- Mis scripts -->
   <script src="/static/assets/js/index/apiUtils.js"></script>
-  <!-- Nuevo script para cargar y mostrar usuarios -->
-  <script src="/static/assets/js/usuarios/usuarios.js"></script>
-
-  <script>
-      // Llama a las funciones para cargar y mostrar usuarios activos y cesados al cargar la página
-      cargarUsuariosActivos();
-      cargarUsuariosCesados();
-      // Inicializa DataTable en las tablas
-      $(document).ready(function () {
-        $('#tablaUsuariosActivos').DataTable({
-            responsive: true,
-            paging: true,
-            searching: true
-            // Puedes agregar más opciones según lo necesites
-        });
-
-        $('#tablaUsuariosCesados').DataTable({
-            responsive: true,
-            paging: true,
-            searching: true
-            // Puedes agregar más opciones según lo necesites
-        });
-    });
-  </script>
+  <script src="/static/assets/js/index/users.js"></script>
 {% endblock javascripts %}
-

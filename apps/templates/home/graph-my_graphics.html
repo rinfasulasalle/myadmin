@@ -20,6 +20,7 @@
 <link rel="stylesheet" href="/static/assets/css/adminlte.min.css" />
 <!-- Html 2 pdf-->
 <script src="/static/assets/plugins/html2pdf/html2pdf.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 <style>
   /* Estilos personalizados para hacer las gráficas responsivas */
   canvas {
@@ -27,8 +28,6 @@
       height: auto !important;
   }
 </style>
-<!-- Agrega esto en la sección head de tu HTML -->
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 
 {% endblock stylesheets %} {% block content %}
 
@@ -375,7 +374,8 @@
   <script src="/static/assets/js/adminlte.min.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="/static/assets/js/demo.js"></script>
-  
+
+
   <!-- Mi script apiUtils.js -->
   <script src="/static/assets/js/graphic/date.js"></script>
   <script src="/static/assets/js/index/apiUtils.js"></script>
